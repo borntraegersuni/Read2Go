@@ -1,4 +1,4 @@
-.widget {
+.widget2 {
     width: 95%;
     margin: 0 auto;
     background: lightgray;
@@ -8,31 +8,31 @@
     text-align: center;
     overflow: hidden;
 }
-.widget h2 {
+.widget2 h2 {
     margin: 0 0 10px;
     font-size: 20px;
     color: white;
 }
-.slider-container {
+.slider-container2 {
     position: relative;
     width: 100%;
     overflow: hidden;
 }
-.slider {
+.slider2 {
     display: flex;
     transition: transform 0.5s ease-in-out;
     width: 200%;
 }
-.slide {
+.slide2 {
     min-width: 10%;
     box-sizing: border-box;
     padding: 5px;
 }
-.slide img {
+.slide2 img {
     width: 100%;
     border-radius: 5px;
 }
-.prev, .next {
+.prev2, .next2 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -43,7 +43,7 @@
     cursor: pointer;
     border-radius: 50%;
 }
-.prev { left: 5px; }
-.next { right: 5px; }
+.prev2 { left: 5px; }
+.next2 { right: 5px; }
 
-.bar { height: 5px; }
+.bar2 { height: 5px; }

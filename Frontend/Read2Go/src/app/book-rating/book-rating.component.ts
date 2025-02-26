@@ -1,34 +1,61 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-rating',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './book-rating.component.html',
   styleUrls: ['./book-rating.component.css']
 })
-export class BookRatingComponent {
-  @Input() TitleWidget: string = ''; // To accept the dynamic title
+export class BookRatingComponent implements AfterViewInit {
   index: number = 0;
 
   covers: string[] = [
     '/examplecover.jpg', './examplecover.jpg', '/examplecover.jpg',
     '/examplecover.jpg', '/examplecover.jpg', '/examplecover.jpg',
     '/examplecover.jpg', '/examplecover.jpg', '/examplecover.jpg',
-    '/examplecover.jpg'
+    '/wduihwdiuhw.jpg'
   ]; // An array of image URLs for the book covers
 
-  moveSlide(step: number): void {
-    const slidesVisible = 5; // Number of slides you want visible at once
-    const totalSlides = this.covers.length; // Get the dynamic length of covers
-    const maxIndex = totalSlides - slidesVisible; // Ensure the last index stays within bounds
+  ngAfterViewInit() {
+    this.updateSlider();
+  }
 
-    // Update the index and ensure it stays within bounds
-    this.index = Math.max(0, Math.min(this.index + step, maxIndex));
-
-    // Move the slider container by a percentage based on the index
+  updateSlider() {
     const slider = document.querySelector('.slider') as HTMLElement;
-    if (slider) {
-      const slideWidth = 100 / slidesVisible; // Each slide takes up a fixed percentage of the visible area
-      slider.style.transform = `translateX(-${this.index * slideWidth}%)`;
+    const totalSlides = this.covers.length;
+    const maxIndex = totalSlides - 5;
+    slider.style.transform = `translateX(-${this.index * 100 / totalSlides}%)`;
+
+    const prevButton = document.querySelector('.prev') as HTMLElement;
+    const nextButton = document.querySelector('.next') as HTMLElement;
+
+    if (this.index === 0) {
+      prevButton.style.display = 'none';
+    } else {
+      prevButton.style.display = 'block';
+    }
+
+    if (this.index === maxIndex) {
+      nextButton.style.display = 'none';
+    } else {
+      nextButton.style.display = 'block';
+    }
+  }
+
+  nextSlide() {
+    const totalSlides = this.covers.length;
+    if (this.index < totalSlides - 1) {
+      this.index++;
+      this.updateSlider();
+    }
+  }
+
+  prevSlide() {
+    if (this.index > 0) {
+      this.index--;
+      this.updateSlider();
     }
   }
 }
