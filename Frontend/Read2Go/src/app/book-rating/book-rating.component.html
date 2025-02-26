@@ -1,1 +1,21 @@
-<p>book-rating works!</p>
+<div class="bar"></div>
+<div class="widget">
+    <h2>{{ TitleWidget }}</h2>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 1"></div>
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 2"></div>
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 3"></div>
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 4"></div>
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 5"></div>
+            <div class="slide"><img src="./examplecover.jpg" alt="Book 6"></div>
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 7"></div>
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 8"></div>
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 9"></div>
+            <div class="slide"><img src="/examplecover.jpg" alt="Book 10"></div>
+        </div>
+        <button class="prev" (click)="moveSlide(-1)">&#10094;</button>
+        <button class="next" (click)="moveSlide(1)">&#10095;</button>
+    </div>
+</div>
+<div class="bar"></div>

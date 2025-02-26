@@ -4,6 +4,7 @@ import { BookRatingComponent } from "../book-rating/book-rating.component";
 import { BCWidgetComponent } from "../bcwidget/bcwidget.component";
 import { RouterOutlet } from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   imports: [RouterOutlet, TitlePicComponent, BookRatingComponent, BCWidgetComponent],

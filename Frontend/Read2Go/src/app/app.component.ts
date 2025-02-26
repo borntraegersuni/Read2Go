@@ -15,4 +15,5 @@ import { FooterComponent } from "./footer/footer.component";
 })
 export class AppComponent {
   title = 'Read2Go';
+  TitleWidget = "Most Popular";
 }
