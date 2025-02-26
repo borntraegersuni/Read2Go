@@ -14,4 +14,10 @@ export const routes: Routes = [
             return import('./book-club/book-club.component').then((m) => m.BookClubComponent)
         },
     },
+    {
+        path: 'login',
+        loadComponent: () => {
+            return import('./loginpage/loginpage.component').then((m) => m.LoginpageComponent)
+        },
+    },
 ];
