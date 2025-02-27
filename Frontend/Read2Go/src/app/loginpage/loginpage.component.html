@@ -1,0 +1,17 @@
+<div class="login-window">
+<form action="#">
+    <h1>Log In</h1>
+
+    <div class="form-control">
+        <label for="email">Email</label>
+        <input [(ngModel)]="loginObj.EmailId" id="email" type="email" name="EmailId"/>
+    </div>
+
+    <div class="form-control">
+        <label for="password">Password</label>
+        <input [(ngModel)]="loginObj.Password" id="password" type="password" name="Password" />
+    </div>
+    <a href="/signup">Not registered yet?</a>
+    <button type="button" (click)="onLogin()">Login</button>
+</form>
+</div>

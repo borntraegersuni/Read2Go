@@ -1,0 +1,9 @@
+<div *ngIf="authService.isAuthenticated(); else loggedOut" class="corner">
+    <span>Hi, {{ authService.getUsername() }}!</span>
+    <a href="#" (click)="onLogout()">Log Out</a>
+  </div>
+  
+  <ng-template #loggedOut>
+    <a href="/login">Log In / Sign Up</a>
+  </ng-template>
+  

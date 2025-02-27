@@ -1,13 +1,13 @@
 <div class="top-bar"></div>
-    <div class="header">
-        <div class="logo-container">
-            <img src="/simplelogo.png" alt="Logo">
-            <div class="title">Read 2 Go</div>
-        </div>
-        <a href="#" class="login">Log In / Sign Up</a>
+<div class="header">
+    <div class="logo-container">
+        <img src="/simplelogo.png" alt="Logo">
+        <div class="title">Read 2 Go</div>
     </div>
-    <div class="nav-bar">
-        <a href="#">Home</a>
-        <a href="./bookclub">Book Club</a>
-        <a href="./bookshelf">Bookshelf</a>
-    </div>
+    <app-headertopright class="login"></app-headertopright>
+</div>
+<div class="nav-bar">
+    <a href="#">Home</a>
+    <a href="./bookclub">Book Club</a>
+    <a *ngIf="authService.isAuthenticated()" href="./bookshelf">Bookshelf</a>
+</div>
