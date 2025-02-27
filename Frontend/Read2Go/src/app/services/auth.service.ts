@@ -4,32 +4,48 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  private isLoggedIn = false;
   private userEmail: string | null = null;
-  private username: string | null = null; // ✅ Store Username
+  private username: string | null = null;
 
-  login(email: string, username: string) {  // ✅ Accept Username
+  constructor() {
+    // Restore session when service loads
+    const savedUser = localStorage.getItem('loggedInUser');
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      this.isLoggedIn = true;
+      this.userEmail = user.EmailId;
+      this.username = user.Username;
+    }
+  }
+
+  login(email: string, username: string) {
+    this.isLoggedIn = true;
     this.userEmail = email;
     this.username = username;
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('username', username);  // ✅ Store Username
+
+    // Save user session in localStorage
+    localStorage.setItem('loggedInUser', JSON.stringify({ EmailId: email, Username: username }));
   }
 
   logout() {
+    this.isLoggedIn = false;
     this.userEmail = null;
     this.username = null;
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('username');
+
+    // Remove session data
+    localStorage.removeItem('loggedInUser');
   }
 
   isAuthenticated(): boolean {
-    return this.userEmail !== null;
+    return this.isLoggedIn;
   }
 
   getUserEmail(): string | null {
     return this.userEmail;
   }
 
-  getUsername(): string | null {  // ✅ Retrieve stored Username
-    return this.username ? this.username : localStorage.getItem('username');
+  getUsername(): string | null {
+    return this.username;
   }
 }

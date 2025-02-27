@@ -1,1 +1,23 @@
-<p>signuppage works!</p>
+<div class="signup-window">
+    <form (submit)="onSignUp(); $event.preventDefault()">
+        <h1>Sign Up</h1>
+    
+        <div class="form-control">
+            <label for="username">Username</label>
+            <input id="username" type="text" [(ngModel)]="signupObj.Username" name="Username"/>
+        </div>
+        
+        <div class="form-control">
+            <label for="email">Email</label>
+            <input id="email" type="email" [(ngModel)]="signupObj.EmailId" name="EmailId"/>
+        </div>
+    
+        <div class="form-control">
+            <label for="password">Password</label>
+            <input id="password" type="password" [(ngModel)]="signupObj.Password" name="Password"/>
+        </div>
+        
+        <a href="/login">Already signed up?</a>
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
