@@ -44,8 +44,11 @@ export class SignUpPageComponent {
 
     // Auto-login the user after signup
     this.authService.login(this.signupObj.EmailId, this.signupObj.Username);
-    alert("Sign Up Successful!");
-    this.router.navigate(['/bookshelf']);
+    //alert("Sign Up Successful!");
+    this.router.navigate(['/bookshelf']).then(() => {
+      window.location.reload();
+    });
+    
   }
 
   // Simulate saving users (real-world: use backend API)

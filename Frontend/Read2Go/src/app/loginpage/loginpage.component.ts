@@ -35,8 +35,10 @@ export class LoginpageComponent {
     );
   
     if (userFound) {
-      this.authService.login(userFound.EmailId, userFound.Username);  // ✅ Store Email & Username
-      this.router.navigate(['/bookshelf']);
+      this.authService.login(userFound.EmailId, userFound.Username);
+      this.router.navigate(['/bookshelf']).then(() => {
+        window.location.reload();
+      });
     } else {
       alert("Invalid email or password.");
     }
