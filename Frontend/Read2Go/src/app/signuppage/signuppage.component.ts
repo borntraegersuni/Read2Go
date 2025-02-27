@@ -34,21 +34,23 @@ export class SignUpPageComponent {
 
   onSignUp() {
     if (!z.string().email().safeParse(this.signupObj.EmailId).success) {
-      alert('Submit a real Email.');
+      alert('Submit a real email.');
       return;
     }
+
+    // Password
     const passwordCheck = z
       .string()
-      .min(3, 'Passwort muss mindestens 3 Zeichen lang sein')
-      // .regex(/[A-Z]/, 'Passwort muss mindestens einen Großbuchstaben enthalten')
+      .min(3, 'Password needs to be at least 3 characters long.')
+      // .regex(/[A-Z]/, 'Password needs to have at least one uppercase letter.')
       // .regex(
       //   /[a-z]/,
-      //   'Passwort muss mindestens einen Kleinbuchstaben enthalten'
+      //   'Password needs to have at least one lowercase letter.'
       // )
-      // .regex(/\d/, 'Passwort muss mindestens eine Zahl enthalten')
+      // .regex(/\d/, 'Password needs at least one lowercase letter.')
       // .regex(
       //   /[@$!%*?&]/,
-      //   'Passwort muss mindestens ein Sonderzeichen (@$!%*?&) enthalten'
+      //   'Password needs to have at least one special character (@$!%*?&)'
       // )
       .safeParse(this.signupObj.Password);
     if (!passwordCheck.success) {
