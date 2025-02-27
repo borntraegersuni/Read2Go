@@ -20,4 +20,10 @@ export const routes: Routes = [
             return import('./loginpage/loginpage.component').then((m) => m.LoginpageComponent)
         },
     },
+    {
+        path: 'bookshelf',
+        loadComponent: () => {
+            return import('./bookshelf/bookshelf.component').then((m) => m.BookshelfComponent)
+        },
+    },
 ];
