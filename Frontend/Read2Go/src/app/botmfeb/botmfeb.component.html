@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="header">
+        <h1>{{ bookTitle }}</h1>
+    </div>
+    <div class="content">
+        <div class="left">
+            <a href="BuchBeschreibung.html" class="book-image">
+                <img [src]="bookImage" alt="Buch Bild">
+            </a>
+            <div class="rating">
+                <div class="stars">
+                    <span *ngFor="let star of [].constructor(5); let i = index" 
+                          [ngClass]="{'star': true, 'gold': i < averageRating, 'gray': i >= averageRating}">
+                          &#9733;
+                    </span>
+                </div>
+                <span class="average">Ø {{ averageRating }} Sterne</span>
+            </div>
+        </div>
+        <div class="right">
+            <div class="description">
+                <p>{{ description }}</p>
+            </div>
+            <a href="bcOverview.html" class="read-more">Read More</a>
+        </div>
+    </div>
+</div>
