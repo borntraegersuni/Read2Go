@@ -21,9 +21,28 @@
             <div class="description">
                 <h3>{{ bookTitle }}</h3>
                 <p>{{ description }}</p>
+                <a (click)="openModal()" class="read-more">Read More</a>
             </div>
-            <a href="bcOverview.html" class="read-more">Read More</a>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal" *ngIf="isModalOpen">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h2>{{ bookTitle }}</h2>
+            <h3>Why We Chose This Book:</h3>
+            <p>"Throne of Glass" is a fast-paced, action-packed fantasy novel with a fierce protagonist, deadly challenges, and an immersive world. Sarah J. Maas expertly blends intrigue, romance, and magic, making this an unforgettable start to an epic series.</p>
+
+            <h3>About the Author:</h3>
+            <p>Sarah J. Maas is a renowned fantasy author known for her ability to create complex characters, intricate plots, and breathtaking world-building. "Throne of Glass" showcases her skill in crafting gripping narratives that keep readers hooked.</p>
+
+            <h3>Book Description:</h3>
+            <p>In a kingdom without magic, an assassin is summoned to the castle to fight for her freedom. Celaena Sardothien must face brutal competition while uncovering dark secrets lurking within the castle walls.</p>
+            <p>With powerful allies and deadly enemies, Celaena must navigate a dangerous game of politics, survival, and discovery.</p>
+
+            <h3>Reading Order:</h3>
+            <p>Book #1 Throne of Glass<br>Book #2 Crown of Midnight<br>Book #3 Heir of Fire (and more in the series)</p>
         </div>
     </div>
 </div>
-

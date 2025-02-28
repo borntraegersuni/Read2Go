@@ -1,5 +1,6 @@
 .container {
     width: 95%;
+    max-width: 1200px;
     margin: 1rem auto;
     background: lightgray;
     padding: 15px;
@@ -106,7 +107,7 @@ h1 {
     padding: 20px;
     border: 3px solid #5a2a81;;
     border-radius: 10px;
-    width: 400px; /* Feste Breite für das Modal */
+    width: clamp(15rem, 700px, 50vw);
     max-height: 80%; /* Maximale Höhe des Modals */
     overflow-y: auto; /* Ermöglicht vertikales Scrollen bei Bedarf */
 }

@@ -21,8 +21,28 @@
             <div class="description">
                 <h3>{{ bookTitle }}</h3>
                 <p>{{ description }}</p>
+                <a (click)="openModal()" class="read-more">Read More</a>
             </div>
-            <a href="bcOverview.html" class="read-more">Read More</a>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal" *ngIf="isModalOpen">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h2>{{ bookTitle }}</h2>
+            <h3>Why We Chose This Book:</h3>
+            <p>"Fourth Wing" introduces readers to a thrilling world of dragon riders, intense competition, and a protagonist who must defy the odds to survive. With rich world-building and a gripping narrative, this book has quickly become a favorite among fantasy readers.</p>
+
+            <h3>About the Author:</h3>
+            <p>Rebecca Yarros delivers another compelling story filled with depth, emotion, and exhilarating action. Her ability to craft intricate character relationships and high-stakes conflicts makes "Fourth Wing" an unforgettable read.</p>
+
+            <h3>Book Description:</h3>
+            <p>Violet Sorrengail was supposed to enter the Scribe Quadrant, living a quiet life among books. Instead, she is thrust into the dangerous world of dragon riders, where survival is anything but guaranteed.</p>
+            <p>With enemies at every turn and a war brewing beyond the walls of Basgiath War College, Violet must use every ounce of her intelligence and resilience to make it through.</p>
+
+            <h3>Reading Order:</h3>
+            <p>Book #1 Fourth Wing<br>Book #2 Iron Flame<br>Book #3 Onyx Storm</p>
         </div>
     </div>
 </div>
