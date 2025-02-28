@@ -1,0 +1,87 @@
+.container {
+    width: 95%;
+    margin: 1rem auto;
+    background: lightgray;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    width: 100%; /* Nimmt die gesamte Breite des Containers ein */
+    text-align: left; /* Zentriert die Überschrift */
+    margin-bottom: 15px; /* Abstand unter der Überschrift */
+}
+
+h1 {
+    color: #ffffff; /* Lila */
+    margin: 0; /* Entfernt den Standardabstand */
+}
+
+.content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentriert das Buchbild und die Sterne */
+}
+
+.book-image img {
+    width: 150px; /* Größe des Buchbildes */
+    height: auto;
+    border-radius: 4px;
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentriert die Sternebewertung */
+    margin-top: 10px; /* Abstand zwischen Buchcover und Sternebewertung */
+}
+
+.stars {
+    display: flex;
+}
+
+.star {
+    font-size: 20px;
+    color: gray; /* Standardfarbe für Sterne */
+}
+
+.gold {
+    color: gold; /* Goldfarbe für gefüllte Sterne */
+}
+
+.gray {
+    color: gray; /* Grau für leere Sterne */
+}
+
+.average {
+    margin-top: 5px;
+}
+
+.right {
+    margin-left: 20px; /* Abstand zwischen den beiden Divs */
+}
+
+.description {
+    margin-bottom: 15px; /* Abstand zwischen Beschreibung und Button */
+    line-height: 1,5;
+}
+
+.read-more {
+    display: inline-block;
+    text-align: center;
+    padding: 5px 10px; /* Kleinere Polsterung für den Button */
+    background-color: #6a0dad; /* Lila */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.read-more:hover {
+    background-color: #5a0a9a; /* Dunkleres Lila bei Hover */
+}
