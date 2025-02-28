@@ -28,16 +28,14 @@ export class BookcardComponent implements AfterViewInit {
 
   initializeStars() {
     document.querySelectorAll('.stars span').forEach(star => {
-      star.addEventListener('mouseover', function(this: HTMLElement) {
-        Array.from(document.querySelectorAll('.stars span')).reverse().forEach(s => (s as HTMLElement).style.color = 'lightgray');
+      star.addEventListener('click', function(this: HTMLElement) {
+        document.querySelectorAll('.stars span').forEach(s => (s as HTMLElement).style.color = 'lightgray');
         this.style.color = 'gold';
         let prev = this.previousElementSibling as HTMLElement;
         while (prev) {
           prev.style.color = 'gold';
           prev = prev.previousElementSibling as HTMLElement;
         }
-      });
-      star.addEventListener('click', function(this: HTMLElement) {
         const rating = this.getAttribute('data-value');
         alert(`You rated this book ${rating} stars!`);
       });
