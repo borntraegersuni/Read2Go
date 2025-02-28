@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './headertopright.component.html',
   styleUrls: ['./headertopright.component.css']
 })
+
 export class HeaderTopRightComponent {
   userEmail: string | null = null;
   username: string | null = null;

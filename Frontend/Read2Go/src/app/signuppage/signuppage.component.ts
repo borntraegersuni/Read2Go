@@ -4,18 +4,23 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { z } from 'zod';
 
 @Component({
   selector: 'app-signuppage',
-  imports: [ FormsModule, RouterModule, HttpClientModule],
+  imports: [FormsModule, RouterModule, HttpClientModule],
   templateUrl: './signuppage.component.html',
-  styleUrl: './signuppage.component.css'
+  styleUrl: './signuppage.component.css',
 })
 export class SignUpPageComponent {
   signupObj: Signup;
   users: Signup[] = [];
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.signupObj = new Signup();
     this.loadUsers();
   }
@@ -28,11 +33,37 @@ export class SignUpPageComponent {
   }
 
   onSignUp() {
+    if (!z.string().email().safeParse(this.signupObj.EmailId).success) {
+      alert('Submit a real email.');
+      return;
+    }
+
+    // Password
+    const passwordCheck = z
+      .string()
+      .min(3, 'Password needs to be at least 3 characters long.')
+      // .regex(/[A-Z]/, 'Password needs to have at least one uppercase letter.')
+      // .regex(
+      //   /[a-z]/,
+      //   'Password needs to have at least one lowercase letter.'
+      // )
+      // .regex(/\d/, 'Password needs at least one lowercase letter.')
+      // .regex(
+      //   /[@$!%*?&]/,
+      //   'Password needs to have at least one special character (@$!%*?&)'
+      // )
+      .safeParse(this.signupObj.Password);
+    if (!passwordCheck.success) {
+      alert(passwordCheck.error.errors.map(e => e.message).join('\n'));
+      return;
+    }
     // Check if the email is already taken
-    const emailExists = this.users.some(user => user.EmailId === this.signupObj.EmailId);
+    const emailExists = this.users.some(
+      (user) => user.EmailId === this.signupObj.EmailId
+    );
 
     if (emailExists) {
-      alert("This email is already registered. Try logging in.");
+      alert('This email is already registered. Try logging in.');
       return;
     }
 
@@ -44,13 +75,15 @@ export class SignUpPageComponent {
 
     // Auto-login the user after signup
     this.authService.login(this.signupObj.EmailId, this.signupObj.Username);
-    alert("Sign Up Successful!");
-    this.router.navigate(['/bookshelf']);
+    //alert("Sign Up Successful!");
+    this.router.navigate(['/bookshelf']).then(() => {
+      window.location.reload();
+    });
   }
 
   // Simulate saving users (real-world: use backend API)
   saveUsers() {
-    console.log("Users saved:", JSON.stringify({ users: this.users }, null, 2));
+    console.log('Users saved:', JSON.stringify({ users: this.users }, null, 2));
   }
 }
 
