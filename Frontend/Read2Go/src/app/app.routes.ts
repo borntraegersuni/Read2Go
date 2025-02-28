@@ -41,4 +41,11 @@ export const routes: Routes = [
     },
     canActivate: [AuthGuard], // Protect this route with the AuthGuard
   },
+  {
+  path: 'booklist',
+    loadComponent: () => {
+      return import('./booklist/booklist.component').then((m) => m.BooklistComponent);
+    },
+    canActivate: [AuthGuard], // Protect this route with the AuthGuard
+  },
 ];
