@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.book-container {
+    display: flex;
+    gap: 5vw;
+    padding: 3vh 3vw;
+    align-items: center;
+    max-width: 80vw;
+    margin: auto;
+    border: 2px solid gray;
+    border-radius: 1.5rem;
+    background-color: #f9f9f9;
+}
+.book-cover {
+    width: 10vw; /* Adjusted size */
+    height: auto;
+    border-radius: 1rem;
+}
+.book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    flex-grow: 1;
+}
+.book-title {
+    font-size: 2em;
+    font-weight: bold;
+}
+.book-author {
+    font-size: 1.5em;
+    color: gray;
+}
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+.stars {
+    display: flex;
+}
+.stars span {
+    font-size: 2em;
+    cursor: pointer;
+    color: lightgray;
+    transition: color 0.3s;
+}
+.stars span:hover,
+.stars span:hover ~ span {
+    color: gold;
+}
+.average-rating {
+    font-size: 1.5em;
+}
+.view-more {
+    font-size: 1.5em;
+    color: #007BFF;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 3vh 3vw;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.popup.active {
+    display: block;
+}

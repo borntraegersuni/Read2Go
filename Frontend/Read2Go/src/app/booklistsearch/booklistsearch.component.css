@@ -1,0 +1,17 @@
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+.search-input {
+    padding: 2vh 4vw;
+    font-size: 1.5em;
+    border: 0.125rem solid gray;
+    border-radius: 1.5rem;
+    outline: none;
+    transition: border-color 0.3s;
+    font-family: 'Times New Roman', Times, serif;
+}
+.search-input:focus {
+    border-color: #a55bb8;
+}

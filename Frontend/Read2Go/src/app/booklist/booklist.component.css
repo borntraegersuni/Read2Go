@@ -1,0 +1,15 @@
+app-booklisthead {
+    display: block;
+    margin-bottom: 2vh; /* Adjust the value as needed */
+}
+
+hr {
+    margin: 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+app-booklistbody {
+    display: block;
+    margin-top: -3vh; /* Adjust the value as needed */
+}
