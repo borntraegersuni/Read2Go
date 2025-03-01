@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './botmdec.component.css'
 })
 export class BotmdecComponent {
-  PickOf: string = "Feb 25' Pick";
+  PickOf: string = "Dec 24' Pick";
   bookTitle: string = "Throne of Glass by Sarah J. Maas";
   bookImage: string = "tog1.jpeg"; // Pfad zum Buchbild
   averageRating: number = 5; // Durchschnittliche Sternebewertung

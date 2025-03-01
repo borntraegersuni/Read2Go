@@ -7,8 +7,8 @@
     <app-headertopright class="login"></app-headertopright>
 </div>
 <div class="nav-bar">
-    <a href="#">Home</a>
-    <a href="./bookclub">Book Club</a>
-    <a *ngIf="authService.isAuthenticated()" href="./bookshelf">Bookshelf</a>
-    <a *ngIf="authService.isAuthenticated()" href="./profile">Profile</a>
+    <a [class.active]="isActive('/')" href="/">Home</a>
+    <a [class.active]="isActive('/bookclub')" href="/bookclub">Book Club</a>
+    <a *ngIf="authService.isAuthenticated()" [class.active]="isActive('/bookshelf')" href="/bookshelf">Bookshelf</a>
+    <a *ngIf="authService.isAuthenticated()" [class.active]="isActive('/profile')" href="/profile">Profile</a>
 </div>

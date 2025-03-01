@@ -55,3 +55,18 @@ body {
     font-family: 'Times New Roman', Times, serif;
     font-size: 14px;
 }
+
+@media screen and (max-width: 767px) {
+    .image-container {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .image-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
