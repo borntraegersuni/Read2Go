@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './botmjan.component.css'
 })
 export class BotmjanComponent {
-  PickOf: string = "Feb 25' Pick";
+  PickOf: string = "Jan 25' Pick";
   bookTitle: string = "Fourth Wing by Rebecca Yarros";
   bookImage: string = "fourthwing.jpeg"; // Pfad zum Buchbild
   averageRating: number = 5; // Durchschnittliche Sternebewertung

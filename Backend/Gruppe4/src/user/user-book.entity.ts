@@ -5,10 +5,10 @@ import { User } from './user.entity';
 
 @Entity()
 export class UserBook extends BaseEntity {
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
-  @ManyToOne(() => Book)
+  @ManyToOne(() => Book, { onDelete: 'CASCADE' })
   book: Book;
 
   @Column({

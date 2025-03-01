@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 export class YourxbooksComponent implements OnInit {
 category: any;
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
   books: string[] = [];
 }

@@ -1,33 +1,82 @@
 <div class="container">
-    <div class="form-container">
-      <h2>User Profile Settings</h2>
-      <form (ngSubmit)="saveChanges()">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" [(ngModel)]="user.username" name="username" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
-        </div>
-        <div class="form-group">
-          <button type="submit">Save Changes</button>
-        </div>
-      </form>
-      <hr>
-      <h3>Delete Account</h3>
-      <p>Warning: Deleting your account is irreversible. All your data will be permanently removed.</p>
+  <div class="form-container">
+    <h2>User Profile Settings</h2>
+    <form (ngSubmit)="saveChanges()" #updateForm="ngForm" novalidate>
       <div class="form-group">
-        <button class="delete" (click)="confirmDelete()">Delete Account</button>
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          [(ngModel)]="user.username"
+          name="username"
+          required
+        />
       </div>
-    </div>
-    <div class="image-container">
-        <img src="./profilepage.jpg" alt="Deco Picture">
-    </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="user.email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="new-password">New Password:</label>
+        <input
+          type="password"
+          id="new-password"
+          [(ngModel)]="user.newPassword"
+          name="newPassword"
+          optional
+        />
+      </div>
+      <div class="form-group">
+        <label for="current-password">Current Password:*</label>
+        <input
+          type="password"
+          id="current-password"
+          [(ngModel)]="user.currentPassword"
+          name="currentPassword"
+          required
+        />
+        <div *ngIf="updateForm.controls['currentPassword']?.invalid" class="error">
+          Password is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit">Save Changes</button>
+      </div>
+    </form>
+    <hr />
+    <h3>Delete Account</h3>
+    <p>
+      Warning: Deleting your account is irreversible. All your data will be
+      permanently removed.
+    </p>
+    <form #deleteForm="ngForm" (ngSubmit)="confirmDelete(deleteForm)" novalidate>
+      <div class="form-group">
+        <label for="delete-password">Current Password:*</label>
+        <input
+          type="password"
+          id="delete-password"
+          [(ngModel)]="user.deletePassword"
+          name="deletePassword"
+          required
+        />
+        <div *ngIf="deleteForm.controls['deletePassword']?.invalid" class="error">
+          Password is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="delete" [disabled]="deleteForm.invalid">
+          Delete Account
+        </button>
+      </div>
+    </form>    
   </div>
-  
-  
+  <div class="image-container">
+    <img src="./profilepage.jpg" alt="Deco Picture" />
+  </div>
+</div>

@@ -29,19 +29,36 @@ export class LoginpageComponent {
     });
   }
 
-  onLogin() {
-    const userFound = this.users.find(user => 
-      user.EmailId === this.loginObj.EmailId && user.Password === this.loginObj.Password
-    );
-  
-    if (userFound) {
-      this.authService.login(userFound.EmailId, userFound.Username);
+  async onLogin() {
+    const result = await fetch('http://localhost:3000/auth/login', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        email: this.loginObj.EmailId,
+        password: this.loginObj.Password
+      })
+    });
+
+    if(result.ok) {
+      const data = await result.json();
+      this.authService.login(data.user.email, data.user.username, data.token);
       this.router.navigate(['/bookshelf']).then(() => {
         window.location.reload();
       });
     } else {
       alert("Invalid email or password.");
     }
+
+    // if (userFound) {
+    //   this.authService.login(userFound.EmailId, userFound.Username);
+    //   this.router.navigate(['/bookshelf']).then(() => {
+    //     window.location.reload();
+    //   });
+    // } else {
+    //   alert("Invalid email or password.");
+    // }
   }
   
 }

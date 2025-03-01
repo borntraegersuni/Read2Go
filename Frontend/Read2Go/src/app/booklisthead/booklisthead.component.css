@@ -1,0 +1,27 @@
+.button-group {
+    display: flex;
+    gap: 10vw;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+    border-radius: 1.5rem;
+}
+input[type="checkbox"] {
+    display: none;
+}
+label {
+    padding: 2vh 4vw;
+    font-size: 1.5em;
+    background-color: lightgray;
+    border: 0.125rem solid gray;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+}
+input[type="checkbox"]:checked + label {
+    background-color: #cfa3d9;
+    border: 0.125rem solid #a55bb8;
+    color: white;
+    border-radius: 1.5rem;
+    transform: scale(1.1);
+}

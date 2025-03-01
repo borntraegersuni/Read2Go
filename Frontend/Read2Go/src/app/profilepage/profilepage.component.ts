@@ -1,11 +1,12 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profilepage',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './profilepage.component.html',
   styleUrl: './profilepage.component.css'
 })
@@ -14,6 +15,9 @@ export class ProfilePageComponent implements OnInit {
     username: '',
     email: '',
     password: '',
+    currentPassword: '',
+    newPassword: '',
+    deletePassword: ''
   };
   profileImage = './assets/profilepage.jpg';
 
@@ -30,25 +34,27 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
-  saveChanges() {
-    if (!this.user.username || !this.user.email || !this.user.password) {
+  async saveChanges() {
+    if (!this.user.username || !this.user.email || !this.user.currentPassword) {
       alert('All fields are required.');
       return;
     }
-
+    
     // Update user information (you can also save this to the backend)
-    this.authService.updateUser(this.user);
-    console.log('Profile updated:', this.user);
-    alert('Profile updated successfully!');
+    if(await this.authService.updateUser(this.user)) {
+      this.router.navigate(['/login']);
+    }
   }
 
-  confirmDelete() {
+  async confirmDelete(form: any) {
+    if (!form.valid) {
+      return;
+    }
     const confirmed = confirm('Are you sure you want to delete your account? This action is irreversible.');
     if (confirmed) {
       // Call deleteUserAccount from AuthService to delete the user
-      this.authService.deleteUserAccount();
-      alert('Your account has been deleted.');
-      this.router.navigate(['/signup']); // Redirect to signup or login page
+      if(await this.authService.deleteUserAccount(this.user.deletePassword))
+        this.router.navigate(['/signup']);
     }
   }
 }

@@ -62,7 +62,7 @@ body {
 }
 .reading-view img:hover {
     transform: scale(1.05); /* Scale up the cover */
-    transition: transform 0.3s ease; /* Smooth transition */
+    transition: transform 0.5s ease; /* Smooth transition */
 }
 
 .reading-view img {
@@ -111,7 +111,7 @@ body {
 }
 .book:hover {
     transform: scale(1.05); /* Scale up the book */
-    transition: transform 0.3s ease; /* Smooth transition */
+    transition: transform 0.5s ease; /* Smooth transition */
 }
 
 /* Responsive Design */
