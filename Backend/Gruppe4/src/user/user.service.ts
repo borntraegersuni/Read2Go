@@ -32,6 +32,18 @@ export class UserService {
     return result ? result[0] : null;
   }
 
+  async deleteAll(): Promise<void> {
+    await this.usersRepository.delete({});
+  }
+
+  async readOneByEmail(email: string): Promise<User | null> {
+    const result = await this.usersRepository.find({
+      where: { email },
+      relations: { userBooks: { book: true } },
+    });
+    return result ? result[0] : null;
+  }
+
   async readOneByUsername(username: string): Promise<User | null> {
     const result = await this.usersRepository.find({
       where: { username },

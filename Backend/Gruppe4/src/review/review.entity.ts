@@ -5,10 +5,10 @@ import { User } from 'src/user/user.entity';
 
 @Entity()
 export class Review extends BaseEntity {
-  @ManyToOne(() => Book)
+  @ManyToOne(() => Book, { onDelete: 'CASCADE' })
   book: Book;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
   @Column({ type: 'numeric', enum: [1, 2, 3, 4, 5] })

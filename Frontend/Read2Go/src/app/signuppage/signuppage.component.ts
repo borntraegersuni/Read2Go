@@ -32,7 +32,7 @@ export class SignUpPageComponent {
     });
   }
 
-  onSignUp() {
+  async onSignUp() {
     if (!z.string().email().safeParse(this.signupObj.EmailId).success) {
       alert('Submit a real email.');
       return;
@@ -54,31 +54,59 @@ export class SignUpPageComponent {
       // )
       .safeParse(this.signupObj.Password);
     if (!passwordCheck.success) {
-      alert(passwordCheck.error.errors.map(e => e.message).join('\n'));
+      alert(passwordCheck.error.errors.map((e) => e.message).join('\n'));
       return;
     }
     // Check if the email is already taken
-    const emailExists = this.users.some(
-      (user) => user.EmailId === this.signupObj.EmailId
-    );
 
-    if (emailExists) {
-      alert('This email is already registered. Try logging in.');
-      return;
+    const request = await fetch('http://localhost:3000/auth/signup', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.signupObj.Username,
+        email: this.signupObj.EmailId,
+        password: this.signupObj.Password,
+      }),
+    });
+
+    if(request.ok) {
+      const data = await request.json();
+      this.authService.login(data.user.email, data.user.username, data.token);
+      this.router.navigate(['/bookshelf']).then(() => {
+        window.location.reload();
+      });
+    } else {
+      const data = await request.json();
+      alert(data.message);
     }
 
-    // Add the new user
-    this.users.push(this.signupObj);
+    // const emailExists = this.users.some(
+    //   (user) => user.EmailId === this.signupObj.EmailId
+    // );
 
-    // Save users back to JSON (simulation, real-world needs a backend)
-    this.saveUsers();
+    // if (emailExists) {
+    //   alert('This email is already registered. Try logging in.');
+    //   return;
+    // }
 
-    // Auto-login the user after signup
-    this.authService.login(this.signupObj.EmailId, this.signupObj.Username);
-    //alert("Sign Up Successful!");
-    this.router.navigate(['/bookshelf']).then(() => {
-      window.location.reload();
-    });
+    // // Add the new user
+    // this.users.push(this.signupObj);
+
+    // // Save users back to JSON (simulation, real-world needs a backend)
+    // this.saveUsers();
+
+    // // Auto-login the user after signup
+    // this.authService.login(
+    //   this.signupObj.EmailId,
+    //   this.signupObj.Username,
+    //   'TODOTOKEN'
+    // );
+    // //alert("Sign Up Successful!");
+    // this.router.navigate(['/bookshelf']).then(() => {
+    //   window.location.reload();
+    // });
   }
 
   // Simulate saving users (real-world: use backend API)
