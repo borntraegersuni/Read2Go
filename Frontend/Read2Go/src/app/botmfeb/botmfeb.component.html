@@ -22,7 +22,25 @@
                 <h3>{{ bookTitle }}</h3>
                 <p>{{ description }}</p>
             </div>
-            <a href="bcOverview.html" class="read-more">Read More</a>
+            <a (click)="openModal()" class="read-more">Read More</a>
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>{{ bookTitle }}</h2>
+        <h3>Why We Chose This Book:</h3>
+        <p>"Iron Flame" by Rebecca Yarros captivates readers with its intense storyline, complex characters, and the high-stakes world of dragon riders. Yarros masterfully blends action, emotion, and intrigue, making it a compelling read that keeps you on the edge of your seat. Her ability to create vivid, relatable characters in a fantastical setting is truly remarkable.</p>
+        <h3>About the Author:</h3>
+        <p>Rebecca Yarros is a bestselling author known for her emotionally charged and gripping novels. With a talent for weaving intricate plots and creating deep, multifaceted characters, Yarros has garnered a dedicated following. "Iron Flame" is a testament to her skill in crafting stories that resonate with readers and leave a lasting impact.</p>
+        <h3>Book description:</h3>
+        <p>Everyone expected Violet Sorrengail to die during her first year at Basgiath War College—Violet included. But Threshing was only the first impossible test meant to weed out the weak-willed, the unworthy, and the unlucky.</p>
+        <p>Now the real training begins, and Violet’s already wondering how she’ll get through. It’s not just that it’s grueling and maliciously brutal, or even that it’s designed to stretch the riders’ capacity for pain beyond endurance. It’s the new vice commandant, who’s made it his personal mission to teach Violet exactly how powerless she is–unless she betrays the man she loves.</p>
+        <p>Although Violet’s body might be weaker and frailer than everyone else’s, she still has her wits—and a will of iron. And leadership is forgetting the most important lesson Basgiath has taught her: Dragon riders make their own rules.</p>
+        <p>But a determination to survive won’t be enough this year. Because Violet knows the real secret hidden for centuries at Basgiath War College—and nothing, not even dragon fire, may be enough to save them in the end.</p>
+        <p>The Empyrean series is best enjoyed in order.<br><br><strong>Reading Order:</strong><br><br>Book #1 Fourth Wing<br><br>Book #2 Iron Flame<br><br>Book #3 Onyx Strom</p>
     </div>
 </div>

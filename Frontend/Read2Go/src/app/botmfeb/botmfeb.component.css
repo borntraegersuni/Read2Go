@@ -1,5 +1,6 @@
 .container {
     width: 95%;
+    max-width: 1200px;
     margin: 1rem auto;
     background: lightgray;
     padding: 15px;
@@ -70,19 +71,57 @@ h1 {
 .description {
     margin-bottom: 15px; /* Abstand zwischen Beschreibung und Button */
     line-height: 1,5;
-    
+
 }
 
 .read-more {
     display: inline-block;
     text-align: center;
     padding: 5px 10px; /* Kleinere Polsterung für den Button */
-    background-color: #6a0dad; /* Lila */
+    background-color: #a55bb8; /* Lila */
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
 .read-more:hover {
-    background-color: #5a0a9a; /* Dunkleres Lila bei Hover */
+    background-color: #7f478d; /* Dunkleres Lila bei Hover */
+}
+.modal {
+    display: flex;
+    justify-content: center; /* Zentriert das Modal horizontal */
+    align-items: center; /* Zentriert das Modal vertikal */
+    position: fixed;
+    z-index: 1000; /* Über anderen Inhalten */
+    left: 0;
+    top: 0;
+    width: 100%; /* Vollständige Breite des Bildschirms */
+    height: 100%; /* Vollständige Höhe des Bildschirms */
+    background-color: rgba(0, 0, 0, 0.5); /* Halbdurchsichtiger Hintergrund */
+    overflow: auto; /* Ermöglicht das Scrollen, falls nötig */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 20px;
+    border: 3px solid #a55bb8;;
+    border-radius: 10px;
+    width: clamp(15rem, 700px, 50vw);
+    max-height: 80%; /* Maximale Höhe des Modals */
+    overflow-y: auto; /* Ermöglicht vertikales Scrollen bei Bedarf */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
 }
