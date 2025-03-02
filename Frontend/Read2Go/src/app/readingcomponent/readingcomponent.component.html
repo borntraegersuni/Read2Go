@@ -1,31 +1,20 @@
 <div class="container">
     <div class="bookshelf">
-        <div class="reading-view">
-            Reading
-            <a href="booklist">
-                <p>12</p>
-            </a>
-            <a href="booklist">View More</a>
+      <div class="reading-view">
+        Reading
+        <a href="booklist?category=reading">
+          <p>{{ books.length }}</p>
+        </a>
+        <a href="booklist?category=reading">View More</a>
+      </div>
+      <div class="shelf-container">
+        <div class="bookrow">
+          <a *ngFor="let book of books" [href]="book.link">
+            <img [src]="book.coverUrl" [alt]="book.title" class="book" />
+          </a>
         </div>
-        <div class="shelf-container">
-            <div class="bookrow">
-                <a href="https://example.com/longest"> <!-- Link behind the first image -->
-                    <img src="./examplecover.jpg" alt="Book Image" class="book" />
-                </a>
-                <a href="https://example.com/shortest"> <!-- Link behind the second image -->
-                    <img src="./examplecover.jpg" alt="Book Image" class="book" />
-                </a>
-                <a href="https://example.com/favorite"> <!-- Link behind the third image -->
-                    <img src="./examplecover.jpg" alt="Book Image" class="book" />
-                </a>
-                <a href="https://example.com/book4"> <!-- Link behind the fourth image -->
-                    <img src="./examplecover.jpg" alt="Book Image" class="book" />
-                </a>
-                <a href="https://example.com/book5"> <!-- Link behind the fifth image -->
-                    <img src="./examplecover.jpg" alt="Book Image" class="book" />
-                </a>
-            </div>
-            <div class="shelf"></div>
-        </div>
+        <div class="shelf"></div>
+      </div>
     </div>
-</div>
+  </div>
+  

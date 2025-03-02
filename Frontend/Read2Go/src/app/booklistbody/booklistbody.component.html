@@ -1,15 +1,17 @@
 <div class="sort">
-    <app-booklistsearch></app-booklistsearch>
-    <app-booklistfilter></app-booklistfilter>
-    <!-- Add an button to add books-->
+  <app-booklistsearch></app-booklistsearch>
+  <app-booklistfilter></app-booklistfilter>
+  <!-- Add a button to add books -->
 </div>
 <div class="books">
-<app-bookcard></app-bookcard>
-</div>
-<div class="books">
-    <app-bookcard></app-bookcard>
-</div>
-<div class="books">
-    <app-bookcard></app-bookcard>
+  <app-bookcard
+    *ngFor="let book of books"
+    [title]="book.title"
+    [coverUrl]="book.coverUrl"
+    [link]="book.link"
+    [author]="book.author"
+    [rating]="book.rating"
+    [bookId]="book.id"
+  ></app-bookcard>
 </div>
 <div class="bottom"></div>

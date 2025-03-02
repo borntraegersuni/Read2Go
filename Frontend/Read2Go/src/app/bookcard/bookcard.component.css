@@ -47,6 +47,9 @@ body {
     color: lightgray;
     transition: color 0.3s;
 }
+.stars span.filled {
+    color: gold;
+}
 .average-rating {
     font-size: 1.5em;
     margin-top: 8px;

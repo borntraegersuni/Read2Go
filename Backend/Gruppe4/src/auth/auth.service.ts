@@ -130,6 +130,21 @@ export class AuthService {
         success: false,
       };
     }
+    const existingUserByEmail = await this.userService.readOneByEmail(email);
+    if (existingUserByEmail && existingUserByEmail.id !== user.id) {
+      return {
+        message: 'Email already taken',
+        success: false,
+      };
+    }
+
+    const existingUserByUsername = await this.userService.readOneByUsername(username);
+    if (existingUserByUsername && existingUserByUsername.id !== user.id) {
+      return {
+        message: 'Username already taken',
+        success: false,
+      };
+    }
     const newuser = new User();
     newuser.username = username;
     newuser.email = email;

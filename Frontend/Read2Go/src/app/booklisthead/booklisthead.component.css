@@ -18,7 +18,8 @@ label {
     transition: background-color 0.3s, transform 0.2s;
     text-align: center;
 }
-input[type="checkbox"]:checked + label {
+
+.active {
     background-color: #cfa3d9;
     border: 0.125rem solid #a55bb8;
     color: white;

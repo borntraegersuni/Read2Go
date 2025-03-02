@@ -1,17 +1,32 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input } from '@angular/core';
 import { BookoverviewComponent } from "../bookoverview/bookoverview.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-bookcard',
+  standalone: true,
   templateUrl: './bookcard.component.html',
   styleUrls: ['./bookcard.component.css'],
-  imports: [BookoverviewComponent]
+  imports: [BookoverviewComponent, CommonModule]
 })
 export class BookcardComponent implements AfterViewInit {
+  @Input() title!: string;
+  @Input() coverUrl!: string;
+  @Input() link!: string;
+  @Input() author!: string;
+  @Input() rating!: number;
+  @Input() bookId!: number;
 
+  stars: number[] = [1, 2, 3, 4, 5];
+
+
+  
   ngAfterViewInit() {
     this.initializePopup();
-    this.initializeStars();
+  }
+
+  setRating(rating: number) {
+    this.rating = rating;
   }
 
   initializePopup() {
@@ -25,22 +40,6 @@ export class BookcardComponent implements AfterViewInit {
 
     closePopup?.addEventListener('click', () => {
       popup?.classList.remove('active');
-    });
-  }
-
-  initializeStars() {
-    document.querySelectorAll('.stars span').forEach(star => {
-      star.addEventListener('click', function(this: HTMLElement) {
-        document.querySelectorAll('.stars span').forEach(s => (s as HTMLElement).style.color = 'lightgray');
-        this.style.color = 'gold';
-        let prev = this.previousElementSibling as HTMLElement;
-        while (prev) {
-          prev.style.color = 'gold';
-          prev = prev.previousElementSibling as HTMLElement;
-        }
-        const rating = this.getAttribute('data-value');
-        alert(`You rated this book ${rating} stars!`);
-      });
     });
   }
 }

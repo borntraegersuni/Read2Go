@@ -1,23 +1,28 @@
 <div class="book-container">
-    <img src="./examplecover.jpg" alt="Book Cover" class="book-cover">
-    <div class="book-details">
-        <div class="book-title">Book Title</div>
-        <div class="book-author">by: Book Author</div>
-        <div class="rating-container">
-            <div class="stars" id="star-rating">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-            </div>
-            <span class="average-rating">Ø: 4.2</span>
-            <div class="view-more">View More</div>
-        </div>
+  <a [href]="link">
+    <img src="./examplecover.jpg" [alt]="title" class="book-cover" />
+  </a>
+  <div class="book-details">
+    <div class="book-title">{{ title }}</div>
+    <div class="book-author">by: {{ author }}</div>
+    <div class="rating-container">
+      <div class="stars" id="star-rating">
+        <span
+          *ngFor="let star of stars; let i = index"
+          [attr.bookid] = "bookId"
+          [class.filled]="i < rating"
+          (click)="setRating(i + 1)"
+          [attr.data-value]="i + 1"
+          >★</span
+        >
+      </div>
+      <span class="average-rating">Ø: {{ rating }}</span>
+      <div class="view-more">View More</div>
     </div>
+  </div>
 </div>
 
 <div class="popup" id="popup">
-    <app-bookoverview></app-bookoverview>
-    <button class="close-popup">Close</button>
+  <app-bookoverview></app-bookoverview>
+  <button class="close-popup">Close</button>
 </div>

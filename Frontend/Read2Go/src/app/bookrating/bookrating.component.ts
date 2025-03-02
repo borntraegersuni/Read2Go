@@ -1,29 +1,40 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Renderer2 } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-bookrating',
   templateUrl: './bookrating.component.html',
-  styleUrls: ['./bookrating.component.css']
+  styleUrls: ['./bookrating.component.css'],
 })
 export class BookratingComponent implements AfterViewInit {
+  constructor(
+    private renderer: Renderer2,
+    private readonly auth: AuthService
+  ) {}
 
   ngAfterViewInit() {
     this.initializeStars();
   }
 
-  initializeStars() {
-    document.querySelectorAll('.stars span').forEach(star => {
-      star.addEventListener('click', function(this: HTMLElement) {
-        document.querySelectorAll('.stars span').forEach(s => (s as HTMLElement).classList.remove('active'));
-        this.classList.add('active');
-        let prev = this.previousElementSibling as HTMLElement;
-        while (prev) {
-          prev.classList.add('active');
-          prev = prev.previousElementSibling as HTMLElement;
-        }
-        const rating = this.getAttribute('data-value');
-        alert(`You rated this book ${rating} stars!`);
-      });
+  private initializeStars() {
+    const stars = document.querySelectorAll('.stars span');
+    stars.forEach((star) => {
+      this.renderer.listen(star, 'click', (event) =>
+        this.onStarClick(event, stars)
+      );
     });
+  }
+
+  private onStarClick(event: MouseEvent, stars: NodeListOf<Element>) {
+    event.stopImmediatePropagation();
+    stars.forEach((star) => this.renderer.removeClass(star, 'active'));
+
+    const clickedStar = event.target as HTMLElement;
+    const rating = clickedStar.getAttribute('data-value');
+    this.auth
+      .sendReview(Number(clickedStar.getAttribute('bookId')), Number(rating))
+      .then(() => {
+        alert('You rated this book ' + rating + ' stars');
+      });
   }
 }
