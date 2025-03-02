@@ -2,7 +2,9 @@
     display: flex;
     justify-content: center;
     margin-top: 5vh;
+    padding: 0 2vw;
 }
+
 .search-input {
     padding: 2vh 4vw;
     font-size: 1.5em;
@@ -11,7 +13,24 @@
     outline: none;
     transition: border-color 0.3s;
     font-family: 'Times New Roman', Times, serif;
+    width: 100%;
+    max-width: 600px;
 }
+
 .search-input:focus {
     border-color: #a55bb8;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        font-size: 1.2em;
+        padding: 1.5vh 3vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-input {
+        font-size: 1em;
+        padding: 1vh 2vw;
+    }
 }

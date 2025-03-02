@@ -1,9 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { BookoverviewComponent } from "../bookoverview/bookoverview.component";
 
 @Component({
   selector: 'app-bookcard',
   templateUrl: './bookcard.component.html',
-  styleUrls: ['./bookcard.component.css']
+  styleUrls: ['./bookcard.component.css'],
+  imports: [BookoverviewComponent]
 })
 export class BookcardComponent implements AfterViewInit {
 
