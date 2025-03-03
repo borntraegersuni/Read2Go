@@ -49,9 +49,9 @@ export const routes: Routes = [
     canActivate: [AuthGuard], // Protect this route with the AuthGuard
   },
   {
-    path: 'bookoverview',
+    path: 'search',
       loadComponent: () => {
-        return import('./bookoverview/bookoverview.component').then((m) => m.BookoverviewComponent);
+        return import('./search/search.component').then((m) => m.SearchComponent);
       },
       canActivate: [AuthGuard], // Protect this route with the AuthGuard
     },

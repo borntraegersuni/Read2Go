@@ -1,15 +1,9 @@
-app-booklisthead {
+app-searchhead {
     display: block;
     margin-bottom: 2vh; /* Adjust the value as needed */
 }
 
-hr {
-    margin: 0;
-    border: none;
-    border-top: 1px solid #ccc;
-}
-
-app-booklistbody {
+app-searchbody {
     display: block;
     margin-top: -3vh; /* Adjust the value as needed */
 }

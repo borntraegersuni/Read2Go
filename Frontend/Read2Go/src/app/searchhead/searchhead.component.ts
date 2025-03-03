@@ -1,17 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { BooklistheadComponent } from "../booklisthead/booklisthead.component";
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { BooklistsearchComponent } from '../booklistsearch/booklistsearch.component';
-import { BooklistfilterComponent } from '../booklistfilter/booklistfilter.component';
 
 @Component({
-  selector: 'app-booklisthead',
-  imports: [CommonModule, BooklistsearchComponent, BooklistfilterComponent
-  ],
-  templateUrl: './booklisthead.component.html',
-  styleUrl: './booklisthead.component.css',
+  selector: 'app-searchhead',
+  imports: [CommonModule, BooklistheadComponent],
+  templateUrl: './searchhead.component.html',
+  styleUrl: './searchhead.component.css'
 })
-export class BooklistheadComponent {
+export class SearchheadComponent {
   @Input() books!: {
     id: number;
     title: string;
@@ -28,6 +26,9 @@ export class BooklistheadComponent {
       this.queryParams = params;
     });
   }
+
+  update(category: string): void {}
+
 
   ngOnInit(): void {
     this.updateCategoryStyles();
