@@ -1,0 +1,12 @@
+.sort {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.books {
+    display: block;
+    margin-top: 2vh; /* Adjust the value as needed */
+}
+.bottom {
+    margin-bottom: 2vh;
+}

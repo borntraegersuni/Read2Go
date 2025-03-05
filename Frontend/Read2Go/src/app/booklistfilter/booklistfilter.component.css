@@ -1,0 +1,17 @@
+.filter-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+.filter-select, .filter-options {
+    padding: 2vh 4vw;
+    font-size: 1.5em;
+    border: 2px solid gray;
+    border-radius: 1.5rem;
+    outline: none;
+    transition: border-color 0.3s;
+    font-family: 'Times New Roman', Times, serif;
+}
+.filter-select:focus, .filter-options:focus {
+    border-color: #a55bb8;
+}

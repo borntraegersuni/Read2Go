@@ -36,7 +36,7 @@ body {
 .nav-bar {
     background-color: #a55bb8;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     padding: 0px 0;
 }
 .nav-bar a {
@@ -47,6 +47,9 @@ body {
     position: relative;
     transition: color 0.3s ease-in-out;
 }
+.nav-bar a.active {
+    color: black;
+}
 .nav-bar a::after {
     content: "";
     position: absolute;
@@ -54,13 +57,24 @@ body {
     bottom: -3px;
     width: 0;
     height: 2px;
-    background-color: white;
+    background-color: black;
     transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 .nav-bar a:hover {
-    color: #ddd;
+    color: black;
 }
 .nav-bar a:hover::after {
     width: 100%;
     left: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .nav-bar {
+        background-color: #a55bb8;
+        display: flex;
+        justify-content: left;
+        padding: 0px 0;
+    }
+
+
 }
