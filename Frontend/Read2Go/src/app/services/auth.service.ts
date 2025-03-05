@@ -102,6 +102,7 @@ export class AuthService {
       rating: number;
       genre: string;
       id: number;
+      bookid: number;
       state: 'wishlist' | 'reading' | 'finished';
     }[];
     return filter ? books.filter((b) => b.state === filter) : books;

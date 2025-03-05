@@ -129,6 +129,7 @@ export class UserService {
           rating: review ? Number(review.rating) : 0,
           title: ub.book.title,
           id: ub.id,
+          bookid: ub.book.id,
         };
       }),
     );
@@ -202,6 +203,7 @@ export class UserService {
     }
     const book = await this.bookService.getBookById(Number(bookId));
     if (!book) {
+      console.log("book not found", bookId)
       return {
         success: false,
       };
@@ -248,5 +250,6 @@ export interface IBook {
   rating: number;
   genre: string;
   id: number;
+  bookid: number;
   state: 'wishlist' | 'reading' | 'finished';
 }
