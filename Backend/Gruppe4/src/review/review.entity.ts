@@ -1,5 +1,5 @@
 import { Book } from 'src/book/book.entity';
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, Unique } from 'typeorm';
 import { BaseEntity } from '../shared/base';
 import { User } from 'src/user/user.entity';
 

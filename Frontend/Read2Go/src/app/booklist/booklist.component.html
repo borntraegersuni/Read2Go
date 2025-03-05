@@ -1,3 +1,7 @@
-<app-booklisthead></app-booklisthead>
-<hr>
-<app-booklistbody></app-booklistbody>
+<div class="container">
+<app-booklisthead [books]="books" [searchUpdate]="update"></app-booklisthead>
+</div>
+<div class="spacer"></div>
+<div class="container">
+<app-booklistbody [books]="books"></app-booklistbody>
+</div>

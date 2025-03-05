@@ -1,10 +1,7 @@
-.sort {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 .books {
-    display: block;
+    display: grid;
+    gap: 8px;
     margin-top: 2vh; /* Adjust the value as needed */
 }
 .bottom {

@@ -1,0 +1,8 @@
+.books {
+    display: grid;
+    gap: 8px;
+    margin-top: 2vh; /* Adjust the value as needed */
+}
+.bottom {
+    margin-bottom: 2vh;
+}

@@ -1,10 +1,11 @@
 .button-group {
     display: flex;
-    gap: 10vw;
+    gap: 2vw;
     justify-content: center;
     align-items: center;
     margin-top: 2vh;
     border-radius: 1.5rem;
+    margin-bottom: -1.5vh;
 }
 input[type="checkbox"] {
     display: none;
@@ -12,16 +13,34 @@ input[type="checkbox"] {
 label {
     padding: 2vh 4vw;
     font-size: 1.5em;
-    background-color: lightgray;
+    background-color: white;
     border: 0.125rem solid gray;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     text-align: center;
+    border-radius: 1.5rem; /* Keep buttons round all the time */
 }
-input[type="checkbox"]:checked + label {
+
+.active {
     background-color: #cfa3d9;
     border: 0.125rem solid #a55bb8;
     color: white;
-    border-radius: 1.5rem;
     transform: scale(1.1);
+}
+.sort {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Media Queries */
+@media (max-width: 768px) {
+    .button-group {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .button-group {
+        margin-bottom: 0;
+    }
 }

@@ -9,7 +9,7 @@ import { BookSlider2Component } from "../book-slider-2/book-slider-2.component";
   selector: 'app-home',
   imports: [RouterOutlet, TitlePicComponent, BookRatingComponent, BCWidgetComponent, BookSlider2Component, BookSlider2Component],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
 

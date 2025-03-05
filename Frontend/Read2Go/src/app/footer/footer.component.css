@@ -1,3 +1,9 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .footer {
     background-color: #cfa3d9;
     border-top: 5px solid #a55bb8;
@@ -5,4 +11,8 @@
     padding: 10px;
     font-family: "Times New Roman", serif;
     font-size: 14px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
 }

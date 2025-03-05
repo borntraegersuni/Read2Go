@@ -42,6 +42,7 @@ export class AppModule implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
+    
     // Example program run. Use command "rm -f db.sqlite && npm run start" to run with a clean database
     //await this.userService.delete(3)
     // const user = new User();
@@ -85,4 +86,3 @@ export class AppModule implements OnModuleInit {
     // console.log(inspect(reviewRead, true, 10, true));
   }
 }
- 

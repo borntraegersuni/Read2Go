@@ -1,0 +1,74 @@
+/* Rating Widget */
+.rating-container {
+    display: flex;
+    flex-direction: column; /* Stack rows */
+    gap: 0.5rem; /* Reduce space between rows */
+    max-width: 50rem;
+    margin: auto;
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+/* Stars + Average Rating Row */
+.stars-container {
+    display: flex;
+    justify-content: space-between; /* Space between stars and average rating */
+    align-items: center; /* Align stars and rating vertically */
+    width: 100%;
+}
+
+/* Stars Section */
+.stars {
+    display: flex;
+    flex-direction: row;
+}
+
+.star {
+    font-size: 2rem;
+    cursor: pointer;
+    color: gray;
+    transition: color 0.3s;
+}
+
+.star:hover, .star.active {
+    color: gold;
+}
+
+/* Average Rating */
+.average-rating {
+    margin-top: 8px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Review Input Field */
+.review-container {
+    display: flex;
+    gap: 0.5rem; /* Space between input and button */
+    width: 100%;
+}
+
+.review-input {
+    flex-grow: 1; /* Allow the input to take up remaining space */
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 3rem; /* Set a minimum height */
+}
+
+.submit-button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #a55bb8;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #7f478d;
+}

@@ -1,10 +1,15 @@
-<div class="button-group">
+<div class="sort">
+    <app-booklistsearch></app-booklistsearch>
+    <app-booklistfilter></app-booklistfilter>
+    <!-- Add a button to add books -->
+  </div>
+  <div class="button-group">
     <input type="checkbox" id="btn1">
-    <label for="btn1">Read</label>
+    <label for="btn1" id="finished" (click)="onCategoryClick('finished')">Read</label>
 
     <input type="checkbox" id="btn2">
-    <label for="btn2">TBR</label>
+    <label for="btn2" id="wishlist" (click)="onCategoryClick('wishlist')">TBR</label>
 
     <input type="checkbox" id="btn3">
-    <label for="btn3">Reading</label>
+    <label for="btn3" id="reading" (click)="onCategoryClick('reading')">Reading</label>
 </div>

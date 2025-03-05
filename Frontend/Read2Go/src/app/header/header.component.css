@@ -68,6 +68,10 @@ body {
     left: 0;
 }
 
+.nav-bar img {
+    height: 20px;
+}
+
 @media screen and (min-width: 768px) {
     .nav-bar {
         background-color: #a55bb8;
@@ -75,6 +79,10 @@ body {
         justify-content: left;
         padding: 0px 0;
     }
+}
 
-
+@media screen and (max-width: 767px) {
+    .nav-bar {
+        flex-wrap: wrap;
+    }
 }

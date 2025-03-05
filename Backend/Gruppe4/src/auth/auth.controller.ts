@@ -73,7 +73,13 @@ export class AuthController {
   async update(
     @Headers() headers,
     @Res() res: Response,
-    @Body() body: { username: string; email: string, oldpassword: string, newpassword: string },
+    @Body()
+    body: {
+      username: string;
+      email: string;
+      oldpassword: string;
+      newpassword: string;
+    },
   ) {
     if (!headers.authorization) {
       res

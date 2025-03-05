@@ -1,0 +1,9 @@
+.progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.bar {
+    margin-top: 1rem;
+}

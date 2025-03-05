@@ -48,4 +48,11 @@ export const routes: Routes = [
     },
     canActivate: [AuthGuard], // Protect this route with the AuthGuard
   },
+  {
+    path: 'search',
+      loadComponent: () => {
+        return import('./search/search.component').then((m) => m.SearchComponent);
+      },
+      canActivate: [AuthGuard], // Protect this route with the AuthGuard
+    },
 ];

@@ -9,6 +9,10 @@
 <div class="nav-bar">
     <a [class.active]="isActive('/')" href="/">Home</a>
     <a [class.active]="isActive('/bookclub')" href="/bookclub">Book Club</a>
+    
     <a *ngIf="authService.isAuthenticated()" [class.active]="isActive('/bookshelf')" href="/bookshelf">Bookshelf</a>
     <a *ngIf="authService.isAuthenticated()" [class.active]="isActive('/profile')" href="/profile">Profile</a>
+    <a *ngIf="authService.isAuthenticated()" [class.active]="isActive('/search')" href="/search">
+        <img [src]="isActive('/search') ? './searchblack.png' : './searchwhite.png'" alt="Search">
+    </a>
 </div>

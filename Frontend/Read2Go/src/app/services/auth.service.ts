@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -75,8 +76,44 @@ export class AuthService {
     return null; // Return null if no user is logged in
   }
 
+  async getBooks(filter: 'wishlist' | 'reading' | 'finished' | '') {
+    const savedUser = localStorage.getItem('loggedInUser');
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      this.isLoggedIn = true;
+      this.userEmail = user.EmailId;
+      this.username = user.Username;
+      this.token = user.Token;
+    }
+    const request = await fetch('http://localhost:3000/user/books', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: this.token || '',
+      },
+    });
+    if (!request.ok) {
+      return [];
+    }
+    const books = (await request.json()).books as {
+      title: string;
+      description: string;
+      image: string;
+      author: string;
+      rating: number;
+      genre: string;
+      id: number;
+      state: 'wishlist' | 'reading' | 'finished';
+    }[];
+    return filter ? books.filter((b) => b.state === filter) : books;
+  }
+
   // Update user profile information (called when the user changes profile details)
-  async updateUser(updatedUser: { username: string; email: string, currentPassword: string, newPassword: string }) {
+  async updateUser(updatedUser: {
+    username: string;
+    email: string;
+    currentPassword: string;
+    newPassword: string;
+  }) {
     const savedUser = localStorage.getItem('loggedInUser');
     if (savedUser) {
       const user = JSON.parse(savedUser);
@@ -98,10 +135,10 @@ export class AuthService {
           oldpassword: updatedUser.currentPassword,
           newpassword: updatedUser.newPassword,
         }),
-      })
-      if(request.ok) {
+      });
+      if (request.ok) {
         this.logout();
-        alert("Profile updated successfully!");
+        alert('Profile updated successfully!');
         return true;
       } else {
         alert((await request.json()).message);
@@ -136,6 +173,36 @@ export class AuthService {
         return true;
       } else {
         alert((await response.json()).message);
+        return false;
+      }
+    }
+    return false;
+  }
+
+  async sendReview(bookId: number, rating: number) {
+    if (this.isLoggedIn) {
+      const savedUser = localStorage.getItem('loggedInUser');
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        this.isLoggedIn = true;
+        this.userEmail = user.EmailId;
+        this.username = user.Username;
+        this.token = user.Token;
+      }
+      console.log(`http://localhost:3000/user/rating?book=${bookId}&rating=${rating}`)
+      const response = await fetch(
+        `http://localhost:3000/user/rating?book=${bookId}&rating=${rating}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: this.token || '',
+          },
+        }
+      );
+      if (response.ok) {
+        return true;
+      } else {
         return false;
       }
     }

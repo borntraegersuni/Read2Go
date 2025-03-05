@@ -13,3 +13,29 @@ app-booklistbody {
     display: block;
     margin-top: -3vh; /* Adjust the value as needed */
 }
+
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 1rem auto;
+    background: lightgray;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 0.5rem;
+    }
+
+    app-booklisthead {
+        margin-bottom: 1vh;
+    }
+
+    app-booklistbody {
+        margin-top: -1.5vh;
+    }
+}
