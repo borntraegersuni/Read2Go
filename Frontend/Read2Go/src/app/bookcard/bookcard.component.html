@@ -15,13 +15,13 @@
         </span>
       </div>
       <span class="average-rating">Ø: {{ rating }}</span>
-      <div class="view-more">View More</div>
+      <button (click)="openPopup()" class="view-more">View More</button>
     </div>
   </div>
 </div>
 
-<div class="popup" id="popup">
+<div class="popup" id="popup-{{ bookId }}">
   <!-- <app-bookoverview [bookId]="bookId"></app-bookoverview> -->
-  <app-bookoverview></app-bookoverview>
-  <button class="close-popup">Close</button>
+  <app-bookoverview [title]="title" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre" ></app-bookoverview>
+  <button (click)="closePopup()" class="close-popup-{{bookId}}">Close</button>
 </div>

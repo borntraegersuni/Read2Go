@@ -17,6 +17,7 @@ export class BookcardComponent implements OnInit, AfterViewInit {
   @Input() author!: string;
   @Input() rating!: number;
   @Input() bookId!: number;
+  @Input() genre!: string;
 
   stars: number[] = [1, 2, 3, 4, 5];
 
@@ -75,8 +76,8 @@ export class BookcardComponent implements OnInit, AfterViewInit {
 
   initializePopup() {
     const viewMore = document.querySelector('.view-more');
-    const popup = document.getElementById('popup');
-    const closePopup = document.querySelector('.close-popup');
+    const popup = document.getElementById('popup-' + this.bookId);
+    const closePopup = document.querySelector('close-popup-' + this.bookId);
     
     if (!viewMore) {
       console.error('View more button not found in the DOM');
@@ -97,14 +98,33 @@ export class BookcardComponent implements OnInit, AfterViewInit {
     const newViewMore = viewMore.cloneNode(true);
     viewMore.parentNode?.replaceChild(newViewMore, viewMore);
     
-    newViewMore.addEventListener('click', () => {
-      console.log('View more clicked!');
-      popup.classList.toggle('active');
-    });
 
     closePopup.addEventListener('click', () => {
       console.log('Close popup clicked!');
       popup.classList.remove('active');
     });
   }
+  
+  closePopup() {
+    console.log('Close popup clicked!');
+    const popup = document.getElementById('popup-' + this.bookId);
+    if (!popup) {
+      console.error('Popup element not found in the DOM');
+      return;
+    }
+    popup.classList.remove('active');
+  }
+
+  openPopup() {
+    console.log('View more clicked!');
+    const popup = document.getElementById('popup-' + this.bookId);    
+    if (!popup) {
+      console.error('Popup element not found in the DOM');
+      return;
+    }
+    console.log('book title', this.title);
+    console.log('View more clicked!');
+    popup.classList.toggle('active');
+  }
+
 }
