@@ -1,7 +1,5 @@
 <div class="book-container">
-  <a [href]="link">
-    <img src="./examplecover.jpg" [alt]="title" class="book-cover" />
-  </a>
+    <img [src]="coverUrl || './examplecover.jpg'" [alt]="title" class="book-cover" />
   <div class="book-details">
     <div class="book-title">{{ title }}</div>
     <div class="book-author">by: {{ author }}</div>
@@ -9,20 +7,21 @@
       <div class="stars" id="star-rating">
         <span
           *ngFor="let star of stars; let i = index"
-          [attr.bookid] = "bookId"
+          [attr.data-bookid]="bookId"
           [class.filled]="i < rating"
           (click)="setRating(i + 1)"
           [attr.data-value]="i + 1"
-          >★</span
-        >
+          >★
+        </span>
       </div>
       <span class="average-rating">Ø: {{ rating }}</span>
-      <div class="view-more">View More</div>
+      <button (click)="openPopup()" class="view-more">View More</button>
     </div>
   </div>
 </div>
 
-<div class="popup" id="popup">
-  <app-bookoverview></app-bookoverview>
-  <button class="close-popup">Close</button>
+<div class="popup" id="popup-{{ bookId }}">
+  <!-- <app-bookoverview [bookId]="bookId"></app-bookoverview> -->
+  <app-bookoverview [title]="title" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre" ></app-bookoverview>
+  <button (click)="closePopup()" class="close-popup-{{bookId}}">Close</button>
 </div>
