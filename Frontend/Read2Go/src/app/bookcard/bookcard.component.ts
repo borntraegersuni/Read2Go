@@ -18,7 +18,10 @@ export class BookcardComponent implements OnInit, AfterViewInit {
   @Input() rating!: number;
   @Input() bookId!: number;
   @Input() genre!: string;
-
+  @Input() description!: string;
+  @Input() published!: number;
+  @Input() state!: string;
+  @Input() display: boolean = true;
   stars: number[] = [1, 2, 3, 4, 5];
 
   constructor(private authService: AuthService) {}
@@ -66,6 +69,8 @@ export class BookcardComponent implements OnInit, AfterViewInit {
         // Use the actual bookid from the book object
         await this.authService.sendReview(book.bookid, rating);
         console.log('Rating saved successfully');
+        alert("Your rated that book with " + rating + " stars");
+
       } else {
         console.error('Book not found or bookid missing');
       }

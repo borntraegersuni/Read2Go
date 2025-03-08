@@ -1,15 +1,33 @@
 <div class="button-group">
     <div class="button">
-        <input type="radio" id="none" name="status" checked>
-        <label for="none">None</label>
+        <button 
+            #statusButton
+            type="button" 
+            id="none" 
+            [class.active]="selectedStatus === 'none'"
+            (click)="setStatus('none')">None</button>
 
-        <input type="radio" id="tbr" name="status">
-        <label for="tbr">TBR</label>
+        <button 
+            #statusButton
+            type="button" 
+            id="tbr" 
+            [class.active]="selectedStatus === 'tbr'"
+            (click)="setStatus('tbr')">TBR</button>
         
-        <input type="radio" id="reading" name="status">
-        <label for="reading">Reading</label>
+        <button 
+            #statusButton
+            type="button" 
+            id="reading" 
+            [class.active]="selectedStatus === 'reading'"
+            (click)="setStatus('reading')">Reading</button>
         
-        <input type="radio" id="read" name="status">
-        <label for="read">Read</label>
+        <button 
+            #statusButton
+            type="button" 
+            id="read" 
+            [class.active]="selectedStatus === 'read'"
+            (click)="setStatus('read')">Read</button>
+        
+        <div class="slider"></div>
     </div>
 </div>

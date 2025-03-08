@@ -1,4 +1,6 @@
 <div class="container">
-<app-searchhead></app-searchhead>
+<app-searchhead [display]="false"></app-searchhead>
 </div>
-<app-searchbody></app-searchbody>
+<div class="container">
+<app-searchbody [books]="books"></app-searchbody>
+</div>

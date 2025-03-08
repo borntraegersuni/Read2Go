@@ -3,7 +3,7 @@
     <app-booklistfilter></app-booklistfilter>
     <!-- Add a button to add books -->
   </div>
-  <div class="button-group">
+  <div class="button-group" *ngIf="display">
     <input type="checkbox" id="btn1">
     <label for="btn1" id="finished" (click)="onCategoryClick('finished')">Read</label>
 

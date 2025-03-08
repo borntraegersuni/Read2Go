@@ -13,4 +13,6 @@ export class Bookcard2Component {
     @Input() author!: string;
     @Input() bookId!: number;
     @Input() genre!: string;
+    @Input() description!: string;
+    @Input() published!: number;
 }

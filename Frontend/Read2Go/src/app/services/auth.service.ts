@@ -103,9 +103,35 @@ export class AuthService {
       genre: string;
       id: number;
       bookid: number;
+      published: number;
       state: 'wishlist' | 'reading' | 'finished';
     }[];
     return filter ? books.filter((b) => b.state === filter) : books;
+  }
+
+  async getAllBooks() {
+    const request = await fetch('http://localhost:3000/user/allBooks', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!request.ok) {
+      return [];
+    }
+    const data = await request.json();
+    return data.books as {
+      id: number;
+      createdAt: string;
+      updatedAt: string;
+      title: string;
+      author: string;
+      description: string | null;
+      publishedYear: number;
+      genre: string;
+      isbn: string;
+      rating: number;
+      image: string;
+    }[];
   }
 
   // Update user profile information (called when the user changes profile details)
@@ -180,6 +206,85 @@ export class AuthService {
     return false;
   }
 
+  async sendBookStatus(bookId: number, status: number) {
+    if (this.isLoggedIn) {
+      const savedUser = localStorage.getItem('loggedInUser');
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        this.isLoggedIn = true;
+        this.userEmail = user.EmailId;
+        this.username = user.Username;
+        this.token = user.Token;
+      }
+      const response = await fetch('http://localhost:3000/user/status', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: this.token || '',
+        },
+        body: JSON.stringify({ bookId, status }),
+      });
+      if (response.ok) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  async sendBookReview(bookId: number, rating: number, review: string) {
+    if (this.isLoggedIn) {
+      const savedUser = localStorage.getItem('loggedInUser');
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        this.isLoggedIn = true;
+        this.userEmail = user.EmailId;
+        this.username = user.Username;
+        this.token = user.Token;
+      }
+      const response = await fetch('http://localhost:3000/user/review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: this.token || '',
+        },
+        body: JSON.stringify({ bookId, review, rating }),
+      });
+      if (response.ok) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  async getReviewForBookByUserBookId(userBookId: number) {
+    if (this.isLoggedIn) {
+      const savedUser = localStorage.getItem('loggedInUser');
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        this.isLoggedIn = true;
+        this.userEmail = user.EmailId;
+        this.username = user.Username;
+        this.token = user.Token;
+      }
+      const response = await fetch(
+        `http://localhost:3000/user/review?bookId=${userBookId}`,
+        {
+          headers: {
+            Authorization: this.token || '',
+          },
+        }
+      );
+      if (response.ok) {
+        return (await response.json()).review;
+      }
+    }
+    return null;
+  }
+
   async sendReview(bookId: number, rating: number) {
     if (this.isLoggedIn) {
       const savedUser = localStorage.getItem('loggedInUser');
@@ -190,7 +295,9 @@ export class AuthService {
         this.username = user.Username;
         this.token = user.Token;
       }
-      console.log(`http://localhost:3000/user/rating?book=${bookId}&rating=${rating}`)
+      console.log(
+        `http://localhost:3000/user/rating?book=${bookId}&rating=${rating}`
+      );
       const response = await fetch(
         `http://localhost:3000/user/rating?book=${bookId}&rating=${rating}`,
         {

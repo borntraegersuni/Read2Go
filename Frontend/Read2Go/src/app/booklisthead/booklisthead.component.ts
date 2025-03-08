@@ -20,6 +20,7 @@ export class BooklistheadComponent {
     author: string;
     rating: number;
   }[];
+  @Input() display: boolean = true;
   @Input() searchUpdate!: (key: string) => void;
   queryParams: Params = {};
 

@@ -1,8 +1,7 @@
-<app-bookcard2 [title]="title" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre"></app-bookcard2>
+<app-bookcard2 [description]="description" [published]="published" [title]="title" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre"></app-bookcard2>
 <div class="bar"></div>
-<app-bookrating></app-bookrating>
-<div class="bar"></div>
+<app-bookrating [rating]="rating" [bookId]="bookId" *ngIf="display"></app-bookrating>
+<!-- <div class="bar"></div> -->
 <div class="progress">
-    <app-bookstatus></app-bookstatus>
-    <app-bookprogress></app-bookprogress>
+    <app-bookstatus [initialStatus]="status" [bookId]="bookId"></app-bookstatus>
 </div>

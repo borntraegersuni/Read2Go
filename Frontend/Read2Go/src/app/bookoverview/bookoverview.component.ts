@@ -25,8 +25,20 @@ export class BookoverviewComponent {
   @Input() rating!: number;
   @Input() bookId!: number;
   @Input() genre!: string;
-
+  @Input() description!: string;
+  @Input() published!: number;
+  @Input() state!: string;
+  @Input() display: boolean = true;
+  status: number = 0;
   ngOnInit() {
     console.log('title for popup:', this.title);
+    console.log('Status', this.state);
+    if (this.state === 'reading') {
+      this.status = 2;
+    } else if (this.state === 'finished') {
+      this.status = 3;
+    } else if (this.state === 'wishlist') {
+      this.status = 1;
+    }
   }
 }

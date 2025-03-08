@@ -22,6 +22,6 @@
 
 <div class="popup" id="popup-{{ bookId }}">
   <!-- <app-bookoverview [bookId]="bookId"></app-bookoverview> -->
-  <app-bookoverview [title]="title" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre" ></app-bookoverview>
+  <app-bookoverview [title]="title" [display]="display" [rating]="rating" [state]="state" [published]="published" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre" [description]="description"></app-bookoverview>
   <button (click)="closePopup()" class="close-popup-{{bookId}}">Close</button>
 </div>

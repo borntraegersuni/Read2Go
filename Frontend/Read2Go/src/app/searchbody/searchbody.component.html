@@ -1,14 +1,18 @@
 <div class="container">
-<div class="books">
-  <app-bookcard
-    *ngFor="let book of books"
-    [title]="book.title"
-    [coverUrl]="book.coverUrl"
-    [link]="book.link"
-    [author]="book.author"
-    [rating]="book.rating"
-    [bookId]="book.id"
-  ></app-bookcard>
-</div>
+  <div class="books">
+    <app-bookcard
+      *ngFor="let book of books"
+      [title]="book.title"
+      [coverUrl]="book.coverUrl"
+      [link]="book.link"
+      [author]="book.author"
+      [rating]="book.rating"
+      [bookId]="book.id"
+      [description]="book.description"
+      [genre]="book.genre"
+      [published]="book.published"
+      [display] = "false"
+    ></app-bookcard>
+  </div>
 </div>
 <div class="bottom"></div>

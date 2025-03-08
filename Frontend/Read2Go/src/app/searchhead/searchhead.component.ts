@@ -19,6 +19,7 @@ export class SearchheadComponent {
     rating: number;
   }[];
   @Input() searchUpdate!: (key: string) => void;
+  @Input() display: boolean = true;
   queryParams: Params = {};
 
   constructor(private route: ActivatedRoute, private router: Router) {

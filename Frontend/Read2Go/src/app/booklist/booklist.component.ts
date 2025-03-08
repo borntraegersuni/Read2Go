@@ -26,6 +26,8 @@ export class BooklistComponent implements OnInit {
     state: string;
     author: string;
     rating: number;
+    description: string;
+    published: number;
   }[] = [];
   originalBooks: {
     genre: string;
@@ -36,6 +38,9 @@ export class BooklistComponent implements OnInit {
     state: string;
     author: string;
     rating: number;
+    description: string;
+    published: number;
+
   }[] = [];
 
   constructor(private route: ActivatedRoute, private authService: AuthService) {
@@ -47,6 +52,7 @@ export class BooklistComponent implements OnInit {
   update(category: string): void {}
 
   async ngOnInit(): Promise<void> {
+    console.log("fetching books");
     const fetchedBooks = await this.authService.getBooks('');
     this.originalBooks = fetchedBooks.map((b) => ({
       genre: b.genre,
@@ -57,7 +63,11 @@ export class BooklistComponent implements OnInit {
       state: b.state,
       author: b.author,
       rating: b.rating,
+      description: b.description,
+      published: Number(b.published),
     }));
+    console.log("fetch published: ", this.originalBooks[0]);
+
     localStorage.setItem('books', JSON.stringify(this.originalBooks));
 
     this.books = [...this.originalBooks];
@@ -105,6 +115,5 @@ export class BooklistComponent implements OnInit {
       }
     }
 
-    console.log(this.books.length);
   }
 }

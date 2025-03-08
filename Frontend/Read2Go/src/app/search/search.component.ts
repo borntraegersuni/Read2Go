@@ -22,9 +22,10 @@ queryParams: Params = {};
     title: string;
     coverUrl: string;
     link: string;
-    state: string;
     author: string;
     rating: number;
+    published: number;
+    description: string;
   }[] = [];
   originalBooks: {
     genre: string;
@@ -32,9 +33,10 @@ queryParams: Params = {};
     title: string;
     coverUrl: string;
     link: string;
-    state: string;
     author: string;
     rating: number;
+    published: number;
+    description: string;
   }[] = [];
 
   constructor(private route: ActivatedRoute, private authService: AuthService) {
@@ -46,26 +48,23 @@ queryParams: Params = {};
   update(category: string): void {}
 
   async ngOnInit(): Promise<void> {
-    const fetchedBooks = await this.authService.getBooks('');
+    const fetchedBooks = await this.authService.getAllBooks();
     this.originalBooks = fetchedBooks.map((b) => ({
       genre: b.genre,
       id: b.id,
       title: b.title,
       coverUrl: b.image, // Assuming 'image' is the correct field for coverUrl
       link: b.title.replaceAll(' ', '+').toLowerCase(),
-      state: b.state,
       author: b.author,
       rating: b.rating,
+      description: b.description ? b.description : '',
+      published: b.publishedYear,
+
     }));
     localStorage.setItem('books', JSON.stringify(this.originalBooks));
 
     this.books = [...this.originalBooks];
     this.search = this.queryParams['search'];
-
-    if (this.queryParams['category']) {
-      this.category = this.queryParams['category'];
-      this.books = this.books.filter((b) => b.state == this.category);
-    }
 
     if (this.queryParams['filter']) {
       this.filter = this.queryParams['filter'];

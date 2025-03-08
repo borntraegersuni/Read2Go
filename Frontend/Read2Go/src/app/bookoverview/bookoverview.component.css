@@ -1,4 +1,5 @@
 .progress {
+    margin-top: -0.125rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;

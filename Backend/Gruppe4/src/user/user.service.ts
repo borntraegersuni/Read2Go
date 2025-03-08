@@ -12,6 +12,7 @@ import { BookService } from 'src/book/book.service';
 import * as jwt from 'jsonwebtoken';
 import { ReviewService } from 'src/review/review.service';
 import { Review } from 'src/review/review.entity';
+import { Book } from 'src/book/book.entity';
 @Injectable()
 export class UserService {
   constructor(
@@ -79,6 +80,57 @@ export class UserService {
 
   // methods for user-books
 
+  async readAllUserBooks(): Promise<
+    {
+      title: string;
+      description: string;
+      image: string;
+      author: string;
+      rating: number;
+      genre: string;
+      id: number;
+      bookid: number;
+      publishedYear: number;
+    }[]
+  > {
+    const books = await this.bookService.getBooks();
+    console.log(books.length);
+
+    const booksWithRatings = await Promise.all(
+      books.map(async (book) => {
+        const reviews = await this.reviewBooksRepository.find({
+          where: { book: { id: book.id } },
+        });
+
+        let rating = 0;
+        if (reviews.length > 0) {
+          const sum = reviews.reduce(
+            (total, review) => total + review.rating,
+            0,
+          );
+          rating = Math.floor(sum / reviews.length);
+        }
+
+        return {
+          author: book.author,
+          description: book.description ? book.description : '',
+          genre: book.genre,
+          image: book.coverImageUrl ? book.coverImageUrl : '',
+          rating: rating ? Number(rating) : 0,
+          title: book.title,
+          id: book.id,
+          bookid: book.id,
+          coverURL: book.coverImageUrl ? book.coverImageUrl : '',
+          publishedYear: book.publishedYear
+        };
+      }),
+    );
+
+    return booksWithRatings;
+  }
+
+  status;
+
   async getBooks(
     authtoken: string,
   ): Promise<{ success: boolean; books: IBook[] }> {
@@ -130,11 +182,167 @@ export class UserService {
           title: ub.book.title,
           id: ub.id,
           bookid: ub.book.id,
+          published: ub.book.publishedYear,
         };
       }),
     );
     return {
       books,
+      success: true,
+    };
+  }
+
+  async reviewBook(
+    token: string,
+    bookId: number,
+    rating: number,
+    review: string,
+  ) {
+    let decoded: {
+      id: number;
+      email: string;
+      iat: number;
+      exp: number;
+    } | null = null;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+        id: number;
+        email: string;
+        iat: number;
+        exp: number;
+      };
+    } catch {
+      return {
+        success: false,
+      };
+    }
+
+    if (!decoded) {
+      return {
+        success: false,
+      };
+    }
+
+    const user = await this.readOneById(decoded.id);
+    if (!user) {
+      return {
+        success: false,
+      };
+    }
+    const book = await this.userBooksRepository.findOne({
+      where: { id: bookId },
+      relations: ['book'],
+    });
+    if (!book) {
+      return {
+        success: false,
+      };
+    }
+    const reviewEntity = new Review();
+    reviewEntity.user = user;
+    reviewEntity.book = book.book;
+    reviewEntity.content = review;
+
+    const validRatings: (1 | 2 | 3 | 4 | 5)[] = [1, 2, 3, 4, 5];
+    if (validRatings.includes(rating as 1 | 2 | 3 | 4 | 5)) {
+      reviewEntity.rating = rating as 1 | 2 | 3 | 4 | 5;
+    } else {
+      return {
+        success: false,
+      };
+    }
+
+    // Check if a review already exists for this user and book
+    const existingReview = await this.reviewBooksRepository.findOne({
+      where: {
+        user: { id: user.id },
+        book: { id: book.book.id },
+      },
+    });
+    if (existingReview) {
+      // Update existing review
+      existingReview.content = reviewEntity.content;
+      existingReview.rating = reviewEntity.rating;
+      await this.reviewBooksRepository.save(existingReview);
+    } else {
+      // Save new review
+      await this.reviewBooksRepository.save(reviewEntity);
+    }
+    return {
+      success: true,
+    };
+  }
+
+  async setStatus(token: string, bookId: number, status: number) {
+    let decoded: {
+      id: number;
+      email: string;
+      iat: number;
+      exp: number;
+    } | null = null;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+        id: number;
+        email: string;
+        iat: number;
+        exp: number;
+      };
+    } catch {
+      return {
+        success: false,
+      };
+    }
+
+    if (!decoded) {
+      return {
+        success: false,
+      };
+    }
+
+    const user = await this.readOneById(decoded.id);
+    if (!user) {
+      return {
+        success: false,
+      };
+    }
+
+    const book = await this.bookService.getBookById(bookId);
+    if (!book) {
+      return {
+        success: false,
+      };
+    }
+
+    let userBook = await this.userBooksRepository.findOne({
+      where: { user: { id: user.id }, book: { id: book.id } },
+    });
+
+    if (!userBook) {
+      if (status == 0) {
+        return {
+          success: true,
+        };
+      }
+      const newUserBook = new UserBook();
+      newUserBook.user = user;
+      newUserBook.book = book;
+      newUserBook.status =
+        status == 1 ? 'wishlist' : status == 2 ? 'reading' : 'finished';
+      userBook = await this.userBooksRepository.save(newUserBook);
+    } 
+    if (status == 0) {
+      await this.userBooksRepository.delete({
+        id: userBook.id,
+      });
+      return {
+        success: true,
+      };
+    }
+
+    userBook.status =
+      status == 1 ? 'wishlist' : status == 2 ? 'reading' : 'finished';
+    await this.userBooksRepository.save(userBook);
+    return {
       success: true,
     };
   }
@@ -167,6 +375,60 @@ export class UserService {
       where: { user: { id: userId }, book: { id: bookId } },
       relations: { user: true, book: true, likes: true },
     });
+  }
+
+  async getReviewForBookByUserBookId(token: string, bookId: number) {
+    let decoded: {
+      id: number;
+      email: string;
+      iat: number;
+      exp: number;
+    } | null = null;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+        id: number;
+        email: string;
+        iat: number;
+        exp: number;
+      };
+    } catch {
+      return {
+        success: false,
+      };
+    }
+
+    if (!decoded) {
+      return {
+        success: false,
+      };
+    }
+
+    const user = await this.readOneById(decoded.id);
+    if (!user) {
+      return {
+        success: false,
+      };
+    }
+    const userBook = await this.userBooksRepository.findOne({
+      where: { user: { id: user.id }, book: { id: bookId } },
+    });
+    if (!userBook) {
+      return {
+        success: true,
+        review: '',
+      };
+    }
+    const review = await this.getReviewByUserAndBook(user.id, bookId);
+    if (!review) {
+      return {
+        success: true,
+        review: '',
+      };
+    }
+    return {
+      success: true,
+      review: review.content ? review.content : '',
+    };
   }
 
   async rateBook(token: any, bookId: string, rating: string) {
@@ -203,7 +465,7 @@ export class UserService {
     }
     const book = await this.bookService.getBookById(Number(bookId));
     if (!book) {
-      console.log("book not found", bookId)
+      console.log('book not found', bookId);
       return {
         success: false,
       };
