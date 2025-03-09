@@ -27,7 +27,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 95%; /* Responsive width */
     max-width: 1900px;
     background-color: lightgray;
     border-radius: 1.5rem;
@@ -158,13 +157,11 @@ a:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .container {
-        width: 90vw;
-    }
 
     .bookshelf {
         flex-direction: column;
         align-items: center;
+        
     }
 
     .reading-view {
@@ -184,5 +181,8 @@ a:hover {
     .book {
         width: 22vw; /* Adjust width so four books fit in one row */
         max-width: 10rem;
+    }
+    .shelf-container {
+        display: none;
     }
 }
