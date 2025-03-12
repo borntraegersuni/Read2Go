@@ -3,11 +3,14 @@ body{
     display: flex;
     flex-direction: column;
     margin: 0;
+    max-width: 1900px;
 }
 
 /* This applies to the main document body */
 :host {
     display: block;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .footer {
@@ -23,4 +26,5 @@ body{
     max-width: 1900px;
     margin: 0 auto;
     margin-top: auto;
+    box-sizing: border-box;
 }
