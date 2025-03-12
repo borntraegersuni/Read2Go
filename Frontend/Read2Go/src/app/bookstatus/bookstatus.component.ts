@@ -50,19 +50,29 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
   async setStatusByNumber(statusNumber: number): Promise<void> {
     // Convert number to string status
     const status = this.statusMap[statusNumber] || 'none';
-    await this.setStatus(status);
+    
+    // Check if the status is actually changing before making API call
+    if (this.selectedStatus !== status) {
+      await this.setStatus(status);
+    }
   }
   
   async setStatus(status: string): Promise<void> {
     if (status) {
+      // Store the old status to check if it changed
+      const oldStatus = this.selectedStatus;
       this.selectedStatus = status;
+      
+      this.updateSliderPosition();
+      
+      // Only send API request if status actually changed and we have a valid bookId
+      if (oldStatus !== status && this.bookId) {
+        await this.auth.sendBookStatus(this.bookId, this.getStatusNumber());
+      }
     } else {
       // Default to 'none' if no status is provided
       this.selectedStatus = 'none';
     }
-    this.updateSliderPosition();
-    await this.auth.sendBookStatus(this.bookId, this.getStatusNumber());
-    //TODO refresh page
   }
   
   /**
@@ -93,18 +103,34 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
     if (!this.selectedStatus) {
       this.selectedStatus = 'none';
     }
+    
+    // Remove all status classes from slider
+    if (slider) {
+      slider.classList.remove('none', 'tbr', 'reading', 'read');
+      // Add the current status class
+      slider.classList.add(this.selectedStatus);
+    }
+    
     const activeButton = this.el.nativeElement.querySelector(`#${this.selectedStatus}`);
     
     if (slider && activeButton) {
       // Get the button's width and position
       const buttonRect = activeButton.getBoundingClientRect();
+      const containerRect = this.el.nativeElement.querySelector('.button').getBoundingClientRect();
       
       // Calculate position relative to container
-      const left = activeButton.offsetLeft - 4;
+      const left = activeButton.offsetLeft;
       
-      // Apply the position and width
-      slider.style.width = `${buttonRect.width}px`;
+      // Apply the position and width to make it match the button exactly
+      slider.style.width = `${buttonRect.width - 8}px`; // -8px to account for padding
       slider.style.transform = `translateX(${left}px)`;
+      
+      // Ensure active class is applied to the correct button
+      const buttons = this.el.nativeElement.querySelectorAll('button');
+      buttons.forEach((btn: HTMLElement) => {
+        btn.classList.remove('active');
+      });
+      activeButton.classList.add('active');
     }
   }
 
