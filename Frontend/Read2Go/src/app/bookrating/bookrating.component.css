@@ -45,30 +45,52 @@
 /* Review Input Field */
 .review-container {
     display: flex;
-    gap: 0.5rem; /* Space between input and button */
+    flex-direction: column; /* Stack input and button for full width */
+    gap: 0.8rem; /* Increased space between input and button */
     width: 100%;
 }
 
 .review-input {
-    flex-grow: 1; /* Allow the input to take up remaining space */
-    padding: 0.5rem;
+    width: 100%; /* Full width of container */
+    padding: 0.8rem;
     border-radius: 0.5rem;
-    border: 1px solid black;
+    border: 1px solid #ccc;
     box-sizing: border-box; /* Ensure padding and border are included in width */
     resize: vertical; /* Allow vertical resizing */
-    min-height: 3rem; /* Set a minimum height */
+    min-height: 5rem; /* Increased minimum height */
+    font-family: inherit;
+    font-size: 1rem;
 }
 
 .submit-button {
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 0.5rem;
     border: none;
     background-color: #a55bb8;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
+    align-self: flex-end; /* Align button to the right */
+    font-size: 1rem;
+    min-width: 8rem; /* Ensure button has a minimum width */
 }
 
 .submit-button:hover {
     background-color: #7f478d;
+}
+
+/* Add responsive design for different screen sizes */
+@media (min-width: 768px) {
+    .review-container {
+        flex-direction: row; /* Side by side on larger screens */
+        align-items: flex-start;
+    }
+    
+    .review-input {
+        flex-grow: 1; /* Allow input to take remaining space */
+    }
+    
+    .submit-button {
+        align-self: flex-start;
+    }
 }
