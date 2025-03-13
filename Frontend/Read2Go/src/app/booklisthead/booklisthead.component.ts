@@ -75,13 +75,19 @@ export class BooklistheadComponent {
   }
 
   private applyCategoryStyles(category: string): void {
-    const element = document.getElementById(category) as HTMLLabelElement;
-    if (element) {
-      element.style.backgroundColor = '#cfa3d9';
-      element.style.border = '0.125rem solid #a55bb8';
-      element.style.color = 'white';
-      element.style.borderRadius = '1.5rem';
-      element.style.transform = 'scale(1.1)';
-    }
+    // Use setTimeout to ensure the DOM is ready
+    setTimeout(() => {
+      const element = document.getElementById(category) as HTMLLabelElement;
+      if (element) {
+        element.style.backgroundColor = '#cfa3d9';
+        element.style.border = '0.125rem solid #a55bb8';
+        element.style.color = 'white';
+        element.style.borderRadius = '1.5rem';
+        element.style.transform = 'scale(1.1)';
+        console.log(`Applied styles to category: ${category}`, element);
+      } else {
+        console.warn(`Element with id '${category}' not found`);
+      }
+    }, 0);
   }
 }
