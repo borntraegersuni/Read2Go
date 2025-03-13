@@ -106,7 +106,8 @@ export class AuthService {
       published: number;
       state: 'wishlist' | 'reading' | 'finished';
     }[];
-    return filter ? books.filter((b) => b.state === filter) : books;
+    console.log('books', books.length);
+    return filter != "" ? books.filter((b) => b.state === filter) : books;
   }
 
   async getAllBooks() {
