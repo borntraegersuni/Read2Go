@@ -85,12 +85,12 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
       const book = books.find((b) => b.id === this.bookId);
       if(!book) {
         console.error('Book not found:', this.bookId);
-        return;
+        
       }
       this.updateSliderPosition();
       console.log("Setting to status: ", status);
       if (oldStatus !== status && this.bookId) {
-        await this.auth.sendBookStatus(book?.bookid, this.getStatusNumber());
+        await this.auth.sendBookStatus(book ? book.bookid : this.bookId, this.getStatusNumber());
       }
     } else {
       // Default to 'none' if no status is provided
