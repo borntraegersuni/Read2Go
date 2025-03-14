@@ -12,6 +12,17 @@ import { AuthService } from '../services/auth.service';
 export class BookSlider2Component implements OnInit, AfterViewInit {
   currentIndex: number = 0;
   images: string[] = [];
+  books: Array<{
+    id: number;
+    title: string;
+    author: string;
+    image: string;
+    rating: number;
+    genre: string;
+    description: string;
+    publishedYear: number;
+    state?: string;
+  }> = [];
 
   @Input() title!: string;
   @Input() coverUrl!: string;
@@ -33,9 +44,24 @@ export class BookSlider2Component implements OnInit, AfterViewInit {
       const books = await this.authService.getAllBooks();
       console.log('Fetched books for slider:', books.length);
       
-      // Get the last 10 books or fewer if less than 10 books are available
-      const lastTenBooks = books.slice(Math.max(0, books.length - 10));
-      console.log('Using last books:', lastTenBooks.length);
+      // Sort books by published year in descending order (newest first)
+      const sortedBooks = [...books].sort((a, b) => b.publishedYear - a.publishedYear);
+      // Get the 10 newest books or fewer if less than 10 books are available
+      const lastTenBooks = sortedBooks.slice(0, 10);
+      console.log('Using newest books:', lastTenBooks.length);
+      
+      // Store the full book info for the popup, mapping to required structure
+      this.books = lastTenBooks.map(book => ({
+        id: book.id,
+        title: book.title,
+        author: book.author,
+        image: book.image,
+        rating: book.rating,
+        genre: book.genre,
+        description: book.description || '', // Convert null to empty string
+        publishedYear: book.publishedYear,
+        // state is optional so omitted if not present
+      }));
       
       // Map the books to their image URLs, fallback to example cover
       this.images = lastTenBooks.map(book => {
@@ -99,6 +125,9 @@ export class BookSlider2Component implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // Ensure carousel is updated after view is initialized
     setTimeout(() => this.updateCarousel(), 100);
+    
+    // Initialize popups for the books
+    setTimeout(() => this.initializePopups(), 200);
   }
 
   updateCarousel() {
@@ -148,6 +177,46 @@ export class BookSlider2Component implements OnInit, AfterViewInit {
     if (this.currentIndex > 0) {
       this.currentIndex--;
       this.updateCarousel();
+    }
+  }
+  
+  // Initialize the popups for book covers
+  initializePopups() {
+    const slides = document.querySelectorAll('.slide2-clickable');
+    slides.forEach((slide) => {
+      slide.addEventListener('click', (e) => {
+        const bookId = (e.currentTarget as HTMLElement).getAttribute('data-book-id');
+        if (bookId) {
+          this.openPopup(parseInt(bookId));
+        }
+      });
+    });
+  }
+  
+  // Open the popup for a specific book
+  openPopup(bookId: number) {
+    console.log('Opening popup for book:', bookId);
+    const popup = document.getElementById(`popup-${bookId}`);
+    if (popup) {
+      popup.classList.add('active');
+    } else {
+      console.error(`Popup for book ${bookId} not found`);
+    }
+  }
+  
+  // Close the popup
+  closePopup(bookId: number) {
+    const popup = document.getElementById(`popup-${bookId}`);
+    if (popup) {
+      popup.classList.remove('active');
+      // Reload page after popup is closed to refresh data
+      // Pass a parameter to indicate if data has changed
+      const dataChanged = popup.getAttribute('data-changed') === 'true';
+      if (dataChanged) {
+        setTimeout(() => {
+          window.location.reload();
+        }, 300);
+      }
     }
   }
 }
