@@ -44,9 +44,9 @@ export class BookRatingComponent implements OnInit, AfterViewInit, OnDestroy {
       const books = await this.authService.getAllBooks();
       console.log('Fetched books for slider:', books.length);
       
-      // Sort books alphabetically by title
+      // Sort books by rating (highest to lowest)
       const sortedBooks = [...books].sort((a, b) => {
-        return a.title.localeCompare(b.title);
+        return b.rating - a.rating;
       });
       // Get the 10 first books after sorting or fewer if less than 10 books are available
       const lastTenBooks = sortedBooks.slice(0, 10);

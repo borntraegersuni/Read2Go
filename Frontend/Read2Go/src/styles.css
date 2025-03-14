@@ -29,3 +29,13 @@ app-footer {
     margin-top: auto;
     flex-shrink: 0; /* Prevent footer from shrinking */
 }
+
+@font-face {
+    font-family: 'MilknBalls';
+    src: url('./assets/fonts/MilknBalls-BlackDemo.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bookerly';
+    src: url('./assets/fonts/Bookerly.ttf') format('truetype');
+}

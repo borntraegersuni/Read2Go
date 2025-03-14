@@ -1,37 +1,41 @@
 .container {
     width: 95%;
     max-width: 1200px;
+    min-width: 320px; /* Maintain minimum width on small screens */
     margin: 1rem auto;
     background: lightgray;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Include padding in width calculation */
+    overflow: hidden;
 }
 
 .header {
-    width: 100%; /* Nimmt die gesamte Breite des Containers ein */
-    text-align: left; /* Zentriert die Überschrift */
-    margin-bottom: 15px; /* Abstand unter der Überschrift */
+    width: 100%; /* Takes up the entire width of the container */
+    text-align: left; /* Aligns the heading to the left */
+    margin-bottom: 15px; /* Space below the heading */
 }
 
 h1 {
-    color: black; /* Lila */
-    margin: 0; /* Entfernt den Standardabstand */
+    color: black;
+    margin: 0; /* Removes default margin */
+    font-size: 24px; /* Match botmjan size */
 }
 
 .content {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; /* Align items to the top */
 }
 
 .left {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Zentriert das Buchbild und die Sterne */
+    align-items: center; /* Centers the book image and stars */
 }
 
 .book-image img {
-    width: 150px; /* Größe des Buchbildes */
+    width: 150px; /* Fixed width like botmjan */
     height: auto;
     border-radius: 4px;
 }
@@ -39,8 +43,8 @@ h1 {
 .rating {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Zentriert die Sternebewertung */
-    margin-top: 10px; /* Abstand zwischen Buchcover und Sternebewertung */
+    align-items: center; /* Centers the star rating */
+    margin-top: 10px; /* Space between book cover and star rating */
 }
 
 .stars {
@@ -49,15 +53,15 @@ h1 {
 
 .star {
     font-size: 20px;
-    color: gray; /* Standardfarbe für Sterne */
+    color: gray; /* Default color for stars */
 }
 
 .gold {
-    color: gold; /* Goldfarbe für gefüllte Sterne */
+    color: gold; /* Gold color for filled stars */
 }
 
 .gray {
-    color: gray; /* Grau für leere Sterne */
+    color: gray; /* Gray for empty stars */
 }
 
 .average {
@@ -65,50 +69,53 @@ h1 {
 }
 
 .right {
-    margin-left: 20px; /* Abstand zwischen den beiden Divs */
+    margin-left: 20px; /* Space between the two divs */
 }
 
 .description {
-    line-height: 1,5;
-    margin-bottom: 15px; /* Abstand zwischen Beschreibung und Button */
+    line-height: 1.5;
+    margin-bottom: 15px; /* Space between description and button */
 }
 
 .read-more {
     display: inline-block;
     text-align: center;
-    padding: 5px 10px; /* Kleinere Polsterung für den Button */
-    background-color: #a55bb8; /* Lila */
+    padding: 5px 10px; /* Smaller padding like botmjan */
+    background-color: #a55bb8; /* Purple */
     color: white;
     text-decoration: none;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .read-more:hover {
-    background-color: #7f478d; /* Dunkleres Lila bei Hover */
+    background-color: #7f478d; /* Darker purple on hover */
 }
+
 .modal {
     display: flex;
-    justify-content: center; /* Zentriert das Modal horizontal */
-    align-items: center; /* Zentriert das Modal vertikal */
+    justify-content: center; /* Centers the modal horizontally */
+    align-items: center; /* Centers the modal vertically */
     position: fixed;
-    z-index: 1000; /* Über anderen Inhalten */
+    z-index: 1000; /* Above other content */
     left: 0;
     top: 0;
-    width: 100%; /* Vollständige Breite des Bildschirms */
-    height: 100%; /* Vollständige Höhe des Bildschirms */
-    background-color: rgba(0, 0, 0, 0.5); /* Halbdurchsichtiger Hintergrund */
-    overflow: auto; /* Ermöglicht das Scrollen, falls nötig */
+    width: 100%; /* Full screen width */
+    height: 100%; /* Full screen height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    overflow: auto; /* Allows scrolling if necessary */
 }
 
 .modal-content {
     background-color: #ffffff;
     margin: auto;
     padding: 20px;
-    border: 3px solid #a55bb8;;
+    border: 3px solid #a55bb8;
     border-radius: 10px;
-    width: clamp(15rem, 700px, 50vw);
-    max-height: 80%; /* Maximale Höhe des Modals */
-    overflow-y: auto; /* Ermöglicht vertikales Scrollen bei Bedarf */
+    width: clamp(15rem, 700px, 50vw); /* Match botmjan width */
+    max-height: 80%; /* Maximum height of the modal */
+    overflow-y: auto; /* Enables vertical scrolling if needed */
 }
 
 .close {
@@ -123,4 +130,42 @@ h1 {
 .close:focus {
     color: black;
     text-decoration: none;
+}
+
+/* Responsive breakpoints - simplified to match botmjan more closely */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center; /* Center content on smaller screens */
+    }
+    
+    .left {
+        margin-bottom: 15px;
+        align-items: center; /* Ensure left content is centered */
+    }
+    
+    .right {
+        margin-left: 0;
+        text-align: center; /* Center text content */
+        width: 100%; /* Take full width to allow proper centering */
+    }
+    
+    .header {
+        text-align: center; /* Center the header text like 'Jan '25 Pick' */
+    }
+    
+    .modal-content {
+        width: 90vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+        width: 98%;
+    }
+    
+    .book-image img {
+        width: 130px; /* Slightly smaller on very small screens */
+    }
 }
