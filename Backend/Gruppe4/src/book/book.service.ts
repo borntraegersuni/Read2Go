@@ -40,15 +40,3 @@ export class BookService {
   
 
 }
-
-/**
- * 1. Get User query
- * 2. Get Book from query
- * 3. RETURN data
- * 
- * 1.1 Get book user selected
- * 1.2 Get book data
- * 1.3 Get Book progress
- * 1.4 Get Book status
- * 
- */

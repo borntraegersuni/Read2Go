@@ -13,6 +13,10 @@
     [published]="book.published"
     [state]="book.state"
   ></app-bookcard>
+  <div class="no-books-warning" *ngIf="books && books.length === 0">
+    <img src="./nosearch.png" alt="No search results" class="no-results-image">
+    <p>No books were found. Expand your collection!</p>
+  </div>
 </div>
 
 <div class="bottom"></div>

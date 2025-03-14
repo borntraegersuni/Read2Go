@@ -2,6 +2,6 @@
 <div class="bar"></div>
 <app-bookrating [rating]="rating" [bookId]="bookId" *ngIf="display"></app-bookrating>
 <!-- <div class="bar"></div> -->
-<div class="progress">
+<div class="progress" *ngIf="authService.isAuthenticated()">
     <app-bookstatus [initialStatus]="status" [bookId]="bookId"></app-bookstatus>
 </div>
