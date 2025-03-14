@@ -54,6 +54,7 @@ export class BooklistComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     console.log("fetching books");
     const fetchedBooks = await this.authService.getBooks('');
+    console.log("fetched books: ", fetchedBooks[0].state);
     this.originalBooks = fetchedBooks.map((b) => ({
       genre: b.genre,
       id: b.id,

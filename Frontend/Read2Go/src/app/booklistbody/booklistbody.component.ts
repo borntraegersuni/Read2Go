@@ -14,5 +14,4 @@ import { CommonModule } from '@angular/common';
 })
 export class BooklistbodyComponent {
   @Input() books!: { id: number; state: string; description: string; published: number; genre: string; title: string, coverUrl: string, link: string, author: string, rating: number }[];
-  
 }

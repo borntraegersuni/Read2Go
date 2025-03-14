@@ -100,15 +100,19 @@ export class UserService {
       books.map(async (book) => {
         const reviews = await this.reviewBooksRepository.find({
           where: { book: { id: book.id } },
-        });
-
+        })
+        ;
         let rating = 0;
         if (reviews.length > 0) {
-          const sum = reviews.reduce(
-            (total, review) => total + review.rating,
-            0,
-          );
-          rating = Math.floor(sum / reviews.length);
+          reviews.forEach((review) => {
+            console.log(rating, review.rating);
+            rating += Number(review.rating);
+          })
+          console.log("rating raw for book: ", book.title, rating);
+
+          rating = Math.round(rating / reviews.length);
+          console.log("rating full for book: ", book.title, rating);
+
         }
 
         return {
@@ -288,12 +292,14 @@ export class UserService {
         exp: number;
       };
     } catch {
+      console.log('error decoding token');
       return {
         success: false,
       };
     }
 
     if (!decoded) {
+      console.log('no decoded');
       return {
         success: false,
       };
@@ -301,6 +307,7 @@ export class UserService {
 
     const user = await this.readOneById(decoded.id);
     if (!user) {
+      console.log("user not found", decoded.id);
       return {
         success: false,
       };
@@ -308,6 +315,7 @@ export class UserService {
 
     const book = await this.bookService.getBookById(bookId);
     if (!book) {
+      console.log("book not found", bookId);
       return {
         success: false,
       };

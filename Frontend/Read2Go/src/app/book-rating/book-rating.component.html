@@ -1,14 +1,35 @@
-<div class="bar"></div>
-<div class="widget">
-    <h2>Most Popular</h2>
-    <div class="slider-container">
-      <div class="slider">
-        <div class="slide" *ngFor="let cover of covers">
-          <img [src]="cover" alt="Book Cover">
+<div class="bar2"></div>
+<div class="widget2">
+  <h2>Most Popular</h2>
+  <div class="slider-container2">
+    <div class="slider2">
+      <div class="slide2" *ngFor="let book of books; let i = index">
+        <div class="slide2-clickable" [attr.data-book-id]="book.id">
+          <img [src]="book.image || './examplecover.jpg'" alt="Book Cover {{i+1}}">
         </div>
       </div>
-      <button class="prev" (click)="prevSlide()">&#10094;</button>
-      <button class="next" (click)="nextSlide()">&#10095;</button>
     </div>
+    <button class="prev2" (click)="goToPreviousSlide()" *ngIf="currentIndex > 0">&#10094;</button>
+    <button class="next2" (click)="goToNextSlide()" *ngIf="currentIndex < books.length - getVisibleSlidesCount()">&#10095;</button>
   </div>
-  <div class="bar"></div>
+</div>
+<div class="bar2"></div>
+
+<!-- Book popups -->
+<div *ngFor="let book of books">
+  <div class="popup" id="popup-{{ book.id }}">
+    <app-bookoverview 
+      [title]="book.title" 
+      [coverUrl]="book.image" 
+      [author]="book.author" 
+      [rating]="book.rating" 
+      [bookId]="book.id" 
+      [genre]="book.genre" 
+      [description]="book.description" 
+      [published]="book.publishedYear"
+      [state]="book.state || ''"
+      [display]="false">
+    </app-bookoverview>
+    <button (click)="closePopup(book.id)" class="close-popup-{{ book.id }}">Close</button>
+  </div>
+</div>

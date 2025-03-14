@@ -9,7 +9,7 @@
     </div>
     <div class="shelf-container">
       <div class="bookrow">
-        <a *ngFor="let book of books" [href]="book.link">
+        <a *ngFor="let book of books.slice(books.length > 3 ? books.length-3 : 0, books.length)" [href]="book.link">
           <img [src]="book.coverUrl" [alt]="book.title" class="book" />
         </a>
       </div>

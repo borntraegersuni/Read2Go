@@ -10,7 +10,11 @@ export class BooklistsearchComponent {
   onSearchChange(event: Event) {
     const input = event.target as HTMLInputElement;
     const url = new URL(window.location.href);
-    url.searchParams.set('search', input.value.replaceAll(" ", "+"));
+    
+    // Don't replace spaces with plus signs in the search parameter
+    // This preserves spaces in the search term which will be properly encoded by the URL
+    url.searchParams.set('search', input.value);
+    
     window.history.pushState({}, '', url.toString());
     window.location.reload();
   }

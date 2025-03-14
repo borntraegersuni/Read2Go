@@ -1,11 +1,13 @@
-<div *ngIf="!authService.isAuthenticated(); else loggedInTemplate">
-    <a href="/login">Log In / Sign Up</a>
+<div class="auth-container logged-out" *ngIf="!authService.isAuthenticated(); else loggedInTemplate">
+    <a href="/login" class="auth-button">Log In / Sign Up</a>
 </div>
 
 <ng-template #loggedInTemplate>
-    <div class="corner">
-        <span>Hi, {{ username }}!</span>
-        <a href="#" (click)="logout()">Log Out</a>
+    <div class="auth-container">
+        <div class="corner">
+            <span>Hi, {{ username }}!</span>
+            <button class="auth-button" (click)="logout()">Log Out</button>
+        </div>
     </div>
 </ng-template>
 

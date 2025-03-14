@@ -122,15 +122,15 @@ export class AppModule implements OnModuleInit {
     //     coverImageUrl: './tog3.jpeg',
     //   }),
 
-    //   this.bookService.addBook({
-    //     title: 'Queen of Shadows',
-    //     author: 'Sarah J. Maas',
-    //     publishedYear: 2015,
-    //     isbn: '9781639731015',
-    //     genre: 'Fantasy',
-    //     description: 'In the fourth book of the #1 bestselling Throne of Glass series by Sarah J. Maas, Celaena Sardothien fully embraces her identity as Aelin Galathynius, Queen of Terrasen. To reclaim her throne, Aelin must fight for her cousin, her imprisoned friend, and her enslaved people. With everything she loves at risk, Aelin\'s heart beats for vengeance, and no one will escape the queen\'s wrath.',
-    //     coverImageUrl: './tog4.jpeg',
-    //   }),
+      // this.bookService.addBook({
+      //   title: 'Queen of Shadows',
+      //   author: 'Sarah J. Maas',
+      //   publishedYear: 2015,
+      //   isbn: '9781639731015',
+      //   genre: 'Fantasy',
+      //   description: 'In the fourth book of the #1 bestselling Throne of Glass series by Sarah J. Maas, Celaena Sardothien fully embraces her identity as Aelin Galathynius, Queen of Terrasen. To reclaim her throne, Aelin must fight for her cousin, her imprisoned friend, and her enslaved people. With everything she loves at risk, Aelin\'s heart beats for vengeance, and no one will escape the queen\'s wrath.',
+      //   coverImageUrl: './tog4.jpeg',
+      // }),
 
     //   this.bookService.addBook({
     //     title: 'Empire of Storms',

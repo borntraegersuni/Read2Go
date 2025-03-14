@@ -4,6 +4,7 @@ import { BookratingComponent } from '../bookrating/bookrating.component';
 import { BookstatusComponent } from '../bookstatus/bookstatus.component';
 import { BookprogressComponent } from '../bookprogress/bookprogress.component';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-bookoverview',
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './bookoverview.component.css',
 })
 export class BookoverviewComponent {
+  constructor(public authService: AuthService) {}
   @Input() title!: string;
   @Input() coverUrl!: string;
   @Input() link!: string;
