@@ -31,7 +31,8 @@
 }
 .slide2 img {
     width: 100%;
-    border-radius: 5px;
+    height: 100%;
+    object-fit: cover;
 }
 .prev2, .next2 {
     position: absolute;

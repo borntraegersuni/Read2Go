@@ -1,14 +1,14 @@
 <div class="bar2"></div>
 <div class="widget2">
-    <h2>Most Read</h2>
+    <h2>Newcomers</h2>
     <div class="slider-container2">
       <div class="slider2">
-        <div class="slide2" *ngFor="let image of images">
-          <img [src]="image" alt="Image Slide">
+        <div class="slide2" *ngFor="let image of images; let i = index">
+          <img [src]="image" alt="Book Cover {{i+1}}">
         </div>
       </div>
-      <button class="prev2" (click)="goToPreviousSlide()">&#10094;</button>
-      <button class="next2" (click)="goToNextSlide()">&#10095;</button>
+      <button class="prev2" (click)="goToPreviousSlide()" *ngIf="currentIndex > 0">&#10094;</button>
+      <button class="next2" (click)="goToNextSlide()" *ngIf="currentIndex < images.length - 5">&#10095;</button>
     </div>
-  </div>  
-  <div class="bar2"></div>
+</div>  
+<div class="bar2"></div>

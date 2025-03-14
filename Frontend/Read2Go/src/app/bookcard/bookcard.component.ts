@@ -134,6 +134,10 @@ export class BookcardComponent implements OnInit, AfterViewInit {
       return;
     }
     popup.classList.remove('active');
+    // Reload the page after the popup is closed to refresh data
+    setTimeout(() => {
+      window.location.reload();
+    }, 300); // Small delay to allow the animation to complete
   }
 
   openPopup() {
