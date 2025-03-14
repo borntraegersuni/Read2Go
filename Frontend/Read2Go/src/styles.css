@@ -39,3 +39,13 @@ app-footer {
     font-family: 'Bookerly';
     src: url('./assets/fonts/Bookerly.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'KenyanCoffee';
+    src: url('./assets/fonts/Kenyan Coffee Rg.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'PerfectlyVintage';
+    src: url('./assets/fonts/Perfectly Vintages Font by Keithzo.otf') format('opentype');
+}

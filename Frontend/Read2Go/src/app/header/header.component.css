@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: "Times New Roman", serif;
+    font-family: 'Times New Roman', Times, serif;
 }
 .top-bar {
     background-color: #a55bb8;
@@ -39,6 +39,7 @@ body {
     display: flex;
     justify-content: center;
     padding: 0px 0;
+    font-family: 'PerfectlyVintage';
 }
 .nav-bar a {
     color: white;
@@ -49,7 +50,7 @@ body {
     transition: color 0.3s ease-in-out;
 }
 .nav-bar a.active {
-    color: black;
+    text-decoration: underline;
 }
 .nav-bar a::after {
     content: "";
@@ -58,11 +59,11 @@ body {
     bottom: -3px;
     width: 0;
     height: 2px;
-    background-color: black;
+    background-color: lightgray;
     transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 .nav-bar a:hover {
-    color: black;
+    color: lightgray;
 }
 .nav-bar a:hover::after {
     width: 100%;

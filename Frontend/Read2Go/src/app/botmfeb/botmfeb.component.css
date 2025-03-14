@@ -132,6 +132,18 @@ h1 {
     text-decoration: none;
 }
 
+p {
+    font-family: 'Bookerly';
+}
+
+h3 {
+    font-family: 'Bookerly';
+}
+
+h1 {
+    font-family: 'Bookerly';
+}
+
 /* Responsive breakpoints - simplified to match botmjan more closely */
 @media (max-width: 768px) {
     .content {

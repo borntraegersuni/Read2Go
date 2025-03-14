@@ -264,7 +264,7 @@ button:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: lightgray;
-    padding: 3vh 3vw;
+    padding: 20px;
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     max-width: 90vw;
@@ -290,6 +290,29 @@ button {
 
 button:hover {
     background-color: #7f478d;
+}
+
+/* Add these styles to your existing CSS file */
+
+.modal-header-new {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+}
+
+.close-new {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.close-new:hover,
+.close-new:focus {
+    color: black;
+    text-decoration: none;
 }
 
 /* Responsive breakpoints */

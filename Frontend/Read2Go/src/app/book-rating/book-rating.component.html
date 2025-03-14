@@ -18,6 +18,9 @@
 <!-- Book popups -->
 <div *ngFor="let book of books">
   <div class="popup" id="popup-{{ book.id }}">
+    <div class="modal-header">
+      <span class="close" (click)="closePopup(book.id)">&times;</span>
+    </div>
     <app-bookoverview 
       [title]="book.title" 
       [coverUrl]="book.image" 
@@ -30,6 +33,5 @@
       [state]="book.state || ''"
       [display]="false">
     </app-bookoverview>
-    <button (click)="closePopup(book.id)" class="close-popup-{{ book.id }}">Close</button>
   </div>
 </div>
