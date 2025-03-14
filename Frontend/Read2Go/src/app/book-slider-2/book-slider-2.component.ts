@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, OnInit } from '@angular/core';
+import { Component, AfterViewInit, Input, OnInit, OnDestroy } from '@angular/core';
 import { BookoverviewComponent } from '../bookoverview/bookoverview.component';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
@@ -9,8 +9,8 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './book-slider-2.component.html',
   styleUrl: './book-slider-2.component.css'
 })
-export class BookSlider2Component implements OnInit, AfterViewInit {
-  currentIndex: number = 0;
+export class BookSlider2Component implements OnInit, AfterViewInit, OnDestroy {
+  currentIndexNew: number = 0;
   images: string[] = [];
   books: Array<{
     id: number;
@@ -42,7 +42,7 @@ export class BookSlider2Component implements OnInit, AfterViewInit {
   async loadImages() {
     try {
       const books = await this.authService.getAllBooks();
-      console.log('Fetched books for slider:', books.length);
+      console.log('Fetched books for newcomer slider:', books.length);
       
       // Sort books by published year in descending order (newest first)
       const sortedBooks = [...books].sort((a, b) => b.publishedYear - a.publishedYear);
@@ -77,12 +77,12 @@ export class BookSlider2Component implements OnInit, AfterViewInit {
       }
       
       // Update carousel after images are loaded
-      setTimeout(() => this.updateCarousel(), 0);
+      setTimeout(() => this.updateCarouselNew(), 0);
     } catch (error) {
       console.error('Error loading book images:', error);
       // Fallback to example cover if error occurs
       this.images = ['./examplecover.jpg'];
-      setTimeout(() => this.updateCarousel(), 0);
+      setTimeout(() => this.updateCarouselNew(), 0);
     }
   }
   
@@ -124,89 +124,116 @@ export class BookSlider2Component implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // Ensure carousel is updated after view is initialized
-    setTimeout(() => this.updateCarousel(), 100);
+    setTimeout(() => this.updateCarouselNew(), 100);
     
     // Initialize popups for the books
-    setTimeout(() => this.initializePopups(), 200);
+    setTimeout(() => this.initializePopupsNew(), 200);
+    
+    // Add resize listener to update carousel when screen size changes
+    window.addEventListener('resize', this.handleResizeNew.bind(this));
   }
 
-  updateCarousel() {
-    const slider = document.querySelector('.slider2') as HTMLElement;
+  ngOnDestroy() {
+    // Clean up the resize listener when component is destroyed
+    window.removeEventListener('resize', this.handleResizeNew.bind(this));
+  }
+
+  handleResizeNew() {
+    this.updateCarouselNew();
+  }
+
+  updateCarouselNew() {
+    const slider = document.querySelector('.slider-new') as HTMLElement;
     if (!slider) {
-      console.error('Slider element not found');
+      console.error('Newcomer slider element not found');
       return;
     }
     
-    const totalImages = this.images.length;
-    if (totalImages === 0) {
-      console.warn('No images to display in carousel');
+    const totalBooks = this.books.length;
+    if (totalBooks === 0) {
+      console.warn('No books to display in newcomer carousel');
       return;
     }
     
-    // Calculate max index based on number of visible slides
-    const maxVisibleSlides = 5;
-    const maxIndex = Math.max(0, totalImages - maxVisibleSlides);
+    // Get visible slides based on screen size
+    const visibleSlides = this.getVisibleSlidesCountNew();
+    const maxIndex = Math.max(0, totalBooks - visibleSlides);
     
-    // Adjust translation percentage based on total images
-    slider.style.transform = `translateX(-${this.currentIndex * (100 / totalImages)}%)`;
+    // Make sure currentIndexNew doesn't exceed maxIndex
+    if (this.currentIndexNew > maxIndex) {
+      this.currentIndexNew = maxIndex;
+    }
     
-    const prevButton = document.querySelector('.prev2') as HTMLElement;
-    const nextButton = document.querySelector('.next2') as HTMLElement;
+    // Calculate slide width as percentage based on visible slides
+    const slideWidth = 100 / visibleSlides;
+    slider.style.transform = `translateX(-${this.currentIndexNew * slideWidth}%)`;
+    
+    // Update navigation buttons visibility
+    const prevButton = document.querySelector('.prev-new') as HTMLElement;
+    const nextButton = document.querySelector('.next-new') as HTMLElement;
     
     if (prevButton) {
-      prevButton.style.display = this.currentIndex === 0 ? 'none' : 'block';
+      prevButton.style.display = this.currentIndexNew === 0 ? 'none' : 'flex';
     }
     
     if (nextButton) {
-      nextButton.style.display = this.currentIndex >= maxIndex ? 'none' : 'block';
+      nextButton.style.display = this.currentIndexNew >= maxIndex ? 'none' : 'flex';
     }
   }
 
-  goToNextSlide() {
-    const totalImages = this.images.length;
-    const maxVisibleSlides = 5;
-    const maxIndex = Math.max(0, totalImages - maxVisibleSlides);
+  getVisibleSlidesCountNew(): number {
+    // Return number of visible slides based on screen width
+    const width = window.innerWidth;
+    if (width <= 480) return 2;      // Mobile: 2 slides
+    if (width <= 768) return 3;      // Tablet: 3 slides
+    if (width <= 1024) return 4;     // Small desktop: 4 slides
+    return 5;                        // Large desktop: 5 slides
+  }
+
+  goToNextSlideNew() {
+    const visibleSlides = this.getVisibleSlidesCountNew();
+    const maxIndex = Math.max(0, this.books.length - visibleSlides);
     
-    if (this.currentIndex < maxIndex) {
-      this.currentIndex++;
-      this.updateCarousel();
+    if (this.currentIndexNew < maxIndex) {
+      this.currentIndexNew++;
+      this.updateCarouselNew();
     }
   }
 
-  goToPreviousSlide() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.updateCarousel();
+  goToPreviousSlideNew() {
+    if (this.currentIndexNew > 0) {
+      this.currentIndexNew--;
+      this.updateCarouselNew();
     }
   }
   
   // Initialize the popups for book covers
-  initializePopups() {
-    const slides = document.querySelectorAll('.slide2-clickable');
+  initializePopupsNew() {
+    const slides = document.querySelectorAll('.slide-new-clickable');
     slides.forEach((slide) => {
       slide.addEventListener('click', (e) => {
         const bookId = (e.currentTarget as HTMLElement).getAttribute('data-book-id');
         if (bookId) {
-          this.openPopup(parseInt(bookId));
+          this.openPopupNew(parseInt(bookId));
         }
       });
     });
   }
   
   // Open the popup for a specific book
-  openPopup(bookId: number) {
-    console.log('Opening popup for book:', bookId);
-    const popup = document.getElementById(`popup-${bookId}`);
+  openPopupNew(bookId: number) {
+    console.log('Opening popup for newcomer book:', bookId);
+    const popup = document.getElementById(`popup-new-${bookId}`);
     if (popup) {
       popup.classList.add('active');
     } else {
-      console.error(`Popup for book ${bookId} not found`);
+      console.error(`Popup for newcomer book ${bookId} not found`);
     }
   }
   
   // Close the popup
-  closePopup(bookId: number) {
-    const popup = document.getElementById(`popup-${bookId}`);
+  closePopupNew(bookId: number) {
+    const popup = document.getElementById(`popup-new-${bookId}`);
     if (popup) {
       popup.classList.remove('active');
       // Reload page after popup is closed to refresh data
