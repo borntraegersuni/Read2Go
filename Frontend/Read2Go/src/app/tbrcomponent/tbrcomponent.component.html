@@ -1,19 +1,40 @@
 <div class="container">
-    <div class="bookshelf">
-      <div class="reading-view">
-        TBR
-        <a href="booklist?category=wishlist">
-          <p>{{ books.length }}</p>
-        </a>
-        <a href="booklist?category=wishlist">View More</a>
-      </div>
-      <div class="shelf-container">
-        <div class="bookrow">
-          <a *ngFor="let book of books.slice(books.length > 3 ? books.length-3 : 0, books.length)" [href]="book.link">
-            <img [src]="book.coverUrl" [alt]="book.title" class="book" />
-          </a>
+  <div class="bookshelf">
+    <div class="reading-view">
+      TBR
+      <a href="booklist?category=wishlist">
+        <p>{{ books.length }}</p>
+      </a>
+      <a href="booklist?category=wishlist">View More</a>
+    </div>
+    <div class="shelf-container">
+      <div class="bookrow">
+        <div *ngFor="let book of books.slice(books.length > 3 ? books.length-3 : 0, books.length)" class="book-wrapper">
+          <img [src]="book.coverUrl" [alt]="book.title" class="book" (click)="openPopup(book.id)" />
         </div>
-        <div class="shelf"></div>
       </div>
+      <div class="shelf"></div>
     </div>
   </div>
+</div>
+
+<!-- Book popups -->
+<div *ngFor="let book of books.slice(books.length > 3 ? books.length-3 : 0, books.length)">
+  <div class="popup" id="popup-{{ book.id }}">
+    <div class="modal-header">
+      <span class="close" (click)="closePopup(book.id)">&times;</span>
+    </div>
+    <app-bookoverview 
+      [title]="book.title" 
+      [coverUrl]="book.coverUrl" 
+      [author]="book.author" 
+      [rating]="book.rating" 
+      [bookId]="book.id" 
+      [genre]="book.genre" 
+      [description]="book.description" 
+      [published]="book.publishedYear"
+      [state]="book.state || ''"
+      [display]="false">
+    </app-bookoverview>
+  </div>
+</div>

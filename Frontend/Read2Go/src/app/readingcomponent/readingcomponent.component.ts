@@ -1,38 +1,93 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BookoverviewComponent } from '../bookoverview/bookoverview.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-readingcomponent',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, BookoverviewComponent],
   templateUrl: './readingcomponent.component.html',
-  styleUrl: './readingcomponent.component.css',
+  styleUrl: './readingcomponent.component.css'
 })
-export class ReadingcomponentComponent {
-  books: { title: string, coverUrl: string, link: string }[] = [];
+export class ReadingcomponentComponent implements OnInit {
+  books: Array<{
+    id: number;
+    title: string;
+    author: string;
+    coverUrl: string;
+    link: string;
+    rating: number;
+    genre: string;
+    description: string;
+    publishedYear: number;
+    state?: string;
+  }> = [];
 
-    constructor(
-      private authService: AuthService
-    ) {}
+  constructor(private authService: AuthService) {}
+
   async ngOnInit() {
     try {
-      const books = await this.authService.getBooks("reading");
-      if (books && Array.isArray(books)) {
-        this.books = books.map(book => {
-          console.log('Book from API:', book); // Debug to check actual data structure
-          return {
-            title: book.title,
-            coverUrl: book.image && book.image !== "" ? book.image : "./examplecover.jpg",
-            link: book.title.toLowerCase().replaceAll(" ", "+")
-          };
-        });
-      } else {
-        console.error('Invalid data format received from the backend');
-        this.books = [];
+      // Get books marked as reading from the service
+      const userBooks = await this.authService.getBooks('reading');
+      
+      // Get book details for each book
+      const allBooks = await this.authService.getAllBooks();
+      
+      if (userBooks && userBooks.length > 0) {
+        const processedBooks = userBooks.map(userBook => {
+          // Find the matching book in allBooks
+          const bookDetails = allBooks.find(book => book.id === userBook.bookid);
+          
+          if (bookDetails) {
+            return {
+              id: bookDetails.id,
+              title: bookDetails.title,
+              author: bookDetails.author,
+              coverUrl: bookDetails.image || './examplecover.jpg',
+              link: `book/${bookDetails.id}`,
+              rating: bookDetails.rating || 0,
+              genre: bookDetails.genre || '',
+              description: bookDetails.description || '',
+              publishedYear: bookDetails.publishedYear || 0,
+              state: 'reading'
+            };
+          }
+          return null;
+        }).filter(book => book !== null) as typeof this.books;
+        
+        this.books = processedBooks;
+        console.log('Reading books loaded:', this.books.length);
       }
     } catch (error) {
-      console.error('Error fetching books from backend:', error);
+      console.error('Failed to load reading books:', error);
       this.books = [];
+    }
+  }
+  
+  // Open the popup for a specific book
+  openPopup(bookId: number) {
+    console.log('Opening popup for book:', bookId);
+    const popup = document.getElementById(`popup-${bookId}`);
+    if (popup) {
+      popup.classList.add('active');
+    } else {
+      console.error(`Popup for book ${bookId} not found`);
+    }
+  }
+  
+  // Close the popup
+  closePopup(bookId: number) {
+    const popup = document.getElementById(`popup-${bookId}`);
+    if (popup) {
+      popup.classList.remove('active');
+      // Check if data has changed to determine whether to reload
+      const dataChanged = popup.getAttribute('data-changed') === 'true';
+      if (dataChanged) {
+        setTimeout(() => {
+          window.location.reload();
+        }, 300);
+      }
     }
   }
 }
