@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { BooklistsearchComponent } from "../booklistsearch/booklistsearch.component";
 import { BookcardComponent } from "../bookcard/bookcard.component";
-import { BooklistfilterComponent } from '../booklistfilter/booklistfilter.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-booklistbody',
   standalone: true,
-  imports: [BooklistsearchComponent, BookcardComponent, BooklistfilterComponent, CommonModule],
+  imports: [ BookcardComponent, CommonModule],
   templateUrl: './booklistbody.component.html',
   styleUrls: ['./booklistbody.component.css'],
   changeDetection: ChangeDetectionStrategy.Default
