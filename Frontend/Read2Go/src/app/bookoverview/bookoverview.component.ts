@@ -31,6 +31,7 @@ export class BookoverviewComponent {
   @Input() published!: number;
   @Input() state!: string;
   @Input() display: boolean = true;
+  @Input() avgRating!: number;
   status: number = 0;
   ngOnInit() {
     console.log('title for popup:', this.title);

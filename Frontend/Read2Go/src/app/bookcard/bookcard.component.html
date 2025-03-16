@@ -8,9 +8,9 @@
         <span
           *ngFor="let star of stars; let i = index"
           [attr.data-bookid]="bookId"
-          [class.filled]="i < rating"
-          (click)="isSearchPage ? null : setRating(i + 1)"
-          [class.clickable]="!isSearchPage"
+          [class.filled]="i < userRating"
+          (click)="setRating(i + 1)"
+          class="clickable"
           [attr.data-value]="i + 1"
           >★
         </span>
@@ -25,5 +25,5 @@
   <div class="modal-header">
     <span class="close" (click)="closePopup()">&times;</span>
   </div>
-  <app-bookoverview [title]="title" [display]="display" [rating]="rating" [state]="state" [published]="published" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre" [description]="description"></app-bookoverview>
+  <app-bookoverview [title]="title" [display]="display" [avgRating]="rating" [rating]="userRating" [state]="state" [published]="published" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre" [description]="description"></app-bookoverview>
 </div>

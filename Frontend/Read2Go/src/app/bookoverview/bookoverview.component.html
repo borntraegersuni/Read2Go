@@ -1,6 +1,6 @@
 <app-bookcard2 [description]="description" [published]="published" [title]="title" [author]="author" [bookId]="bookId" [coverUrl]="coverUrl" [genre]="genre"></app-bookcard2>
 <div class="bar"></div>
-<app-bookrating [rating]="rating" [bookId]="bookId" *ngIf="display"></app-bookrating>
+<app-bookrating [rating]="rating" [avgRating]="avgRating" [bookId]="bookId" *ngIf="display"></app-bookrating>
 <!-- <div class="bar"></div> -->
 <div class="progress" *ngIf="authService.isAuthenticated()">
     <app-bookstatus [initialStatus]="status" [bookId]="bookId"></app-bookstatus>

@@ -28,6 +28,7 @@ export class BooklistComponent implements OnInit {
     rating: number;
     description: string;
     published: number;
+    avgRating: number;
   }[] = [];
   originalBooks: {
     genre: string;
@@ -40,9 +41,8 @@ export class BooklistComponent implements OnInit {
     rating: number;
     description: string;
     published: number;
-
+    avgRating: number;
   }[] = [];
-
   constructor(private route: ActivatedRoute, private authService: AuthService) {
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
@@ -53,6 +53,7 @@ export class BooklistComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     console.log("fetching books");
+    const allBooks = await this.authService.getAllBooks();
     const fetchedBooks = await this.authService.getBooks('');
     console.log("fetched books: ", fetchedBooks[0].state);
     this.originalBooks = fetchedBooks.map((b) => ({
@@ -66,6 +67,7 @@ export class BooklistComponent implements OnInit {
       rating: b.rating,
       description: b.description,
       published: Number(b.published),
+      avgRating: allBooks.find((ab) => ab.id === b.bookid)?.rating ?? 0,
     }));
     console.log("fetch published: ", this.originalBooks[0]);
 

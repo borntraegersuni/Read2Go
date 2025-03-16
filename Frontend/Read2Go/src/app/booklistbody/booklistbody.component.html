@@ -6,12 +6,13 @@
     [coverUrl]="book.coverUrl"
     [link]="book.link"
     [author]="book.author"
-    [rating]="book.rating"
+    [userRating]="book.rating"
     [bookId]="book.id"
     [genre]="book.genre"
     [description]="book.description"
     [published]="book.published"
     [state]="book.state"
+    [rating]="book.avgRating"
   ></app-bookcard>
   <div class="no-books-warning" *ngIf="books && books.length === 0">
     <img src="./nosearch.png" alt="No search results" class="no-results-image">

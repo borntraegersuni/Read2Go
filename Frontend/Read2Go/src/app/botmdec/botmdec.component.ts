@@ -24,7 +24,7 @@ export class BotmdecComponent implements OnInit {
   async ngOnInit() {
     try {
       // Get all books from the service
-      const books = await this.authService.getBooks('');
+      const books = await this.authService.getAllBooks();
       
       // Find the Throne of Glass book
       const throneOfGlassBook = books.find(book => 

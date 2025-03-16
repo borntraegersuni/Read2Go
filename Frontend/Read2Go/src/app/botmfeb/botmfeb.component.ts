@@ -24,7 +24,7 @@ export class BotmfebComponent implements OnInit {
   async ngOnInit() {
     try {
       // Get all books from the service
-      const books = await this.authService.getBooks('');
+      const books = await this.authService.getAllBooks();
       
       // Find the Iron Flame book
       const ironFlameBook = books.find(book => 

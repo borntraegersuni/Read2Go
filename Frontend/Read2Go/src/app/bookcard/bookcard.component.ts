@@ -78,19 +78,33 @@ export class BookcardComponent implements OnInit, AfterViewInit {
   }
 
   async setRating(rating: number) {
-    // Only allow rating if not on search page
-    if (this.isSearchPage) {
-      return; // Do nothing if on search page
-    }
-
     // Store user's personal rating
     this.userRating = rating;
     
     try {
-      // Get the actual bookId (not the userBookId)
+      let bookId = this.bookId;
+      
+      // If we're on the search page, we need to ensure the book is in the user's library
+      if (this.isSearchPage) {
+        // First check if the book is already in user's library
+        const userBooks = await this.authService.getBooks('');
+        const existingBook = userBooks.find(b => b.bookid === this.bookId);
+        
+        if (!existingBook) {
+          // Book isn't in user's library yet, so add it first with "read/finished" status (3)
+          await this.authService.sendBookStatus(this.bookId, 3); // Using 3 to represent 'finished/read' status
+          console.log('Book added to library with "read" status for rating');
+        }
+      } else {
+        // Always set book to "read" status when rating it, even if it's already in library
+        await this.authService.sendBookStatus(this.bookId, 3);
+        console.log('Book status updated to "read"');
+      }
+      
+      // Get the updated list of user's books
       const books = await this.authService.getBooks('');
-      const book = books.find((b) => b.id === this.bookId);
-
+      const book = books.find(b => b.bookid === this.bookId);
+      
       if (book && book.bookid) {
         // Send the user's rating to the server
         await this.authService.sendReview(book.bookid, rating);
@@ -98,7 +112,7 @@ export class BookcardComponent implements OnInit, AfterViewInit {
         
         // After saving, fetch the updated average rating
         const updatedBooks = await this.authService.getAllBooks();
-        const updatedBook = updatedBooks.find((b) => b.id === this.bookId);
+        const updatedBook = updatedBooks.find(b => b.id === this.bookId);
         if (updatedBook) {
           // Update the display with the new average rating
           this.rating = updatedBook.rating;
