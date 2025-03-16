@@ -75,3 +75,21 @@
     min-width: 80px;
   }
 }
+
+/* Hide greeting text on smaller screens */
+@media (max-width: 576px) {
+  .auth-container {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    max-width: auto;
+  }
+  
+  .corner span {
+    display: none; /* Hide the greeting text */
+  }
+  
+  .auth-button {
+    margin-left: 0; /* Remove left margin when greeting is hidden */
+  }
+}

@@ -50,8 +50,8 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit() {
     // Set initial position
-    setTimeout(() => this.updateSliderPosition(), 0);
-
+    setTimeout(() => this.updateSliderPosition(), 200);
+    console.log('After init', this.initialStatus);
     // Add resize listener to update slider when window size changes
     window.addEventListener('resize', () => this.updateSliderPosition());
   }
@@ -68,7 +68,7 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
   async setStatusByNumber(statusNumber: number): Promise<void> {
     // Convert number to string status
     const status = this.statusMap[statusNumber] || 'none';
-
+    this.selectedStatus = status;
     // Check if the status is actually changing before making API call
     if (this.selectedStatus !== status) {
       await this.setStatus(status);
@@ -77,6 +77,7 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
 
   async setStatus(status: string): Promise<void> {
     if (status) {
+      console.log('Setting status:', status);
       // Store the old status to check if it changed
       const oldStatus = this.selectedStatus;
       this.selectedStatus = status;

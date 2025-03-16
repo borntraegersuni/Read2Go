@@ -15,53 +15,57 @@ export class BookcardComponent implements OnInit, AfterViewInit {
   @Input() coverUrl!: string;
   @Input() link!: string;
   @Input() author!: string;
-  @Input() rating!: number;
+  @Input() rating!: number; // This will now always be the average rating
+  @Input() userRating: number = 0; // New property for user's personal rating
   @Input() bookId!: number;
   @Input() genre!: string;
   @Input() description!: string;
   @Input() published!: number;
   @Input() state!: string;
   @Input() display: boolean = true;
+  @Input() isSearchPage: boolean = false;
   stars: number[] = [1, 2, 3, 4, 5];
+  isPopupOpen = false;
 
   constructor(private authService: AuthService) {}
 
   async ngOnInit() {
     if (this.bookId) {
       try {
-        // Fetch all books and find the one with matching ID
-        const books = await this.authService.getAllBooks(); // Average Rating Books
+        // Fetch all books to get the general average rating
+        const books = await this.authService.getAllBooks();
         const book = books.find((b) => b.id === this.bookId);
-        console.log(book?.id)
-        const userBooks = await this.authService.getBooks('');
-        const userBook = userBooks.find((b) => b.bookid === book?.id);
-        console.log('userbooks', userBooks);
-        console.log('bookid', this.bookId, 'title', this.title);
-        console.log(
-          'rating',
-          userBook!.rating,
-          'averagerating',
-          book!.rating,
-          'title',
-          this.title
-        );
+        
         if (!book) {
-          console.log('book not found');
+          console.log('Book not found');
           return;
         }
-        console.log('bookrating', book!.rating);
-
+        
+        // Get user books to find the user's personal rating
+        const userBooks = await this.authService.getBooks('');
+        const userBook = userBooks.find((b) => b.bookid === book.id);
+        
+        console.log('Book ID:', this.bookId, 'Title:', this.title);
+        console.log('Average rating:', book.rating);
+        
+        // Always update the display with the average rating from all users
         if (book) {
           // Update cover URL if it exists in the backend
-          this.coverUrl =
-            book.image && book.image !== ''
-              ? book.image
-              : this.coverUrl || './examplecover.jpg';
+          this.coverUrl = book.image && book.image !== '' 
+            ? book.image 
+            : this.coverUrl || './examplecover.jpg';
 
-          // Optionally update other properties if needed
+          // Update the book properties
           this.title = book.title || this.title;
           this.author = book.author || this.author;
-          this.rating = book.rating || this.rating;
+          
+          // Important: Always use the average rating from the book object
+          this.rating = book.rating || 0;
+          
+          // Store user's personal rating separately
+          this.userRating = userBook?.rating || 0;
+          
+          console.log('Display rating set to average:', this.rating);
         }
       } catch (error) {
         console.error('Error fetching book details:', error);
@@ -70,24 +74,36 @@ export class BookcardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Use setTimeout to ensure DOM elements are fully rendered
-    setTimeout(() => {
-      this.initializePopup();
-    }, 0);
+
   }
 
   async setRating(rating: number) {
-    this.rating = rating;
+    // Only allow rating if not on search page
+    if (this.isSearchPage) {
+      return; // Do nothing if on search page
+    }
+
+    // Store user's personal rating
+    this.userRating = rating;
+    
     try {
       // Get the actual bookId (not the userBookId)
       const books = await this.authService.getBooks('');
       const book = books.find((b) => b.id === this.bookId);
 
       if (book && book.bookid) {
-        // Use the actual bookid from the book object
+        // Send the user's rating to the server
         await this.authService.sendReview(book.bookid, rating);
         console.log('Rating saved successfully');
-        //alert('Your rated that book with ' + rating + ' stars');
+        
+        // After saving, fetch the updated average rating
+        const updatedBooks = await this.authService.getAllBooks();
+        const updatedBook = updatedBooks.find((b) => b.id === this.bookId);
+        if (updatedBook) {
+          // Update the display with the new average rating
+          this.rating = updatedBook.rating;
+          console.log('Updated average rating:', this.rating);
+        }
       } else {
         console.error('Book not found or bookid missing');
       }

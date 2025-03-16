@@ -4,12 +4,13 @@
     <div class="book-title">{{ title }}</div>
     <div class="book-author">by: {{ author }}</div>
     <div class="rating-container">
-      <div class="stars" id="star-rating">
+      <div class="stars" [ngClass]="{'readonly': isSearchPage}">
         <span
           *ngFor="let star of stars; let i = index"
           [attr.data-bookid]="bookId"
           [class.filled]="i < rating"
-          (click)="setRating(i + 1)"
+          (click)="isSearchPage ? null : setRating(i + 1)"
+          [class.clickable]="!isSearchPage"
           [attr.data-value]="i + 1"
           >★
         </span>

@@ -78,5 +78,6 @@ button:hover:not(.active) {
 .slider.checked {
     width: calc(25% - 8px);
     transform: translateX(calc(100% - 8px));
-    background: #7e3a91; /* Slightly darker purple for checked state */
+    background: #7e3a91; 
+    color: white;
 }
