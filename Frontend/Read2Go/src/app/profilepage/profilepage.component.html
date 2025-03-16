@@ -1,82 +1,94 @@
 <div class="container">
   <div class="form-container">
-    <h2>User Profile Settings</h2>
-    <form (ngSubmit)="saveChanges()" #updateForm="ngForm" novalidate>
+    <h2>Profile Settings</h2>
+    
+    <!-- General error message -->
+    <div class="error-message" *ngIf="fieldErrors.general">
+      {{ fieldErrors.general }}
+    </div>
+    
+    <form #profileForm="ngForm" (ngSubmit)="saveChanges()">
       <div class="form-group">
         <label for="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          [(ngModel)]="user.username"
-          name="username"
-          required
-        />
+        <input type="text" id="username" name="username" [(ngModel)]="user.username" required>
+        <span class="field-error" *ngIf="fieldErrors.username">{{ fieldErrors.username }}</span>
       </div>
+      
       <div class="form-group">
         <label for="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          [(ngModel)]="user.email"
-          name="email"
-          required
-        />
+        <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
+        <span class="field-error" *ngIf="fieldErrors.email">{{ fieldErrors.email }}</span>
       </div>
+      
       <div class="form-group">
-        <label for="new-password">New Password:</label>
-        <input
-          type="password"
-          id="new-password"
-          [(ngModel)]="user.newPassword"
-          name="newPassword"
-          optional
-        />
+        <label for="currentPassword">Current Password: (required for changes)</label>
+        <input type="password" id="currentPassword" name="currentPassword" [(ngModel)]="user.currentPassword" required>
+        <span class="field-error" *ngIf="fieldErrors.currentPassword">{{ fieldErrors.currentPassword }}</span>
       </div>
+      
       <div class="form-group">
-        <label for="current-password">Current Password:*</label>
-        <input
-          type="password"
-          id="current-password"
-          [(ngModel)]="user.currentPassword"
-          name="currentPassword"
-          required
-        />
-        <div *ngIf="updateForm.controls['currentPassword']?.invalid" class="error">
-          Password is required!
-        </div>
+        <label for="newPassword">New Password: (leave blank to keep current)</label>
+        <input type="password" id="newPassword" name="newPassword" [(ngModel)]="user.newPassword">
       </div>
+      
       <div class="form-group">
         <button type="submit">Save Changes</button>
       </div>
     </form>
-    <hr />
-    <h3>Delete Account</h3>
-    <p>
-      Warning: Deleting your account is irreversible. All your data will be
-      permanently removed.
-    </p>
-    <form #deleteForm="ngForm" (ngSubmit)="confirmDelete(deleteForm)" novalidate>
+    
+    <h2>Delete Account</h2>
+    <form #deleteForm="ngForm">
       <div class="form-group">
-        <label for="delete-password">Current Password:*</label>
-        <input
-          type="password"
-          id="delete-password"
-          [(ngModel)]="user.deletePassword"
-          name="deletePassword"
-          required
-        />
-        <div *ngIf="deleteForm.controls['deletePassword']?.invalid" class="error">
-          Password is required!
-        </div>
+        <p>Warning: Deleting your account is irreversible. All your data will be
+          permanently removed.</p>
+        <label for="deletePassword">Enter your password to confirm:</label>
+        <input type="password" id="deletePassword" name="deletePassword" [(ngModel)]="user.deletePassword" required>
       </div>
+      
       <div class="form-group">
-        <button type="submit" class="delete" [disabled]="deleteForm.invalid">
-          Delete Account
-        </button>
+        <button type="button" class="delete" (click)="openDeleteModal(deleteForm)">Delete Account</button>
       </div>
-    </form>    
+    </form>
   </div>
+  
   <div class="image-container">
-    <img src="./profilepage.jpg" alt="Deco Picture" />
+    <img [src]="profileImage" alt="Profile Image">
   </div>
+</div>
+
+<!-- Delete Account Confirmation Modal -->
+<div class="modal" *ngIf="showDeleteModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Confirm Account Deletion</h2>
+      <span class="close" (click)="closeDeleteModal()">&times;</span>
+    </div>
+    
+    <div class="modal-body">
+      <p class="warning-text">Are you sure you want to delete your account?</p>
+      <p>This action is <strong>permanent</strong> and cannot be undone.</p>
+      <p>All your data, including your reading lists and reviews, will be permanently removed.</p>
+      
+      <div class="error-message" *ngIf="deleteError">
+        {{ deleteError }}
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeDeleteModal()">Cancel</button>
+      <button class="confirm-delete-btn" (click)="confirmDelete()">Permanently Delete Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" [ngClass]="{'show': toast.show, 'toast-success': toast.type === 'success', 'toast-error': toast.type === 'error', 'toast-warning': toast.type === 'warning', 'toast-info': toast.type === 'info'}">
+  <div class="toast-content">
+    <span class="toast-icon" *ngIf="toast.type === 'success'">✓</span>
+    <span class="toast-icon" *ngIf="toast.type === 'error'">✗</span>
+    <span class="toast-icon" *ngIf="toast.type === 'warning'">⚠</span>
+    <span class="toast-icon" *ngIf="toast.type === 'info'">ℹ</span>
+    <span class="toast-message">{{ toast.message }}</span>
+  </div>
+  <button class="toast-close" (click)="hideToast()">×</button>
 </div>

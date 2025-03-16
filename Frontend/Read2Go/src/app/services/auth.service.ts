@@ -166,10 +166,10 @@ export class AuthService {
       });
       if (request.ok) {
         this.logout();
-        alert('Profile updated successfully!');
+        //alert('Profile updated successfully!');
         return true;
       } else {
-        alert((await request.json()).message);
+        //alert((await request.json()).message);
         return false;
       }
     }
@@ -200,7 +200,7 @@ export class AuthService {
         this.logout();
         return true;
       } else {
-        alert((await response.json()).message);
+        //alert((await response.json()).message);
         return false;
       }
     }

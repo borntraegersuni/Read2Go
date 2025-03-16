@@ -34,7 +34,7 @@ export class SignUpPageComponent {
 
   async onSignUp() {
     if (!z.string().email().safeParse(this.signupObj.EmailId).success) {
-      alert('Submit a real email.');
+      //alert('Submit a real email.');
       return;
     }
 
@@ -54,7 +54,7 @@ export class SignUpPageComponent {
       // )
       .safeParse(this.signupObj.Password);
     if (!passwordCheck.success) {
-      alert(passwordCheck.error.errors.map((e) => e.message).join('\n'));
+      //alert(passwordCheck.error.errors.map((e) => e.message).join('\n'));
       return;
     }
     // Check if the email is already taken
@@ -79,7 +79,7 @@ export class SignUpPageComponent {
       });
     } else {
       const data = await request.json();
-      alert(data.message);
+      //alert(data.message);
     }
 
     // const emailExists = this.users.some(

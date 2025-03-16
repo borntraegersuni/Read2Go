@@ -48,7 +48,7 @@ export class LoginpageComponent {
         window.location.reload();
       });
     } else {
-      alert("Invalid email or password.");
+      //alert("Invalid email or password.");
     }
 
     // if (userFound) {
