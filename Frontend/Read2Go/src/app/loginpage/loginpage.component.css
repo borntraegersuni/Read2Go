@@ -83,3 +83,95 @@ button {
 button:hover {
     background: #7b1fa2;
 }
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    min-width: 250px;
+    max-width: 350px;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    padding: 12px 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    z-index: 1100;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.toast-icon {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.toast-message {
+    flex: 1;
+}
+
+.toast-close {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    line-height: 10px;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-close:hover,
+.toast-close:focus {
+    color: white;
+    text-decoration: none;
+    background: transparent;
+}
+
+.toast-success {
+    background-color: #28a745;
+}
+
+.toast-error {
+    background-color: #dc3545;
+}
+
+.toast-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.toast-info {
+    background-color: #17a2b8;
+}
+
+/* Make form inputs look better with error state */
+.form-group input.ng-invalid.ng-touched {
+    border: 1px solid #dc3545;
+}
+
+.form-group input.ng-valid.ng-touched {
+    border: 1px solid #28a745;
+}
