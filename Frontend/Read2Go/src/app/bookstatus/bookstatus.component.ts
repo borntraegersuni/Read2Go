@@ -46,19 +46,41 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
   ngOnInit() {
     console.log('init', this.initialStatus);
     this.setStatusByNumber(this.initialStatus);
+    
+    // Add a DOM content loaded listener to ensure everything is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.updateSliderPosition();
+      });
+    } else {
+      // DOM already loaded, schedule position update
+      setTimeout(() => this.updateSliderPosition(), 0);
+    }
   }
 
   ngAfterViewInit() {
-    // Set initial position
-    setTimeout(() => this.updateSliderPosition(), 200);
-    console.log('After init', this.initialStatus);
-    // Add resize listener to update slider when window size changes
-    window.addEventListener('resize', () => this.updateSliderPosition());
+    // First attempt with a sequence of increasingly delayed updates
+    this.updateSliderPosition();
+    
+    // Add resize listener using the bound method
+    window.addEventListener('resize', this.updateSliderPosition);
+    
+    // Add a load listener to update when all resources are loaded
+    window.addEventListener('load', this.updateSliderPosition);
+    
+    // More aggressive approach with multiple delayed attempts
+    const delayTimes = [0, 50, 100, 250, 500, 1000];
+    delayTimes.forEach(delay => {
+      setTimeout(() => {
+        this.updateSliderPosition();
+      }, delay);
+    });
   }
 
   ngOnDestroy() {
-    // Remove resize listener when component is destroyed
-    window.removeEventListener('resize', () => this.updateSliderPosition());
+    // Remove all event listeners
+    window.removeEventListener('resize', this.updateSliderPosition);
+    window.removeEventListener('load', this.updateSliderPosition);
   }
 
   /**
@@ -122,44 +144,51 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
   }
 
   private updateSliderPosition() {
-    const slider = this.el.nativeElement.querySelector('.slider');
-    // Ensure we always have a valid status
-    if (!this.selectedStatus) {
-      console.log("none")
-      this.selectedStatus = 'none';
-    }
+    try {
+      const slider = this.el.nativeElement.querySelector('.slider');
+      // Ensure we always have a valid status
+      if (!this.selectedStatus) {
+        console.log("none");
+        this.selectedStatus = 'none';
+      }
 
-    // Remove all status classes from slider
-    if (slider) {
-      slider.classList.remove('none', 'tbr', 'reading', 'read');
-      console.log()
-      slider.classList.add(this.selectedStatus);
-    }
+      // Remove all status classes from slider
+      if (slider) {
+        slider.classList.remove('none', 'tbr', 'reading', 'read');
+        slider.classList.add(this.selectedStatus);
+      }
 
-    const activeButton = this.el.nativeElement.querySelector(
-      `#${this.selectedStatus}`
-    );
+      const activeButton = this.el.nativeElement.querySelector(
+        `#${this.selectedStatus}`
+      );
 
-    if (slider && activeButton) {
-      // Get the button's width and position
-      const buttonRect = activeButton.getBoundingClientRect();
-      const containerRect = this.el.nativeElement
-        .querySelector('.button')
-        .getBoundingClientRect();
+      if (!activeButton) {
+        console.error(`Button with ID #${this.selectedStatus} not found`);
+        return;
+      }
 
-      // Calculate position relative to container
-      const left = activeButton.offsetLeft;
+      if (slider && activeButton) {
+        // Get the button's width and position
+        const buttonRect = activeButton.getBoundingClientRect();
+        
+        // Apply the position and width to make it match the button exactly
+        const left = activeButton.offsetLeft;
+        
+        console.log(`Positioning slider for status: ${this.selectedStatus}, left: ${left}px, width: ${buttonRect.width}px`);
+        
+        // Apply the position and width to make it match the button exactly
+        slider.style.width = `${buttonRect.width - 8}px`; // -8px to account for padding
+        slider.style.transform = `translateX(${left}px)`;
 
-      // Apply the position and width to make it match the button exactly
-      slider.style.width = `${buttonRect.width - 8}px`; // -8px to account for padding
-      slider.style.transform = `translateX(${left}px)`;
-
-      // Ensure active class is applied to the correct button
-      const buttons = this.el.nativeElement.querySelectorAll('button');
-      buttons.forEach((btn: HTMLElement) => {
-        btn.classList.remove('active');
-      });
-      activeButton.classList.add('active');
+        // Ensure active class is applied to the correct button
+        const buttons = this.el.nativeElement.querySelectorAll('button');
+        buttons.forEach((btn: HTMLElement) => {
+          btn.classList.remove('active');
+        });
+        activeButton.classList.add('active');
+      }
+    } catch (error) {
+      console.error('Error updating slider position:', error);
     }
   }
 }

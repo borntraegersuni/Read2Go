@@ -3,7 +3,7 @@
     align-items: center;
     position: relative;
     background: white;
-    border-radius: 30px;
+    border-radius: 1rem;
     padding: 4px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
@@ -45,11 +45,12 @@ button {
 }
 
 button.active {
-    color: black;
+    color: white;
+    background: #a55bb8;
 }
 
 /* Improved dynamic slider positioning */
-.slider.none {
+/* .slider.none {
     width: calc(25% - 8px);
     transform: translateX(0);
 }
@@ -70,14 +71,14 @@ button.active {
 }
 
 /* Optional hover effect */
-button:hover:not(.active) {
+/*button:hover:not(.active) {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Add checked state styling */
-.slider.checked {
+/*.slider.checked {
     width: calc(25% - 8px);
     transform: translateX(calc(100% - 8px));
     background: #7e3a91; 
     color: white;
-}
+} */
