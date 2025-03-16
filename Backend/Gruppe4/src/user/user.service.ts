@@ -105,13 +105,13 @@ export class UserService {
         let rating = 0;
         if (reviews.length > 0) {
           reviews.forEach((review) => {
-            console.log(rating, review.rating);
+            //console.log(rating, review.rating);
             rating += Number(review.rating);
           })
-          console.log("rating raw for book: ", book.title, rating);
+          //console.log("rating raw for book: ", book.title, rating);
 
           rating = Math.round(rating / reviews.length);
-          console.log("rating full for book: ", book.title, rating);
+          //console.log("rating full for book: ", book.title, rating);
 
         }
 

@@ -37,7 +37,6 @@
 
 /* Average Rating */
 .average-rating {
-    margin-top: 8px;
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -62,6 +61,13 @@
     font-size: 1rem;
 }
 
+/* Submit Button */
+.submit-button-container {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    width: 100%;
+}
+
 .submit-button {
     padding: 0.8rem 1.5rem;
     border-radius: 0.5rem;
@@ -70,7 +76,6 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
-    align-self: flex-end; /* Align button to the right */
     font-size: 1rem;
     min-width: 8rem; /* Ensure button has a minimum width */
 }
@@ -82,15 +87,10 @@
 /* Add responsive design for different screen sizes */
 @media (min-width: 768px) {
     .review-container {
-        flex-direction: row; /* Side by side on larger screens */
-        align-items: flex-start;
+        flex-direction: column; /* Keep column layout on larger screens */
     }
     
     .review-input {
         flex-grow: 1; /* Allow input to take remaining space */
-    }
-    
-    .submit-button {
-        align-self: flex-start;
     }
 }

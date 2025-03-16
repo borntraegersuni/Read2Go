@@ -58,7 +58,7 @@ export class AppModule implements OnModuleInit {
     //   publishedYear: 1997,
     //   isbn: '978-0-7475-3269-9',
     //   genre: 'Fantasy',
-    //   coverImageUrl: 'https://m.media-amazon.com/images/I/81DI+BAN2SL._AC_UF1000,1000_QL80_.jpg', 
+    //   coverImageUrl: 'https://m.media-amazon.com/images/I/81DI+BAN2SL._AC_UF1000,1000_QL80_.jpeg', 
     // });
     
     // Add book with id 4 to user with id 1
@@ -220,10 +220,110 @@ export class AppModule implements OnModuleInit {
     //     genre: 'Fantasy',
     //     description: 'In Onyx Storm, the third installment of Rebecca Yarros\' Empyrean series, Violet Sorrengail faces the ultimate test as the battle intensifies at Basgiath War College. With trust in short supply and enemies both outside and within, Violet must venture beyond the crumbling Aretian wards to seek new allies for Navarre. Her journey demands every ounce of her wit, strength, and determination to protect her dragons, family, and home. As she grapples with a secret that could unravel everything, Violet knows they need an army, power, magic, and most importantly, the truth she alone can uncover. With a storm on the horizon, not everyone will survive its fury, making this a razor-sharp, thrilling continuation of the series.',
     //     coverImageUrl: './onyxstorm.jpeg',
-    //   })
-    // ]);
+//     //   })
+//     this.bookService.addBook({
+//       title: 'The Housemaid',
+//       author: 'Freida McFadden',
+//       publishedYear: 2022,
+//       isbn: '9781538742570',
+//       genre: 'Thriller',
+//       description: 'The Housemaid by Freida McFadden is a gripping psychological thriller that has sold over 2 million copies and is set to become a major motion picture starring Sydney Sweeney and Amanda Seyfried. The story follows a housemaid who becomes entangled in the lives of the wealthy Winchester family, uncovering dark secrets and dangerous desires as she navigates her own hidden identity. With its jaw-dropping twists, this bestseller is a must-read for fans of suspenseful fiction.',
+//       coverImageUrl: './housemaid.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'Tell Me What You Did: A Novel',
+//       author: 'Carter Wilson',
+//       publishedYear: 2025,
+//       isbn: '9781464226229',
+//       genre: 'Thriller',
+//       description: 'In The Confession, Poe Webb hosts a popular true crime podcast where people anonymously confess their crimes, offering them a mix of anonymity and instant fame. However, her world is turned upside down when a mysterious man claims to be her mother\'s murderer, forcing Poe to confront a dark secret\: she knows that her mother\'s killer is actually dead—because she killed him herself. As the truth unravels, the stakes rise, and Poe must navigate the dangerous intersection of confession and consequence.',
+//       coverImageUrl: './tellmewhatyoudid.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'Atomic Habits',
+//       author: 'James Clear',
+//       publishedYear: 2018,
+//       isbn: '9780735211292',
+//       genre: 'Nonfiction',
+//       description: 'Atomic Habits by James Clear is a \#1 New York Times bestseller with over 20 million copies sold, offering a proven framework for improving habits and achieving remarkable results. Clear emphasizes that success is not about willpower but about creating effective systems, providing practical strategies to form good habits and break bad ones. With insights from various fields and inspiring true stories, this book equips readers with the tools to transform their habits and reach their goals.',
+//       coverImageUrl: './atomichabits.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'The Diary of Anne Frank',
+//       author: 'Anne Frank',
+//       publishedYear: 2003,
+//       isbn: '9780141315195',
+//       genre: 'Nonfiction',
+//       description: 'This edition reprints the version authorized by the Frank estate, and includes a new Introduction, a Bibliography, and a chronology of Anne Frank\'s life and times.',
+//       coverImageUrl: './annefrank.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'Funny Story',
+//       author: 'Emily Henry',
+//       publishedYear: 2025,
+//       isbn: '9780593441213',
+//       genre: 'Romace',
+//       description: 'Happy Place by Emily Henry follows Daphne, who finds herself starting anew in Waning Bay, Michigan, after her fiancé falls for his childhood best friend. Stranded without friends or family, she becomes roommates with Miles Nowak, Petra\'s ex, and together they navigate their contrasting personalities while forming a tentative friendship. As they post misleading photos of their summer adventures, they must confront the unexpected possibility of love amidst their complicated pasts.',
+//       coverImageUrl: './funnystory.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'Blue Sisters',
+//       author: 'Coco Mellors',
+//       publishedYear: 2025,
+//       isbn: '9780008623036',
+//       genre: 'Fiction',
+//       description: 'The Blue Sisters follows the lives of three very different sisters Avery Bonnie and Lucky who are brought together by the unexpected death of their beloved fourth sister Nicky. As they reunite in New York to confront the sale of their childhood home they must navigate their individual struggles with grief addiction and heartbreak. Through their journey the sisters learn to reconnect with one another and rediscover their love for life amidst the challenges they face.',
+//       coverImageUrl: './bluesisters.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'Yellowface',
+//       author: 'R. F. Kuang',
+//       publishedYear: 2023,
+//       isbn: '9780063323179',
+//       genre: 'Fiction',
+//       description: 'Yellowface tells the story of June Hayward who steals the manuscript of her deceased friend Athena Liu after witnessing her death. As June rebrands herself as Juniper Song and claims Athena\'s work as her own she grapples with the consequences of her actions amid questions of diversity and cultural appropriation. With a gripping narrative and dark humor R.F. Kuang explores the lengths to which one will go to protect their success and identity.',
+//       coverImageUrl: './yellowface.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'Just Kids',
+//       author: 'Patti Smith',
+//       publishedYear: 2010,
+//       isbn: '9780747568766',
+//       genre: 'Poetry',
+//       description: 'Just kids is memoir about Patti Smith and her extraordinary relationship with artist Robert Mapplethorpe. Set against the vibrant backdrop of New York City in the late 1960s and 1970s the book chronicles their romance and lifelong friendship as they navigate the art and music scenes alongside iconic figures of the time. Beautifully written this memoir serves as both a love story and an elegy capturing the struggles and triumphs of two young artists dedicated to their craft.',
+//       coverImageUrl: './justkids.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'The Love Hypothesis',
+//       author: 'Ali Hazelwood',
+//       publishedYear: 2021,
+//       isbn: '9781408725764',
+//       genre: 'Romance',
+//       description: 'The Love Hypothesis is a contemporary romance that follows Olive Smith a third-year Ph.D. candidate who does not believe in lasting romantic relationships but finds herself in a fake relationship with her colleague Adam Carlsen. When Olive kisses Adam to convince her best friend that she is on her way to a happily ever after he surprisingly agrees to be her fake boyfriend which leads to unexpected chemistry and challenges. As their charade unfolds Olive realizes that understanding love is far more complicated than any scientific hypothesis.',
+//       coverImageUrl: './lovehypothesis.jpeg',
+//     }),
+
+// this.bookService.addBook({
+//       title: 'The American Roommate Experiment',
+//       author: 'Elena Armas',
+//       publishedYear: 2022,
+//       isbn: '9781398515642',
+//       genre: 'Romance',
+//       description: 'The American Roommate Experiment is a delightful rom-com by Elena Armas that follows Rosie Graham who has just quit her job to pursue her secret career as a romance writer but faces writer\'s block and a crumbling apartment ceiling. When she unexpectedly ends up sharing an apartment with Lucas Martín the man she has been secretly crushing on he proposes a series of experimental dates to inspire her writing. As they navigate their forced proximity and growing attraction Rosie must confront her feelings before Lucas\'s time in New York runs out.',
+//       coverImageUrl: './amaricanroommate.jpeg',
+//     })
+
+//     ]);
     
-    // console.log('All books have been added to the database.');
+//     console.log('All books have been added to the database.');
 
 
 
@@ -246,8 +346,8 @@ export class AppModule implements OnModuleInit {
 
 // console.log('All books have been added to user 1\'s reading list.');
 
-//Delete books with IDs 9 through 21
-// for (let id = 48; id <= 60; id++) {
+// //Delete books
+// for (let id = 84; id <= 93; id++) {
 //   try {
 //     await this.bookService.deleteBook(id);
 //     console.log(`Successfully deleted book with ID ${id}`);
