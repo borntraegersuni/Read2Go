@@ -8,13 +8,22 @@ import { z } from 'zod';
 
 @Component({
   selector: 'app-signuppage',
-  imports: [FormsModule, RouterModule, HttpClientModule],
+  standalone: true,
+  imports: [FormsModule, RouterModule, HttpClientModule, CommonModule],
   templateUrl: './signuppage.component.html',
   styleUrl: './signuppage.component.css',
 })
 export class SignUpPageComponent {
   signupObj: Signup;
   users: Signup[] = [];
+  
+  // Toast notification properties
+  toast = {
+    show: false,
+    message: '',
+    type: 'error' as 'success' | 'error' | 'info' | 'warning',
+    timeout: null as any
+  };
 
   constructor(
     private http: HttpClient,
@@ -33,12 +42,25 @@ export class SignUpPageComponent {
   }
 
   async onSignUp() {
-    if (!z.string().email().safeParse(this.signupObj.EmailId).success) {
-      //alert('Submit a real email.');
+    // Check if username is set
+    if (!this.signupObj.Username || this.signupObj.Username.trim() === '') {
+      this.showToast('Please enter a username', 'warning');
       return;
     }
 
-    // Password
+    // Validate username length
+    if (this.signupObj.Username.length < 3 || this.signupObj.Username.length > 20) {
+      this.showToast('Username must be between 3 and 20 characters', 'warning');
+      return;
+    }
+
+    // Validate email
+    if (!z.string().email().safeParse(this.signupObj.EmailId).success) {
+      this.showToast('Please enter a valid email address', 'warning');
+      return;
+    }
+
+    // Password validation
     const passwordCheck = z
       .string()
       .min(3, 'Password needs to be at least 3 characters long.')
@@ -53,60 +75,86 @@ export class SignUpPageComponent {
       //   'Password needs to have at least one special character (@$!%*?&)'
       // )
       .safeParse(this.signupObj.Password);
+      
     if (!passwordCheck.success) {
-      //alert(passwordCheck.error.errors.map((e) => e.message).join('\n'));
+      this.showToast(
+        passwordCheck.error.errors.map((e) => e.message).join('. '), 
+        'warning'
+      );
       return;
     }
-    // Check if the email is already taken
-
-    const request = await fetch('http://localhost:3000/auth/signup', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        username: this.signupObj.Username,
-        email: this.signupObj.EmailId,
-        password: this.signupObj.Password,
-      }),
-    });
-
-    if(request.ok) {
-      const data = await request.json();
-      this.authService.login(data.user.email, data.user.username, data.token);
-      this.router.navigate(['/bookshelf']).then(() => {
-        window.location.reload();
+    
+    try {
+      const request = await fetch('http://localhost:3000/auth/signup', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          username: this.signupObj.Username,
+          email: this.signupObj.EmailId,
+          password: this.signupObj.Password,
+        }),
       });
-    } else {
-      const data = await request.json();
-      //alert(data.message);
+
+      if(request.ok) {
+        const data = await request.json();
+        this.authService.login(data.user.email, data.user.username, data.token);
+        
+        this.showToast('Account created successfully!', 'success');
+        setTimeout(() => {
+          this.router.navigate(['/bookshelf']).then(() => {
+            window.location.reload();
+          });
+        }, 1000);
+      } else {
+        const data = await request.json();
+        this.handleSignupError(data, request.status);
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      this.showToast('Connection error. Please try again later.', 'error');
     }
-
-    // const emailExists = this.users.some(
-    //   (user) => user.EmailId === this.signupObj.EmailId
-    // );
-
-    // if (emailExists) {
-    //   alert('This email is already registered. Try logging in.');
-    //   return;
-    // }
-
-    // // Add the new user
-    // this.users.push(this.signupObj);
-
-    // // Save users back to JSON (simulation, real-world needs a backend)
-    // this.saveUsers();
-
-    // // Auto-login the user after signup
-    // this.authService.login(
-    //   this.signupObj.EmailId,
-    //   this.signupObj.Username,
-    //   'TODOTOKEN'
-    // );
-    // //alert("Sign Up Successful!");
-    // this.router.navigate(['/bookshelf']).then(() => {
-    //   window.location.reload();
-    // });
+  }
+  
+  // Handle specific signup errors
+  handleSignupError(data: any, statusCode: number) {
+    const message = data.message || 'An error occurred during signup';
+    
+    if (message.includes('email') && message.includes('exist')) {
+      this.showToast('This email address is already registered', 'error');
+    }
+    else if (message.includes('username') && message.includes('exist')) {
+      this.showToast('This username is already taken', 'error');
+    }
+    else if (statusCode === 400) {
+      this.showToast('Please check your information and try again', 'error');
+    }
+    else {
+      this.showToast(message, 'error');
+    }
+  }
+  
+  // Toast notification methods
+  showToast(message: string, type: 'success' | 'error' | 'warning' | 'info') {
+    // Clear any existing timeout
+    if (this.toast.timeout) {
+      clearTimeout(this.toast.timeout);
+    }
+    
+    // Set toast properties
+    this.toast.show = true;
+    this.toast.message = message;
+    this.toast.type = type;
+    
+    // Set timeout to hide toast
+    this.toast.timeout = setTimeout(() => {
+      this.hideToast();
+    }, type === 'error' ? 5000 : 3000); // Show errors longer
+  }
+  
+  hideToast() {
+    this.toast.show = false;
   }
 
   // Simulate saving users (real-world: use backend API)
