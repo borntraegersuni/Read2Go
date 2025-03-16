@@ -87,7 +87,7 @@ export class BookcardComponent implements OnInit, AfterViewInit {
         // Use the actual bookid from the book object
         await this.authService.sendReview(book.bookid, rating);
         console.log('Rating saved successfully');
-        alert('Your rated that book with ' + rating + ' stars');
+        //alert('Your rated that book with ' + rating + ' stars');
       } else {
         console.error('Book not found or bookid missing');
       }

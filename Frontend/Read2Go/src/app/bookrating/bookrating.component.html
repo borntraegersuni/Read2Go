@@ -22,3 +22,15 @@
         </form>
     </div>
 </div>
+
+<!-- Toast notification -->
+<div class="toast" [ngClass]="{'show': toast.show, 'toast-success': toast.type === 'success', 'toast-error': toast.type === 'error', 'toast-warning': toast.type === 'warning', 'toast-info': toast.type === 'info'}">
+  <div class="toast-content">
+    <span class="toast-icon" *ngIf="toast.type === 'success'">✓</span>
+    <span class="toast-icon" *ngIf="toast.type === 'error'">✗</span>
+    <span class="toast-icon" *ngIf="toast.type === 'warning'">⚠</span>
+    <span class="toast-icon" *ngIf="toast.type === 'info'">ℹ</span>
+    <span class="toast-message">{{ toast.message }}</span>
+  </div>
+  <button class="toast-close" (click)="hideToast()">×</button>
+</div>
