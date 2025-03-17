@@ -3,8 +3,10 @@
     gap: 8px;
     margin-top: 2vh; /* Adjust the value as needed */
 }
+
 .bottom {
     margin-bottom: 2vh;
+    font-family: 'Bookerly';
 }
 .no-books-warning {
     grid-column: 1 / -1; /* Span all columns */
@@ -20,6 +22,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: min(100%, 1000px); /* More responsive width */
     max-width: 100%; /* Ensure it doesn't overflow */
+    font-family: 'Bookerly';
 }
 
 .no-books-warning img {

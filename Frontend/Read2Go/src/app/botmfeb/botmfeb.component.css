@@ -75,6 +75,7 @@ h1 {
 .description {
     line-height: 1.5;
     margin-bottom: 15px; /* Space between description and button */
+    font-family: 'Bookerly';
 }
 
 .read-more {
@@ -87,6 +88,7 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: 'Bookerly';
 }
 
 .read-more:hover {
@@ -132,18 +134,6 @@ h1 {
     text-decoration: none;
 }
 
-p {
-    font-family: 'Bookerly';
-}
-
-h3 {
-    font-family: 'Bookerly';
-}
-
-h1 {
-    font-family: 'Bookerly';
-}
-
 /* Responsive breakpoints - simplified to match botmjan more closely */
 @media (max-width: 768px) {
     .content {
@@ -180,4 +170,8 @@ h1 {
     .book-image img {
         width: 130px; /* Slightly smaller on very small screens */
     }
+}
+
+button{
+    font-family: 'Bookerly';
 }
