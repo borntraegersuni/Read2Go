@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 20px;
+    font-family: 'Bookerly';
 }
 .container {
     display: flex;
@@ -30,6 +30,7 @@ body {
 }
 .form-group {
     margin-bottom: 15px;
+    font-family: 'Bookerly';
 }
 .form-group label {
     display: block;
@@ -39,6 +40,7 @@ body {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
+    font-family: 'Bookerly';
 }
 .form-group button {
     padding: 10px 15px;
@@ -47,13 +49,13 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-family: 'Times New Roman', Times, serif;
     font-size: 14px;
+    font-family: 'Bookerly';
 }
 .form-group button.delete {
     background-color: #e05555;
-    font-family: 'Times New Roman', Times, serif;
     font-size: 14px;
+    font-family: 'Bookerly';
 }
 
 @media screen and (max-width: 767px) {

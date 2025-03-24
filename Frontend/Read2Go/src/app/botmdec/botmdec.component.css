@@ -75,6 +75,7 @@ h1 {
 .description {
     line-height: 1.5;
     margin-bottom: 15px; /* Space between description and button */
+    font-family: 'Bookerly';
 }
 
 .read-more {

@@ -1,5 +1,5 @@
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Bookerly';
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -80,6 +80,7 @@ a:hover {
     font-size: 1.2rem;
     font-weight: bolder;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    font-family: 'Bookerly';
 }
 
 .reading-view img:hover {

@@ -16,7 +16,25 @@ app-root {
     flex-direction: column;
     min-height: 100vh;
 }
+p {
+    font-family: 'Bookerly';
+}
 
+h1{
+    font-family: 'PerfectlyVintage'; 
+    font-weight: 599;
+}
+h2{
+    font-family: 'PerfectlyVintage';
+    font-weight: 599; 
+}
+h3{
+    font-family: 'PerfectlyVintage'; 
+    font-weight: 599;
+}
+button{
+    font-family: 'Bookerly';
+}
 /* This is your main content wrapper */
 .content-container {
     flex: 1 0 auto; /* This allows the container to grow but not shrink */
