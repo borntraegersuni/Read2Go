@@ -1,6 +1,7 @@
 .search-container {
     display: flex;
     justify-content: center;
+    
 }
 
 .search-input {
@@ -10,6 +11,7 @@
     border-radius: 1rem;
     outline: none;
     transition: border-color 0.3s;
+    font-family: 'Bookerly';
     /*font-family: 'Times New Roman', Times, serif;*/
     width: 100%;
     max-width: 600px;

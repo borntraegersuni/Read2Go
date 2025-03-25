@@ -7,15 +7,16 @@
   align-items: center;
   justify-content: center;
   max-width: 250px;
-  margin-left: auto; /* This pushes it to the right */
-  float: right; /* Additional alignment to ensure it's far right */
+  margin-left: auto;
+  float: right;
+  font-family: 'Bookerly';
 }
 
-/* Style for when user is logged out - just the button */
 .auth-container.logged-out {
   padding: 0;
   background-color: transparent;
   box-shadow: none;
+  font-family: 'Bookerly';
 }
 
 .corner {
@@ -23,14 +24,15 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  gap: 5px; /* Minimal gap between text and button */
+  gap: 5px;
+  font-family: 'Bookerly';
 }
 
 .corner span {
   font-size: 1.1rem;
   font-weight: bold;
-  white-space: nowrap; /* Prevent wrapping */
-  margin: 0; /* Remove all margins */
+  white-space: nowrap;
+  margin: 0;
 }
 
 .auth-button {
@@ -40,13 +42,12 @@
   padding: 0.6rem 1.2rem;
   border-radius: 1rem;
   cursor: pointer;
-  /*font-family: 'Times New Roman', Times, serif;*/
   font-weight: 500;
   transition: background-color 0.3s ease, transform 0.2s ease;
   text-decoration: none;
   display: inline-block;
   text-align: center;
-  margin: 0; /* Remove margins */
+  margin: 0;
   margin-left: 10px;
 }
 
@@ -55,7 +56,6 @@
   transform: scale(1.05);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .auth-container {
     padding: 0.8vh 1.5vh;
@@ -65,7 +65,7 @@
   .corner {
     flex-direction: row;
     align-items: center;
-    gap: 3px; /* Even smaller gap on mobile */
+    gap: 3px;
   }
   
   .auth-button {
@@ -75,7 +75,6 @@
   }
 }
 
-/* Hide greeting text on smaller screens */
 @media (max-width: 576px) {
   .auth-container {
     background-color: transparent;
@@ -85,10 +84,10 @@
   }
   
   .corner span {
-    display: none; /* Hide the greeting text */
+    display: none;
   }
   
   .auth-button {
-    margin-left: 0; /* Remove left margin when greeting is hidden */
+    margin-left: 0;
   }
 }

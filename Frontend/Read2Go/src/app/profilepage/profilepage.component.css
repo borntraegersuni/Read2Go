@@ -5,7 +5,7 @@ body {
 .container {
     display: flex;
     max-width: 800px;
-    margin: 20px auto; /* Center horizontally */
+    margin: 20px auto; 
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -26,7 +26,7 @@ body {
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
-    border: 5px solid #919191; /* Added border */
+    border: 5px solid #919191; 
 }
 .form-group {
     margin-bottom: 15px;
@@ -44,7 +44,7 @@ body {
 }
 .form-group button {
     padding: 10px 15px;
-    background-color: #cfa3d9;
+    background-color: #a55bb8;
     color: white;
     border: none;
     border-radius: 5px;
@@ -52,10 +52,17 @@ body {
     font-size: 14px;
     font-family: 'Bookerly';
 }
+.form-group button:hover {
+  background-color: #7e3a91;
+  transform: scale(1.05);
+}
 .form-group button.delete {
     background-color: #e05555;
     font-size: 14px;
     font-family: 'Bookerly';
+}
+.form-group button.delete:hover {
+  background-color: #cb4e4e;
 }
 
 @media screen and (max-width: 767px) {
@@ -73,7 +80,6 @@ body {
     }
 }
 
-/* Modal Styles - Only adding this new section */
 .modal {
   display: block;
   position: fixed;
@@ -155,6 +161,7 @@ body {
 
 .cancel-btn:hover {
   background-color: #5a6268;
+  transform: scale(1.05);
 }
 
 .confirm-delete-btn {
@@ -169,6 +176,7 @@ body {
 
 .confirm-delete-btn:hover {
   background-color: #c9302c;
+  transform: scale(1.05);
 }
 
 .error-message {
@@ -180,9 +188,6 @@ body {
   border-radius: 5px;
 }
 
-/* Add these styles to your existing CSS - keep your existing CSS intact */
-
-/* Field error styles */
 .field-error {
     color: #d9534f;
     font-size: 0.85rem;
@@ -199,7 +204,6 @@ body {
     border-radius: 5px;
   }
   
-  /* Toast notification */
   .toast {
     position: fixed;
     bottom: 20px;
@@ -274,7 +278,6 @@ body {
     background-color: #17a2b8;
   }
   
-  /* Make form inputs look better with error state */
   .form-group input.ng-invalid.ng-touched {
     border: 1px solid #dc3545;
   }

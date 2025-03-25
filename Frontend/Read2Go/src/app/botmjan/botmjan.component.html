@@ -4,9 +4,9 @@
     </div>
     <div class="content">
         <div class="left">
-            <a href="BuchBeschreibung.html" class="book-image">
+            <div class="book-image">
                 <img [src]="bookImage" alt="Buch Bild">
-            </a>
+            </div>
             <div class="rating">
                 <div class="stars">
                     <span *ngFor="let star of [].constructor(5); let i = index" 
@@ -49,4 +49,3 @@
             <p>Book #1 Fourth Wing<br>Book #2 Iron Flame<br>Book #3 Onyx Storm</p>
         </div>
     </div>
-</div>

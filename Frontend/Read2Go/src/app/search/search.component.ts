@@ -70,15 +70,15 @@ queryParams: Params = {};
       this.filter = this.queryParams['filter'];
       if (this.filter == 'author') {
         this.books = this.books
-          .sort((a, b) => a.author.localeCompare(b.title))
+          .sort((a, b) => a.author.localeCompare(b.author))
           .filter((b) =>
             b.author.toLowerCase().startsWith(this.search?.toLowerCase() || '')
           );
       } else if (this.filter == 'genre') {
         this.books = this.books
-          .sort((a, b) => a.genre.localeCompare(b.title))
+          .sort((a, b) => a.genre.localeCompare(b.genre))
           .filter((b) =>
-            b.genre.toLowerCase().startsWith(this.search?.toLowerCase() || '')
+            b.genre.toLowerCase().includes(this.search?.toLowerCase() || '')
           );
       } else if (this.filter == 'title' || this.filter == 'rating') {
         this.books = this.books

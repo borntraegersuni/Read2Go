@@ -67,3 +67,47 @@ app-footer {
     font-family: 'PerfectlyVintage';
     src: url('./assets/fonts/Perfectly Vintages Font by Keithzo.otf') format('opentype');
 }
+
+.toast {
+    font-family: 'Bookerly';
+  }
+  
+  .toast.show {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-content {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-icon {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-message {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-close {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-close:hover {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-success {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-error {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-warning {
+    font-family: 'Bookerly';
+  }
+  
+  .toast-info {
+    font-family: 'Bookerly';
+}

@@ -23,12 +23,14 @@
     flex-grow: 1;
 }
 .book-title {
+    font-family: 'PerfectlyVintage';
     font-size: 2em;
-    font-weight: bold;
+    font-weight: 599;
 }
 .book-author {
     font-size: 1.5em;
     color: gray;
+    font-family: 'Bookerly';
 }
 .rating-container {
     height: fit-content;

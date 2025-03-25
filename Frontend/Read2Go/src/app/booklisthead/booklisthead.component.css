@@ -4,8 +4,10 @@
     justify-content: center;
     align-items: center;
     margin-top: 2vh;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     margin-bottom: -1.5vh;
+    font-family: 'Bookerly';
+
 }
 input[type="checkbox"] {
     display: none;

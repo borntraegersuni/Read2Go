@@ -1,41 +1,41 @@
 .container {
     width: 95%;
     max-width: 1200px;
-    min-width: 320px; /* Maintain minimum width on small screens */
+    min-width: 320px; 
     margin: 1rem auto;
     background: lightgray;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Include padding in width calculation */
+    box-sizing: border-box;
     overflow: hidden;
 }
 
 .header {
-    width: 100%; /* Takes up the entire width of the container */
-    text-align: left; /* Aligns the heading to the left */
-    margin-bottom: 15px; /* Space below the heading */
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
 }
 
 h1 {
     color: black;
-    margin: 0; /* Removes default margin */
-    font-size: 24px; /* Match botmjan size */
+    margin: 0;
+    font-size: 24px;
 }
 
 .content {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start;
 }
 
 .left {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the book image and stars */
+    align-items: center;
 }
 
 .book-image img {
-    width: 150px; /* Fixed width like botmjan */
+    width: 150px;
     height: auto;
     border-radius: 4px;
 }
@@ -43,8 +43,8 @@ h1 {
 .rating {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the star rating */
-    margin-top: 10px; /* Space between book cover and star rating */
+    align-items: center;
+    margin-top: 10px;
 }
 
 .stars {
@@ -53,15 +53,15 @@ h1 {
 
 .star {
     font-size: 20px;
-    color: gray; /* Default color for stars */
+    color: gray;
 }
 
 .gold {
-    color: gold; /* Gold color for filled stars */
+    color: gold;
 }
 
 .gray {
-    color: gray; /* Gray for empty stars */
+    color: gray;
 }
 
 .average {
@@ -69,20 +69,20 @@ h1 {
 }
 
 .right {
-    margin-left: 20px; /* Space between the two divs */
+    margin-left: 20px;
 }
 
 .description {
     line-height: 1.5;
-    margin-bottom: 15px; /* Space between description and button */
+    margin-bottom: 15px;
     font-family: 'Bookerly';
 }
 
 .read-more {
     display: inline-block;
     text-align: center;
-    padding: 5px 10px; /* Smaller padding like botmjan */
-    background-color: #a55bb8; /* Purple */
+    padding: 5px 10px;
+    background-color: #a55bb8;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -91,21 +91,21 @@ h1 {
 }
 
 .read-more:hover {
-    background-color: #7f478d; /* Darker purple on hover */
+    background-color: #7f478d;
 }
 
 .modal {
     display: flex;
-    justify-content: center; /* Centers the modal horizontally */
-    align-items: center; /* Centers the modal vertically */
+    justify-content: center;
+    align-items: center;
     position: fixed;
-    z-index: 1000; /* Above other content */
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; /* Full screen width */
-    height: 100%; /* Full screen height */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    overflow: auto; /* Allows scrolling if necessary */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
 }
 
 .modal-content {
@@ -114,9 +114,9 @@ h1 {
     padding: 20px;
     border: 3px solid #a55bb8;
     border-radius: 10px;
-    width: clamp(15rem, 700px, 50vw); /* Match botmjan width */
-    max-height: 80%; /* Maximum height of the modal */
-    overflow-y: auto; /* Enables vertical scrolling if needed */
+    width: clamp(15rem, 700px, 50vw);
+    max-height: 80%;
+    overflow-y: auto;
 }
 
 .close {
@@ -133,26 +133,25 @@ h1 {
     text-decoration: none;
 }
 
-/* Responsive breakpoints - simplified to match botmjan more closely */
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
-        align-items: center; /* Center content on smaller screens */
+        align-items: center;
     }
     
     .left {
         margin-bottom: 15px;
-        align-items: center; /* Ensure left content is centered */
+        align-items: center;
     }
     
     .right {
         margin-left: 0;
-        text-align: center; /* Center text content */
-        width: 100%; /* Take full width to allow proper centering */
+        text-align: center;
+        width: 100%;
     }
     
     .header {
-        text-align: center; /* Center the header text like 'Jan '25 Pick' */
+        text-align: center;
     }
     
     .modal-content {
@@ -167,6 +166,6 @@ h1 {
     }
     
     .book-image img {
-        width: 130px; /* Slightly smaller on very small screens */
+        width: 130px;
     }
 }

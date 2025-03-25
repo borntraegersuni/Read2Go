@@ -42,8 +42,6 @@ export class AppModule implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
-
-
     // Example program run. Use command "rm -f db.sqlite && npm run start" to run with a clean database
     //await this.userService.delete(3)
     // const user = new User();
@@ -319,7 +317,47 @@ export class AppModule implements OnModuleInit {
 //       genre: 'Romance',
 //       description: 'The American Roommate Experiment is a delightful rom-com by Elena Armas that follows Rosie Graham who has just quit her job to pursue her secret career as a romance writer but faces writer\'s block and a crumbling apartment ceiling. When she unexpectedly ends up sharing an apartment with Lucas Martín the man she has been secretly crushing on he proposes a series of experimental dates to inspire her writing. As they navigate their forced proximity and growing attraction Rosie must confront her feelings before Lucas\'s time in New York runs out.',
 //       coverImageUrl: './amaricanroommate.jpeg',
-//     })
+// //     })
+// this.bookService.addBook({
+//   title: 'The Universe In A Nutshell',
+//   author: 'Stephen Hawking',
+//   publishedYear: 2001,
+//   isbn: '9780593048153',
+//   genre: 'Science',
+//   description: 'Hawking aims to provide a comprehensive overview of the universe, from its origins and evolution to its possible future. The book delves into various complex concepts such as quantum mechanics, general relativity, black holes, and the nature of time.',
+//   coverImageUrl: './tuian.jpg',
+//   }),
+ 
+//  this.bookService.addBook({
+//  title: 'Promise Me, Dad',
+//  author: 'Joe Biden',
+//  publishedYear: 2017,
+//  isbn: '9781250171696',
+//  genre: ' Memoir',
+//  description: 'In November 2014, thirteen members of the Biden family gathered on Nantucket for Thanksgiving, a tradition they had been celebrating for the past forty years; it was the one constant in what had become a hectic, scrutinized, and overscheduled life. The Thanksgiving holiday was a much-needed respite, a time to connect, a time to reflect on what the year had brought, and what the future might hold. But this year felt different from all those that had come before. Joe and Jill Biden’s eldest son, Beau, had been diagnosed with a malignant brain tumor fifteen months earlier, and his survival was uncertain. “Promise me, Dad,” Beau had told his father. “Give me your word that no matter what happens, you\’re going to be all right.” Joe Biden gave him his word.',
+//  coverImageUrl: './promisemedad.jpeg',
+//  }),
+ 
+//  this.bookService.addBook({
+//  title: 'Generic MY Book Cover Secrets in a Silicon Valley Startup',
+//  author: 'Generic',
+//  publishedYear: 2004,
+//  isbn: '',
+//  genre: 'Memoir',
+//  description: 'How many times have you purchased a product based on its design? And have you gone to watch a movie by its poster? And have you bought a book by its cover? Of course you have! They say an image is worth a thousand words, and when it comes to choosing a novel, we opt for original book covers and those with surprising designs that attract our attention, even though the most crucial aspect is the content.',
+//  coverImageUrl: './examplecover.jpg',
+//  }),
+ 
+//  this.bookService.addBook({
+//  title: 'Harry Potter and the Philosopher\'s Stone',
+//  author: 'J. K. Rowling',
+//  publishedYear: 1997,
+//  isbn: '9781408855652',
+//  genre: 'Fantasy',
+//  description: 'Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry\'s eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin.',
+//  coverImageUrl: './hp1.jpg',
+//  })
+
 
 //     ]);
     
@@ -346,8 +384,8 @@ export class AppModule implements OnModuleInit {
 
 // console.log('All books have been added to user 1\'s reading list.');
 
-// //Delete books
-// for (let id = 84; id <= 93; id++) {
+//Delete books
+// for (let id = 1; id <= 8; id++) {
 //   try {
 //     await this.bookService.deleteBook(id);
 //     console.log(`Successfully deleted book with ID ${id}`);
