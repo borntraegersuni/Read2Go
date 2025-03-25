@@ -16,6 +16,18 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './bookoverview.component.html',
   styleUrl: './bookoverview.component.css',
 })
+
+/**
+ * Component for displaying detailed book information in an overview format.
+ * 
+ * This component receives book data via input properties and displays them
+ * in a comprehensive overview. It handles various book states (reading, finished, wishlist)
+ * and converts them to numeric status codes for internal processing.
+ * 
+ * The component is used to show detailed information about a book including its
+ * title, author, cover, rating, genre, description, and reading status.
+ */
+
 export class BookoverviewComponent {
   constructor(public authService: AuthService) {}
   @Input() title!: string;

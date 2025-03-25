@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { BookoverviewComponent } from '../bookoverview/bookoverview.component';
 import { AuthService } from '../services/auth.service';
 
+/**
+ * ReadcomponentComponent displays a list of books marked as 'finished' by the user.
+ * This component fetches user's finished books along with their details, displays them,
+ * and provides functionality to open and close book detail popups.
+ */
 @Component({
   selector: 'app-readcomponent',
   standalone: true,
@@ -28,15 +33,11 @@ export class ReadcomponentComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      // Get books marked as finished from the service
       const userBooks = await this.authService.getBooks('finished');
-      
-      // Get book details for each book
       const allBooks = await this.authService.getAllBooks();
       
       if (userBooks && userBooks.length > 0) {
         const processedBooks = userBooks.map(userBook => {
-          // Find the matching book in allBooks
           const bookDetails = allBooks.find(book => book.id === userBook.bookid);
           
           if (bookDetails) {
@@ -65,7 +66,6 @@ export class ReadcomponentComponent implements OnInit {
     }
   }
   
-  // Open the popup for a specific book
   openPopup(bookId: number) {
     console.log('Opening popup for book:', bookId);
     const popup = document.getElementById(`popup-${bookId}`);
@@ -76,12 +76,10 @@ export class ReadcomponentComponent implements OnInit {
     }
   }
   
-  // Close the popup
   closePopup(bookId: number) {
     const popup = document.getElementById(`popup-${bookId}`);
     if (popup) {
       popup.classList.remove('active');
-      // Check if data has changed to determine whether to reload
       const dataChanged = popup.getAttribute('data-changed') === 'true';
       if (dataChanged) {
         setTimeout(() => {

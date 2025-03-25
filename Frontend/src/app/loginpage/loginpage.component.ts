@@ -5,6 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
+/**
+ * Component for handling user login functionality.
+ * 
+ * Provides a login interface that authenticates users against the backend API,
+ * stores authentication tokens, and redirects to the bookshelf page upon
+ * successful login. Includes toast notifications for user feedback.
+ */
 
 @Component({
   selector: 'app-loginpage',
@@ -17,8 +24,7 @@ export class LoginpageComponent {
 
   loginObj: Login;
   users: Login[] = [];
-  
-  // Toast notification properties
+
   toast = {
     show: false,
     message: '',
@@ -28,14 +34,6 @@ export class LoginpageComponent {
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
     this.loginObj = new Login();
-    this.loadUsers();
-  }
-
-  // Load users from the local JSON file
-  loadUsers() {
-    this.http.get<Login[]>('./users.json').subscribe((data: any) => {
-      this.users = data.users;
-    });
   }
 
   async onLogin() {
@@ -56,7 +54,6 @@ export class LoginpageComponent {
         this.authService.login(data.user.email, data.user.username, data.token);
         this.showToast('Login successful!', 'success');
         
-        // Short delay to show the success message before navigating
         setTimeout(() => {
           this.router.navigate(['/bookshelf']).then(() => {
             window.location.reload();
@@ -74,22 +71,18 @@ export class LoginpageComponent {
     }
   }
   
-  // Toast notification methods
   showToast(message: string, type: 'success' | 'error' | 'warning' | 'info') {
-    // Clear any existing timeout
     if (this.toast.timeout) {
       clearTimeout(this.toast.timeout);
     }
     
-    // Set toast properties
     this.toast.show = true;
     this.toast.message = message;
     this.toast.type = type;
     
-    // Set timeout to hide toast
     this.toast.timeout = setTimeout(() => {
       this.hideToast();
-    }, type === 'error' ? 5000 : 3000); // Show errors longer
+    }, type === 'error' ? 5000 : 3000); 
   }
   
   hideToast() {

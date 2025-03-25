@@ -24,7 +24,6 @@
     height: 5px;
 }
 
-/* Responsive adjustments */
 @media screen and (max-width: 992px) {
     .banner {
         height: 350px;

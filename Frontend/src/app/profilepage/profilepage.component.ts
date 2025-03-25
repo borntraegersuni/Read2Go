@@ -4,6 +4,13 @@ import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+/**
+ * ProfilePageComponent provides user profile management functionality.
+ * It allows users to view and update their profile information (username, email),
+ * change their password, and delete their account. The component includes
+ * form validation, error handling, and toast notifications to provide
+ * feedback to users about their actions.
+ */
 @Component({
   selector: 'app-profilepage',
   standalone: true,
@@ -24,7 +31,6 @@ export class ProfilePageComponent implements OnInit {
   showDeleteModal = false;
   deleteError: string = '';
   
-  // Field-specific error messages
   fieldErrors = {
     username: '',
     email: '',
@@ -32,7 +38,6 @@ export class ProfilePageComponent implements OnInit {
     general: ''
   };
   
-  // Toast notifications
   toast = {
     show: false,
     message: '',
@@ -43,21 +48,18 @@ export class ProfilePageComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // Load the currently logged-in user from AuthService
     const currentUser = this.authService.getCurrentUser();
     if (currentUser) {
       this.user.username = currentUser.username;
       this.user.email = currentUser.email;
     } else {
-      this.router.navigate(['/login']); // Redirect to login if no user is found
+      this.router.navigate(['/login']);
     }
   }
 
   async saveChanges() {
-    // Reset all error messages
     this.resetErrors();
     
-    // Validate fields
     let hasErrors = false;
     
     if (!this.user.username) {
@@ -80,7 +82,6 @@ export class ProfilePageComponent implements OnInit {
       return;
     }
     
-    // Update user information
     try {
       if(await this.authService.updateUser(this.user)) {
         this.showToast('Profile updated successfully!', 'success');
@@ -135,22 +136,18 @@ export class ProfilePageComponent implements OnInit {
     }
   }
   
-  // Helper methods for toast notifications
   showToast(message: string, type: 'success' | 'error' | 'warning' | 'info') {
-    // Clear any existing timeout
     if (this.toast.timeout) {
       clearTimeout(this.toast.timeout);
     }
     
-    // Set toast properties
     this.toast.show = true;
     this.toast.message = message;
     this.toast.type = type;
     
-    // Set timeout to hide toast
     this.toast.timeout = setTimeout(() => {
       this.hideToast();
-    }, type === 'error' ? 5000 : 3000); // Show errors longer
+    }, type === 'error' ? 5000 : 3000);
   }
   
   hideToast() {

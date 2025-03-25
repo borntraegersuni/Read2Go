@@ -3,6 +3,12 @@ import { BooklistheadComponent } from "../booklisthead/booklisthead.component";
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+/**
+ * SearchheadComponent provides a filter/navigation interface for book listings.
+ * It allows users to filter books by categories (finished, wishlist, reading)
+ * and handles the URL query parameters to maintain state. The component also
+ * applies visual styling to indicate active category filters.
+ */
 @Component({
   selector: 'app-searchhead',
   imports: [CommonModule, BooklistheadComponent],

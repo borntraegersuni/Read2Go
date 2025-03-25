@@ -11,6 +11,16 @@ import { BooklistfilterComponent } from '../booklistfilter/booklistfilter.compon
   templateUrl: './booklisthead.component.html',
   styleUrl: './booklisthead.component.css',
 })
+/**
+ * Component for displaying the header of a book list with filtering capabilities
+ * 
+ * @method ngOnInit - Lifecycle hook that initializes category styles
+ * @method onCategoryClick - Handles clicks on category filters
+ * @method updateCategoryStyles - Updates the styles of category elements based on selection
+ * @method resetCategoryStyles - Resets the styles of all category elements
+ * @method applyCategoryStyles - Applies highlight styles to the selected category
+ */
+
 export class BooklistheadComponent {
   @Input() books!: {
     id: number;
@@ -75,7 +85,6 @@ export class BooklistheadComponent {
   }
 
   private applyCategoryStyles(category: string): void {
-    // Use setTimeout to ensure the DOM is ready
     setTimeout(() => {
       const element = document.getElementById(category) as HTMLLabelElement;
       if (element) {

@@ -15,8 +15,8 @@ export class BookcardComponent implements OnInit, AfterViewInit {
   @Input() coverUrl!: string;
   @Input() link!: string;
   @Input() author!: string;
-  @Input() rating!: number; // This will now always be the average rating
-  @Input() userRating: number = 0; // New property for user's personal rating
+  @Input() rating!: number; // Average rating
+  @Input() userRating: number = 0; // User's personal rating
   @Input() bookId!: number;
   @Input() genre!: string;
   @Input() description!: string;
@@ -50,7 +50,7 @@ export class BookcardComponent implements OnInit, AfterViewInit {
         
         // Always update the display with the average rating from all users
         if (book) {
-          // Update cover URL if it exists in the backend
+          // Update cover URL 
           this.coverUrl = book.image && book.image !== '' 
             ? book.image 
             : this.coverUrl || './examplecover.jpg';
@@ -84,19 +84,19 @@ export class BookcardComponent implements OnInit, AfterViewInit {
     try {
       let bookId = this.bookId;
       
-      // If we're on the search page, we need to ensure the book is in the user's library
+      
       if (this.isSearchPage) {
-        // First check if the book is already in user's library
+        // Check if the book is already in user's library
         const userBooks = await this.authService.getBooks('');
         const existingBook = userBooks.find(b => b.bookid === this.bookId);
         
         if (!existingBook) {
-          // Book isn't in user's library yet, so add it first with "read/finished" status (3)
-          await this.authService.sendBookStatus(this.bookId, 3); // Using 3 to represent 'finished/read' status
+          // If not: add it first with "read/finished" status (3)
+          await this.authService.sendBookStatus(this.bookId, 3); 
           console.log('Book added to library with "read" status for rating');
         }
       } else {
-        // Always set book to "read" status when rating it, even if it's already in library
+        // Always set book to "read" status when rating it
         await this.authService.sendBookStatus(this.bookId, 3);
         console.log('Book status updated to "read"');
       }
@@ -146,7 +146,6 @@ export class BookcardComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    // Remove any existing event listeners before adding new ones
     const newViewMore = viewMore.cloneNode(true);
     viewMore.parentNode?.replaceChild(newViewMore, viewMore);
 
@@ -164,10 +163,9 @@ export class BookcardComponent implements OnInit, AfterViewInit {
       return;
     }
     popup.classList.remove('active');
-    // Reload the page after the popup is closed to refresh data
     setTimeout(() => {
       window.location.reload();
-    }, 300); // Small delay to allow the animation to complete
+    }, 300); 
   }
 
   openPopup() {

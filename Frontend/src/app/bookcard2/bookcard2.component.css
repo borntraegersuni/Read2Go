@@ -1,8 +1,8 @@
 .container {
     display: grid;
     grid-template-columns: 12rem 3fr;
-    gap: 1rem; /* Add some space between columns */
-    align-items: start; /* Align items at the top */
+    gap: 1rem;
+    align-items: start;
     max-width: 50rem;
     margin: auto;
     background: white;
@@ -14,14 +14,14 @@
     width: 10rem;
     height: auto;
     object-fit: cover;
-    align-self: center; /* Center the book cover within its column */
+    align-self: center;
     align-items: center;
 }
 
 .bookinfos {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align text at the top */
+    justify-content: flex-start;
     height: 100%;
     align-items: flex-start;
     padding: 0;
@@ -29,7 +29,7 @@
 }
 
 .bookinfos h1 {
-    margin: 0; /* Remove any extra spacing above and below */
+    margin: 0;
 }
 
 .bookinfos h2 {
@@ -38,12 +38,12 @@
 }
 
 .bookinfos p {
-    margin: 0 0 0.2rem 0; /* Remove extra margins */
+    margin: 0 0 0.2rem 0;
 }
 
 .bookmark {
     display: flex;
-    align-items: flex-start; /* Align bookmark next to the book details */
+    align-items: flex-start;
     justify-content: flex-start;
     margin: 0;
     padding: 0;
@@ -67,12 +67,12 @@
         max-width: 100%;
     }
     .bookinfos {
-        grid-column: 1 / span 2; /* Make the book details span both columns */
-        grid-row: 2; /* Move the book details to the second row */
+        grid-column: 1 / span 2;
+        grid-row: 2;
     }
     
     .bookmark {
-        grid-column: 2; /* Move the bookmark next to the book cover */
+        grid-column: 2;
         grid-row: 1;
         align-self: center;
     }

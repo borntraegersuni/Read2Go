@@ -3,6 +3,12 @@ import { CommonModule } from '@angular/common';
 import { BookoverviewComponent } from '../bookoverview/bookoverview.component';
 import { AuthService } from '../services/auth.service';
 
+/**
+ * ReadingcomponentComponent displays a list of books that the user has marked as "reading".
+ * It fetches the user's reading list and corresponding book details from the AuthService,
+ * and provides functionality to open and close popups for each book. The component tracks
+ * changes made in the popup and can trigger a page reload when necessary.
+ */
 @Component({
   selector: 'app-readingcomponent',
   standalone: true,
@@ -28,15 +34,12 @@ export class ReadingcomponentComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      // Get books marked as reading from the service
       const userBooks = await this.authService.getBooks('reading');
       
-      // Get book details for each book
       const allBooks = await this.authService.getAllBooks();
       
       if (userBooks && userBooks.length > 0) {
         const processedBooks = userBooks.map(userBook => {
-          // Find the matching book in allBooks
           const bookDetails = allBooks.find(book => book.id === userBook.bookid);
           
           if (bookDetails) {
@@ -65,7 +68,6 @@ export class ReadingcomponentComponent implements OnInit {
     }
   }
   
-  // Open the popup for a specific book
   openPopup(bookId: number) {
     console.log('Opening popup for book:', bookId);
     const popup = document.getElementById(`popup-${bookId}`);
@@ -76,12 +78,10 @@ export class ReadingcomponentComponent implements OnInit {
     }
   }
   
-  // Close the popup
   closePopup(bookId: number) {
     const popup = document.getElementById(`popup-${bookId}`);
     if (popup) {
       popup.classList.remove('active');
-      // Check if data has changed to determine whether to reload
       const dataChanged = popup.getAttribute('data-changed') === 'true';
       if (dataChanged) {
         setTimeout(() => {

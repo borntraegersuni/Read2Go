@@ -51,6 +51,18 @@ export class BooklistComponent implements OnInit {
 
   update(category: string): void {}
 
+  /**
+   * Initializes component on load by:
+   * 1. Fetching all books and user's books from authentication service
+   * 2. Mapping API data to component's book model
+   * 3. Storing books in local storage
+   * 4. Applying filters based on URL query parameters:
+   *    - category: Filters by book state
+   *    - filter: Sorts by author, genre, title, or rating
+   *    - search: Filters by search term
+   *    - direction: Controls sort order
+   * @returns Promise that resolves when initialization is complete
+   */
   async ngOnInit(): Promise<void> {
     console.log("fetching books");
     const allBooks = await this.authService.getAllBooks();
@@ -60,7 +72,7 @@ export class BooklistComponent implements OnInit {
       genre: b.genre,
       id: b.id,
       title: b.title,
-      coverUrl: b.image, // Assuming 'image' is the correct field for coverUrl
+      coverUrl: b.image,
       link: b.title.replaceAll(' ', '+').toLowerCase(),
       state: b.state,
       author: b.author,

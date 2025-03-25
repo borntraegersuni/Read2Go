@@ -12,10 +12,9 @@
     outline: none;
     transition: border-color 0.3s;
     font-family: 'Bookerly';
-    /*font-family: 'Times New Roman', Times, serif;*/
     width: 100%;
     max-width: 600px;
-    height: 2rem; /* Adjusted height to match the filter input */
+    height: 2rem; 
 }
 
 @media (max-width: 768px) {

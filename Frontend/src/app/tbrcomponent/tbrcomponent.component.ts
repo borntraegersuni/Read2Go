@@ -3,6 +3,12 @@ import { CommonModule } from '@angular/common';
 import { BookoverviewComponent } from '../bookoverview/bookoverview.component';
 import { AuthService } from '../services/auth.service';
 
+/**
+ * Component that manages and displays the user's "To Be Read" (TBR) book list.
+ * Fetches books marked as wishlist from the user's library, combines them with
+ * complete book details, and provides functionality to view detailed information
+ * through interactive popups.
+ */
 @Component({
   selector: 'app-tbrcomponent',
   standalone: true,
@@ -28,15 +34,11 @@ export class TbrcomponentComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      // Get books marked as wishlist from the service
       const userBooks = await this.authService.getBooks('wishlist');
-      
-      // Get book details for each book
       const allBooks = await this.authService.getAllBooks();
       
       if (userBooks && userBooks.length > 0) {
         const processedBooks = userBooks.map(userBook => {
-          // Find the matching book in allBooks
           const bookDetails = allBooks.find(book => book.id === userBook.bookid);
           
           if (bookDetails) {
@@ -64,10 +66,8 @@ export class TbrcomponentComponent implements OnInit {
       this.books = [];
     }
   }
-  
-  // Open the popup for a specific book
+
   openPopup(bookId: number) {
-    console.log('Opening popup for book:', bookId);
     const popup = document.getElementById(`popup-${bookId}`);
     if (popup) {
       popup.classList.add('active');
@@ -75,13 +75,11 @@ export class TbrcomponentComponent implements OnInit {
       console.error(`Popup for book ${bookId} not found`);
     }
   }
-  
-  // Close the popup
+
   closePopup(bookId: number) {
     const popup = document.getElementById(`popup-${bookId}`);
     if (popup) {
       popup.classList.remove('active');
-      // Check if data has changed to determine whether to reload
       const dataChanged = popup.getAttribute('data-changed') === 'true';
       if (dataChanged) {
         setTimeout(() => {

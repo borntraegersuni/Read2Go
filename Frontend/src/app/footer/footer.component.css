@@ -6,7 +6,6 @@ body{
     max-width: 1900px;
 }
 
-/* This applies to the main document body */
 :host {
     display: block;
     width: 100%;

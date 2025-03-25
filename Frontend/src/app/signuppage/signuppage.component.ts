@@ -6,6 +6,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { z } from 'zod';
 
+/**
+ * SignUpPageComponent handles user registration functionality for the application.
+ * It manages the signup form validation using Zod schema validation, communicates with 
+ * the backend server to create new user accounts, handles various error scenarios,
+ * and provides user feedback through toast notifications. Upon successful signup,
+ * the user is automatically logged in and redirected to the bookshelf page.
+ */
 @Component({
   selector: 'app-signuppage',
   standalone: true,
@@ -17,7 +24,6 @@ export class SignUpPageComponent {
   signupObj: Signup;
   users: Signup[] = [];
   
-  // Toast notification properties
   toast = {
     show: false,
     message: '',
@@ -34,7 +40,6 @@ export class SignUpPageComponent {
     this.loadUsers();
   }
 
-  // Load existing users from users.json
   loadUsers() {
     this.http.get<{ users: Signup[] }>('./users.json').subscribe((data) => {
       this.users = data.users;
@@ -42,25 +47,21 @@ export class SignUpPageComponent {
   }
 
   async onSignUp() {
-    // Check if username is set
     if (!this.signupObj.Username || this.signupObj.Username.trim() === '') {
       this.showToast('Please enter a username', 'warning');
       return;
     }
 
-    // Validate username length
     if (this.signupObj.Username.length < 3 || this.signupObj.Username.length > 20) {
       this.showToast('Username must be between 3 and 20 characters', 'warning');
       return;
     }
 
-    // Validate email
     if (!z.string().email().safeParse(this.signupObj.EmailId).success) {
       this.showToast('Please enter a valid email address', 'warning');
       return;
     }
 
-    // Password validation
     const passwordCheck = z
       .string()
       .min(3, 'Password needs to be at least 3 characters long.')
@@ -117,7 +118,6 @@ export class SignUpPageComponent {
     }
   }
   
-  // Handle specific signup errors
   handleSignupError(data: any, statusCode: number) {
     const message = data.message || 'An error occurred during signup';
     
@@ -135,29 +135,24 @@ export class SignUpPageComponent {
     }
   }
   
-  // Toast notification methods
   showToast(message: string, type: 'success' | 'error' | 'warning' | 'info') {
-    // Clear any existing timeout
     if (this.toast.timeout) {
       clearTimeout(this.toast.timeout);
     }
     
-    // Set toast properties
     this.toast.show = true;
     this.toast.message = message;
     this.toast.type = type;
     
-    // Set timeout to hide toast
     this.toast.timeout = setTimeout(() => {
       this.hideToast();
-    }, type === 'error' ? 5000 : 3000); // Show errors longer
+    }, type === 'error' ? 5000 : 3000);
   }
   
   hideToast() {
     this.toast.show = false;
   }
 
-  // Simulate saving users (real-world: use backend API)
   saveUsers() {
     console.log('Users saved:', JSON.stringify({ users: this.users }, null, 2));
   }

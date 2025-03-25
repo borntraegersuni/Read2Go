@@ -1,6 +1,6 @@
 app-booklisthead {
     display: block;
-    margin-bottom: 2vh; /* Adjust the value as needed */
+    margin-bottom: 2vh;
 }
 
 hr {
@@ -11,7 +11,7 @@ hr {
 
 app-booklistbody {
     display: block;
-    margin-top: -3vh; /* Adjust the value as needed */
+    margin-top: -3vh;
 }
 
 .container {
@@ -24,7 +24,6 @@ app-booklistbody {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Media query for smaller screens */
 @media (max-width: 768px) {
     .container {
         width: 90%;

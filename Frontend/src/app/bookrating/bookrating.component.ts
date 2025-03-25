@@ -8,6 +8,19 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./bookrating.component.css'],
   imports: [CommonModule],
 })
+
+/**
+ * Component for handling book ratings and reviews.
+ * 
+ * This component allows users to:
+ * - Rate books on a 5-star scale
+ * - Submit written reviews for books
+ * - View their previously submitted ratings and reviews
+ * 
+ * The component displays toast notifications to provide feedback on user actions
+ * and manages the API interactions with the AuthService to persist ratings and reviews.
+ */
+
 export class BookratingComponent {
   constructor(
     private renderer: Renderer2,
@@ -20,7 +33,6 @@ export class BookratingComponent {
   stars = [1, 2, 3, 4, 5];
   review = '';
 
-  // Toast notification properties
   toast = {
     show: false,
     message: '',
@@ -84,25 +96,21 @@ export class BookratingComponent {
     }
   }
 
-  // Toast notification methods
   showToast(message: string, type: 'success' | 'error' | 'warning' | 'info') {
-    // Clear any existing timeout
     if (this.toast.timeout) {
       clearTimeout(this.toast.timeout);
     }
 
-    // Set toast properties
     this.toast.show = true;
     this.toast.message = message;
     this.toast.type = type;
 
-    // Set timeout to hide toast
     this.toast.timeout = setTimeout(
       () => {
         this.hideToast();
       },
       type === 'error' ? 5000 : 3000
-    ); // Show errors longer
+    ); 
   }
 
   hideToast() {

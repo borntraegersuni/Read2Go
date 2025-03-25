@@ -168,7 +168,6 @@ button:hover {
     background-color: #17a2b8;
 }
 
-/* Make form inputs look better with error state */
 .form-group input.ng-invalid.ng-touched {
     border: 1px solid #dc3545;
 }

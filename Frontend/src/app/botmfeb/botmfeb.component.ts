@@ -9,35 +9,38 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './botmfeb.component.html',
   styleUrl: './botmfeb.component.css'
 })
+
+/**
+ * BotmfebComponent handles the display of the "Book of the Month" (Feburary) feature.
+ * It shows information about the featured book "Iron Flame", retrieves book data
+ * from the backend via AuthService, and provides modal functionality for additional book details.
+ */
+
 export class BotmfebComponent implements OnInit {
   PickOf: string = "Feb 25' Pick";
   bookTitle: string = "Iron Flame by Rebecca Yarros";
   bookAuthor: string = "Rebecca Yarros";
-  bookImage: string = "ironflame.jpeg"; // Path to book image
-  averageRating: number = 0; // Will be populated from actual book data
+  bookImage: string = "ironflame.jpeg";
+  averageRating: number = 0;
   description: string = `Violet Sorrengail, who expected to die during her first year at Basgiath War College, faces brutal challenges and the threat of the new vice commandant, who aims to teach her just how powerless she is unless she betrays the man she loves, while simultaneously learning the crucial lesson that dragon riders make their own rules, and she realizes that her determination alone may not be enough to survive the hidden dangers the school holds.`;
   isModalOpen: boolean = false;
-  bookId: number = 0; // Will be populated when book is found
+  bookId: number = 0;
 
   constructor(private authService: AuthService) {}
 
   async ngOnInit() {
     try {
-      // Get all books from the service
       const books = await this.authService.getAllBooks();
       
-      // Find the Iron Flame book
       const ironFlameBook = books.find(book => 
         book.title.toLowerCase().includes('iron flame') || 
         (book.title.toLowerCase() === 'iron flame')
       );
       
-      // Update component properties if book is found
       if (ironFlameBook) {
-        this.averageRating = ironFlameBook.rating || 4; // Use the rating from the book data, fallback to 4
+        this.averageRating = ironFlameBook.rating || 4;
         this.bookId = ironFlameBook.id || 0;
         
-        // If there's a more detailed description in the book data, use that instead
         if (ironFlameBook.description && ironFlameBook.description.trim() !== '') {
           this.description = ironFlameBook.description;
         }

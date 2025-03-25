@@ -4,6 +4,12 @@ import { SearchbodyComponent } from "../searchbody/searchbody.component";
 import { ActivatedRoute, Params } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
+/**
+ * The SearchComponent handles book searching functionality, allowing users to view and filter
+ * books by various criteria (author, genre, title, rating). It retrieves the book data from
+ * the AuthService, processes URL query parameters for search terms and filter options, and
+ * maintains both the original and filtered book collections.
+ */
 @Component({
   selector: 'app-search',
   imports: [SearchheadComponent, SearchbodyComponent],
@@ -53,7 +59,7 @@ queryParams: Params = {};
       genre: b.genre,
       id: b.id,
       title: b.title,
-      coverUrl: b.image, // Assuming 'image' is the correct field for coverUrl
+      coverUrl: b.image,
       link: b.title.replaceAll(' ', '+').toLowerCase(),
       author: b.author,
       rating: b.rating,

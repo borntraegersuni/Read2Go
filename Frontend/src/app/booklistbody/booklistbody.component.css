@@ -1,14 +1,13 @@
-
 .books {
     display: grid;
     gap: 8px;
-    margin-top: 2vh; /* Adjust the value as needed */
+    margin-top: 2vh;
 }
 .bottom {
     margin-bottom: 2vh;
 }
 .no-books-warning {
-    grid-column: 1 / -1; /* Span all columns */
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,16 +18,16 @@
     background-color: white;
     border-radius: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: min(100%, 1000px); /* More responsive width */
-    max-width: 100%; /* Ensure it doesn't overflow */
+    width: min(100%, 1000px);
+    max-width: 100%;
 }
 
 .no-books-warning img {
     max-width: 100%;
     height: auto;
     object-fit: contain;
-    max-height: 75px; /* Reduced image height */
-    width: auto; /* Let width adjust proportionally */
+    max-height: 75px;
+    width: auto;
 }
 
 @media (max-width: 768px) {
@@ -37,6 +36,6 @@
     }
     
     .no-books-warning img {
-        max-height: 120px; /* Even smaller on mobile */
+        max-height: 120px;
     }
 }
