@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookprogressComponent } from './bookprogress.component';
+import { MostpopularComponent } from './mostpopular.component';
 
-describe('BookprogressComponent', () => {
-  let component: BookprogressComponent;
-  let fixture: ComponentFixture<BookprogressComponent>;
+describe('MostpopularComponent', () => {
+  let component: MostpopularComponent;
+  let fixture: ComponentFixture<MostpopularComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BookprogressComponent]
+      imports: [MostpopularComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BookprogressComponent);
+    fixture = TestBed.createComponent(MostpopularComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

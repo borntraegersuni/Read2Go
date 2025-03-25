@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { TitlePicComponent } from "../title-pic/title-pic.component";
-import { BookRatingComponent } from "../book-rating/book-rating.component";
 import { BCWidgetComponent } from "../bcwidget/bcwidget.component";
-import { BookSlider2Component } from "../book-slider-2/book-slider-2.component";
+import { MostpopularComponent } from '../mostpopular/mostpopular.component';
+import { NewcomersComponent } from "../newcomers/newcomers.component";
 
 @Component({
   selector: 'app-home',
-  imports: [TitlePicComponent, BookRatingComponent, BCWidgetComponent, BookSlider2Component, BookSlider2Component],
+  imports: [TitlePicComponent,BCWidgetComponent, MostpopularComponent, NewcomersComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

@@ -1,13 +1,13 @@
 .bcwidget {
     width: 95%;
     max-width: 1200px;
-    min-width: 320px; /* Ensure minimum width on small screens */
+    min-width: 320px; 
     margin: 0 auto;
     background: lightgray;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Include padding in width calculation */
+    box-sizing: border-box; 
     overflow: hidden;
 }
 
@@ -22,7 +22,7 @@
     align-items: flex-start;
     padding: 1rem;
     width: 100%;
-    box-sizing: border-box; /* Ensure padding doesn't add to width */
+    box-sizing: border-box; 
 }
 
 .inner-box::before {
@@ -80,7 +80,7 @@
     max-width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     line-height: 1.5;
-    display: none; /* Hidden by default on mobile */
+    display: none; 
     box-sizing: border-box;
 } 
 
@@ -126,7 +126,11 @@ cite {
     transform: scale(1.005);
 }
 
-/* Responsive breakpoints - match with book-rating */
+cite {
+    font-family: 'Bookerly';
+}
+
+/* Responsive breakpoints */
 @media (min-width: 768px) {
     .quote-container {
         display: block;
