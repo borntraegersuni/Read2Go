@@ -49,11 +49,11 @@ export class NewcomersComponent implements OnInit, AfterViewInit, OnDestroy {
   async loadImages() {
     try {
       const books = await this.authService.getAllBooks();
-      console.log('Fetched books for newcomer slider:', books.length);
+      //console.log('Fetched books for newcomer slider:', books.length);
       
       const sortedBooks = [...books].sort((a, b) => b.publishedYear - a.publishedYear);
       const lastTenBooks = sortedBooks.slice(0, 10);
-      console.log('Using newest books:', lastTenBooks.length);
+      //console.log('Using newest books:', lastTenBooks.length);
       
       this.books = lastTenBooks.map(book => ({
         id: book.id,
@@ -68,12 +68,12 @@ export class NewcomersComponent implements OnInit, AfterViewInit, OnDestroy {
       
       this.images = lastTenBooks.map(book => {
         const imageUrl = book.image && book.image !== '' ? book.image : './examplecover.jpg';
-        console.log(`Book "${book.title}" image: ${imageUrl}`);
+        //console.log(`Book "${book.title}" image: ${imageUrl}`);
         return imageUrl;
       });
       
       if (this.images.length === 0) {
-        console.log('No books found, using fallback image');
+        //console.log('No books found, using fallback image');
         this.images = ['./examplecover.jpg'];
       }
       
@@ -94,14 +94,14 @@ export class NewcomersComponent implements OnInit, AfterViewInit, OnDestroy {
         const book = books.find((b) => b.id === this.bookId);
         
         if (!book) {
-          console.log('Book not found:', this.bookId);
+          //console.log('Book not found:', this.bookId);
           return;
         }
         
         const userBooks = await this.authService.getBooks('');
         const userBook = userBooks.find((b) => b.bookid === book?.id);
         
-        console.log('Book found:', book.title, 'Rating:', book.rating);
+        //console.log('Book found:', book.title, 'Rating:', book.rating);
         
         this.coverUrl = book.image && book.image !== '' 
           ? book.image 
@@ -203,7 +203,7 @@ export class NewcomersComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   openPopupNew(bookId: number) {
-    console.log('Opening popup for newcomer book:', bookId);
+    //console.log('Opening popup for newcomer book:', bookId);
     const popup = document.getElementById(`popup-new-${bookId}`);
     if (popup) {
       popup.classList.add('active');

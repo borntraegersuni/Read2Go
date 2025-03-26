@@ -47,7 +47,7 @@ export class BotmdecComponent implements OnInit {
           this.bookAuthor = throneOfGlassBook.author;
         }
       } else {
-        console.log('Throne of Glass book not found in the books array, using default rating');
+        //console.log('Throne of Glass book not found in the books array, using default rating');
       }
     } catch (error) {
       console.error('Error fetching books data:', error);

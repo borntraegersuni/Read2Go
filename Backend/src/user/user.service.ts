@@ -94,7 +94,7 @@ export class UserService {
     }[]
   > {
     const books = await this.bookService.getBooks();
-    console.log(books.length);
+    //console.log(books.length);
 
     const booksWithRatings = await Promise.all(
       books.map(async (book) => {
@@ -292,14 +292,14 @@ export class UserService {
         exp: number;
       };
     } catch {
-      console.log('error decoding token');
+      //console.log('error decoding token');
       return {
         success: false,
       };
     }
 
     if (!decoded) {
-      console.log('no decoded');
+      //console.log('no decoded');
       return {
         success: false,
       };
@@ -307,7 +307,7 @@ export class UserService {
 
     const user = await this.readOneById(decoded.id);
     if (!user) {
-      console.log("user not found", decoded.id);
+      //console.log("user not found", decoded.id);
       return {
         success: false,
       };
@@ -315,7 +315,7 @@ export class UserService {
 
     const book = await this.bookService.getBookById(bookId);
     if (!book) {
-      console.log("book not found", bookId);
+      //console.log("book not found", bookId);
       return {
         success: false,
       };
@@ -473,7 +473,7 @@ export class UserService {
     }
     const book = await this.bookService.getBookById(Number(bookId));
     if (!book) {
-      console.log('book not found', bookId);
+      //console.log('book not found', bookId);
       return {
         success: false,
       };

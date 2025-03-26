@@ -154,7 +154,7 @@ export class SignUpPageComponent {
   }
 
   saveUsers() {
-    console.log('Users saved:', JSON.stringify({ users: this.users }, null, 2));
+    //console.log('Users saved:', JSON.stringify({ users: this.users }, null, 2));
   }
 }
 

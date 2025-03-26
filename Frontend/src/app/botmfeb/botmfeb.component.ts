@@ -45,7 +45,7 @@ export class BotmfebComponent implements OnInit {
           this.description = ironFlameBook.description;
         }
       } else {
-        console.log('Iron Flame book not found in the books array, using default rating');
+        //console.log('Iron Flame book not found in the books array, using default rating');
       }
     } catch (error) {
       console.error('Error fetching books data:', error);

@@ -58,7 +58,7 @@ export class ReadcomponentComponent implements OnInit {
         }).filter(book => book !== null) as typeof this.books;
         
         this.books = processedBooks;
-        console.log('Read books loaded:', this.books.length);
+        //console.log('Read books loaded:', this.books.length);
       }
     } catch (error) {
       console.error('Failed to load read books:', error);
@@ -67,7 +67,7 @@ export class ReadcomponentComponent implements OnInit {
   }
   
   openPopup(bookId: number) {
-    console.log('Opening popup for book:', bookId);
+    //console.log('Opening popup for book:', bookId);
     const popup = document.getElementById(`popup-${bookId}`);
     if (popup) {
       popup.classList.add('active');

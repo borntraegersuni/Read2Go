@@ -44,8 +44,8 @@ export class BookoverviewComponent {
   @Input() avgRating!: number;
   status: number = 0;
   ngOnInit() {
-    console.log('title for popup:', this.title);
-    console.log('Status', this.state);
+    //console.log('title for popup:', this.title);
+    //console.log('Status', this.state);
     if (this.state === 'reading') {
       this.status = 2;
     } else if (this.state === 'finished') {

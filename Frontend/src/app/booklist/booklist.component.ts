@@ -64,10 +64,10 @@ export class BooklistComponent implements OnInit {
    * @returns Promise that resolves when initialization is complete
    */
   async ngOnInit(): Promise<void> {
-    console.log("fetching books");
+    //console.log("fetching books");
     const allBooks = await this.authService.getAllBooks();
     const fetchedBooks = await this.authService.getBooks('');
-    console.log("fetched books: ", fetchedBooks[0].state);
+    //console.log("fetched books: ", fetchedBooks[0].state);
     this.originalBooks = fetchedBooks.map((b) => ({
       genre: b.genre,
       id: b.id,
@@ -81,7 +81,7 @@ export class BooklistComponent implements OnInit {
       published: Number(b.published),
       avgRating: allBooks.find((ab) => ab.id === b.bookid)?.rating ?? 0,
     }));
-    console.log("fetch published: ", this.originalBooks[0]);
+    //console.log("fetch published: ", this.originalBooks[0]);
 
     localStorage.setItem('books', JSON.stringify(this.originalBooks));
 

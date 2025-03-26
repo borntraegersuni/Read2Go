@@ -27,7 +27,7 @@ export class AuthService {
     this.userEmail = email;
     this.username = username;
     this.token = token;
-    console.log('login Token: ', token);
+    //console.log('login Token: ', token);
     // Save user session in localStorage
     localStorage.setItem(
       'loggedInUser',
@@ -106,7 +106,7 @@ export class AuthService {
       published: number;
       state: 'wishlist' | 'reading' | 'finished';
     }[];
-    console.log('books', books.length);
+    //console.log('books', books.length);
     return filter != "" ? books.filter((b) => b.state === filter) : books;
   }
 
@@ -296,9 +296,9 @@ export class AuthService {
         this.username = user.Username;
         this.token = user.Token;
       }
-      console.log(
-        `http://localhost:3000/user/rating?book=${bookId}&rating=${rating}`
-      );
+      //console.log(
+        //`http://localhost:3000/user/rating?book=${bookId}&rating=${rating}`
+      //);
       const response = await fetch(
         `http://localhost:3000/user/rating?book=${bookId}&rating=${rating}`,
         {

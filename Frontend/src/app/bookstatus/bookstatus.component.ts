@@ -50,7 +50,7 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('init', this.initialStatus);
+    //console.log('init', this.initialStatus);
     this.setStatusByNumber(this.initialStatus);
     
     if (document.readyState === 'loading') {
@@ -92,7 +92,7 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
 
   async setStatus(status: string): Promise<void> {
     if (status) {
-      console.log('Setting status:', status);
+      //console.log('Setting status:', status);
       const oldStatus = this.selectedStatus;
       this.selectedStatus = status;
 
@@ -103,7 +103,7 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
         
       }
       this.updateSliderPosition();
-      console.log("Setting to status: ", status);
+      //console.log("Setting to status: ", status);
       if (oldStatus !== status && this.bookId) {
         await this.auth.sendBookStatus(book ? book.bookid : this.bookId, this.getStatusNumber());
       }
@@ -129,7 +129,7 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
     try {
       const slider = this.el.nativeElement.querySelector('.slider');
       if (!this.selectedStatus) {
-        console.log("none");
+        //console.log("none");
         this.selectedStatus = 'none';
       }
 
@@ -152,7 +152,7 @@ export class BookstatusComponent implements AfterViewInit, OnChanges {
         
         const left = activeButton.offsetLeft;
         
-        console.log(`Positioning slider for status: ${this.selectedStatus}, left: ${left}px, width: ${buttonRect.width}px`);
+        //console.log(`Positioning slider for status: ${this.selectedStatus}, left: ${left}px, width: ${buttonRect.width}px`);
         
         slider.style.width = `${buttonRect.width - 8}px`;
         slider.style.transform = `translateX(${left}px)`;

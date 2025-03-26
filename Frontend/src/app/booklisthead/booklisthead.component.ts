@@ -93,7 +93,7 @@ export class BooklistheadComponent {
         element.style.color = 'white';
         element.style.borderRadius = '1.5rem';
         element.style.transform = 'scale(1.1)';
-        console.log(`Applied styles to category: ${category}`, element);
+        //console.log(`Applied styles to category: ${category}`, element);
       } else {
         console.warn(`Element with id '${category}' not found`);
       }

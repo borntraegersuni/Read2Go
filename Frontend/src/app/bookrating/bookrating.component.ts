@@ -48,7 +48,7 @@ export class BookratingComponent {
 
       if (book && book.bookid) {
         await this.auth.sendReview(book.bookid, rating);
-        console.log('Rating saved successfully');
+        //console.log('Rating saved successfully');
         this.showToast(`You rated that book with ${rating} stars`, 'success');
       } else {
         console.error('Book not found or bookid missing');
@@ -73,7 +73,7 @@ export class BookratingComponent {
 
     try {
       await this.auth.sendBookReview(bookId, this.rating, review);
-      console.log('Review saved successfully');
+      //console.log('Review saved successfully');
       this.showToast('Your review has been saved', 'success');
     } catch (error) {
       console.error('Error saving review:', error);
@@ -90,7 +90,7 @@ export class BookratingComponent {
           book?.bookid
         );
       }
-      console.log('BookId:', this.bookId, 'Review:', this.review);
+      //console.log('BookId:', this.bookId, 'Review:', this.review);
     } catch (error) {
       console.error('Error fetching review:', error);
     }

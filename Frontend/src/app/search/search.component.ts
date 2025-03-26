@@ -109,6 +109,6 @@ queryParams: Params = {};
       }
     }
 
-    console.log(this.books.length);
+    //console.log(this.books.length);
   }
 }

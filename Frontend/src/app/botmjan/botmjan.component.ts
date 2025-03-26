@@ -49,7 +49,7 @@ export class BotmjanComponent implements OnInit {
           this.bookAuthor = fourthWingBook.author;
         }
       } else {
-        console.log('Fourth Wing book not found in the books array, using default rating');
+        //console.log('Fourth Wing book not found in the books array, using default rating');
       }
     } catch (error) {
       console.error('Error fetching books data:', error);

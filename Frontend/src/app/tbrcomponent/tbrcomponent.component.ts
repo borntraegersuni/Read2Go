@@ -59,7 +59,7 @@ export class TbrcomponentComponent implements OnInit {
         }).filter(book => book !== null) as typeof this.books;
         
         this.books = processedBooks;
-        console.log('TBR books loaded:', this.books.length);
+        //console.log('TBR books loaded:', this.books.length);
       }
     } catch (error) {
       console.error('Failed to load TBR books:', error);
